@@ -1,238 +1,134 @@
 <!DOCTYPE html>
 <html lang="ja">
-
 <head>
-
     <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>CYBER GACHA</title>
 
-    <link
-        rel="stylesheet"
-        href="style.css"
-    >
-
+    <link rel="stylesheet" href="style.css">
 </head>
-
 
 <body>
 
-
-    <!-- =========================
-         BACKGROUND
-    ========================== -->
-
-    <div class="grid"></div>
-
-    <div class="scanlines"></div>
-
-
-    <!-- =========================
-         LDM BUTTON
-    ========================== -->
-
-    <button id="ldmButton">
-        LDM: OFF
-    </button>
-
-
-    <!-- =========================
-         SKIP BUTTON
-    ========================== -->
-
-    <button id="skipButton">
-        SKIP: OFF
-    </button>
-
-
-    <!-- =========================
+    <!-- =================================
          HEADER
-    ========================== -->
+    ================================== -->
 
     <header>
 
-        <div class="status">
-            ● SYSTEM ONLINE
+        <div class="systemStatus">
+            <span class="statusDot"></span>
+            SYSTEM ONLINE
         </div>
 
         <h1>
-            CYBER GACHA
+            # CYBER GACHA
         </h1>
-
-        <p>
-            TAP THE BOX TO OPEN
-        </p>
 
     </header>
 
 
+    <!-- =================================
+         MAIN
+    ================================== -->
+
     <main>
 
-
-        <!-- =========================
-             GACHA AREA
-        ========================== -->
-
-        <div id="gachaArea">
-
-
-            <!-- =====================
-                 SCANNERS
-            ====================== -->
-
-            <div
-                class="scanner scanner1"
-            ></div>
-
-            <div
-                class="scanner scanner2"
-            ></div>
-
-
-            <!-- =====================
-                 HUD RINGS
-            ====================== -->
-
-            <div
-                class="hudRing hudRing1"
-            ></div>
-
-            <div
-                class="hudRing hudRing2"
-            ></div>
-
-            <div
-                class="hudRing hudRing3"
-            ></div>
-
-
-            <!-- =====================
-                 CRYSTALS
-            ====================== -->
-
-            <div
-                id="crystalContainer"
-            ></div>
-
-
-            <!-- =====================
-                 PARTICLES
-            ====================== -->
-
-            <div
-                id="particleContainer"
-            ></div>
-
-
-            <!-- =====================
-                 ENERGY BEAMS
-            ====================== -->
-
-            <div
-                id="beamContainer"
-            ></div>
-
-
-            <!-- =====================
-                 SHOCKWAVE
-            ====================== -->
-
-            <div
-                id="shockwaveContainer"
-            ></div>
-
-
-            <!-- =====================
-                 GACHA BOX
-            ====================== -->
-
-            <div
-                id="gachaBox"
-            >
-
-                <div class="boxTop">
-
-                    <div class="boxLight"></div>
-
-                </div>
-
-
-                <div class="boxBody">
-
-
-                    <div class="boxScreen">
-
-                        <span id="boxScreenSmall">
-                            CYBER
-                        </span>
-
-                        <strong id="boxScreenMain">
-                            GACHA
-                        </strong>
-
-                    </div>
-
-
-                    <div
-                        class="boxCore"
-                    ></div>
-
-
-                    <div
-                        class="boxLine line1"
-                    ></div>
-
-                    <div
-                        class="boxLine line2"
-                    ></div>
-
-                    <div
-                        class="boxLine line3"
-                    ></div>
-
-
-                </div>
-
-
-                <div class="boxBottom"></div>
-
-
-            </div>
-
-
-            <!-- =====================
-                 TAP TEXT
-            ====================== -->
-
-            <div id="tapText">
-                TAP BOX
-            </div>
-
-
-            <!-- =====================
-                 CHARGE MESSAGE
-            ====================== -->
-
-            <div id="chargeMessage">
-                SYSTEM READY
-            </div>
-
-
+        <div class="instruction">
+            TAP THE BOX TO OPEN
         </div>
 
 
+        <!-- =================================
+             GACHA AREA
+        ================================== -->
 
-        <!-- =========================
-             GUARANTEE COUNTERS
-        ========================== -->
+        <section id="gachaArea">
 
-        <div id="guaranteeArea">
+            <!-- パーティクル -->
+            <div id="particleContainer"></div>
 
+            <!-- クリスタル -->
+            <div id="crystalContainer"></div>
+
+            <!-- ビーム -->
+            <div id="beamContainer"></div>
+
+            <!-- 衝撃波 -->
+            <div id="shockwaveContainer"></div>
+
+
+            <!-- =================================
+                 GACHA BOX
+            ================================== -->
+
+            <div id="gachaBox">
+
+                <div class="boxOuter">
+
+                    <div class="boxGlow"></div>
+
+                    <div class="boxTop"></div>
+
+                    <div class="boxMain">
+
+                        <div class="boxScreen">
+
+                            <div id="boxScreenSmall">
+                                CYBER
+                            </div>
+
+                            <div id="boxScreenMain">
+                                GACHA
+                            </div>
+
+                        </div>
+
+                        <div class="boxCore"></div>
+
+                    </div>
+
+                    <div class="boxBottom"></div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================
+                 CHARGE MESSAGE
+            ================================== -->
+
+            <div id="chargeMessage">
+                GACHA
+            </div>
+
+        </section>
+
+
+        <!-- =================================
+             RESULT
+        ================================== -->
+
+        <section id="resultSection">
+
+            <div class="sectionTitle">
+                RESULT
+            </div>
+
+            <div id="resultRarity">
+                ---
+            </div>
+
+        </section>
+
+
+        <!-- =================================
+             GUARANTEE
+        ================================== -->
+
+        <section id="guaranteeSection">
 
             <div class="guaranteeCard">
 
@@ -240,20 +136,12 @@
                     SSR GUARANTEE
                 </div>
 
-                <div
-                    id="ssrCounter"
-                    class="guaranteeCounter"
-                >
+                <div id="ssrCounter">
                     0 / 200
                 </div>
 
-                <div class="guaranteeBar">
-
-                    <div
-                        id="ssrBar"
-                        class="guaranteeBarFill"
-                    ></div>
-
+                <div class="progressBackground">
+                    <div id="ssrBar"></div>
                 </div>
 
             </div>
@@ -265,82 +153,71 @@
                     XR GUARANTEE
                 </div>
 
-                <div
-                    id="xrCounter"
-                    class="guaranteeCounter"
-                >
+                <div id="xrCounter">
                     0 / 15000
                 </div>
 
-                <div class="guaranteeBar">
-
-                    <div
-                        id="xrBar"
-                        class="guaranteeBarFill"
-                    ></div>
-
+                <div class="progressBackground">
+                    <div id="xrBar"></div>
                 </div>
 
             </div>
 
-
-        </div>
-
+        </section>
 
 
-        <!-- =========================
-             RESULT
-        ========================== -->
+        <!-- =================================
+             SETTINGS
+        ================================== -->
 
-        <div id="resultArea">
+        <section id="settings">
 
-            <div id="resultLabel">
-                RESULT
-            </div>
+            <button id="ldmButton">
+                LDM: OFF
+            </button>
 
-            <div id="resultRarity">
-                ---
-            </div>
+            <button id="skipButton">
+                SKIP: OFF
+            </button>
 
-        </div>
+            <!-- データリセット -->
+            <button id="resetButton">
+                RESET DATA
+            </button>
+
+        </section>
 
 
-
-        <!-- =========================
+        <!-- =================================
              HISTORY
-        ========================== -->
+        ================================== -->
 
-        <div id="historyArea">
+        <section id="historySection">
 
-            <h2>
+            <div class="sectionTitle">
                 HISTORY
-            </h2>
+            </div>
 
             <div id="historyList"></div>
 
-        </div>
-
+        </section>
 
     </main>
 
 
-
-    <!-- =========================
+    <!-- =================================
          SSR OVERLAY
-    ========================== -->
+    ================================== -->
 
-    <div
-        id="ssrOverlay"
-        class="overlay"
-    >
+    <div id="ssrOverlay">
 
         <div class="overlayContent">
 
-            <div class="rareText">
+            <div class="overlayLabel">
                 SUPER RARE
             </div>
 
-            <div class="rareRarity">
+            <div class="overlayRarity">
                 SSR
             </div>
 
@@ -353,23 +230,19 @@
     </div>
 
 
-
-    <!-- =========================
+    <!-- =================================
          XR OVERLAY
-    ========================== -->
+    ================================== -->
 
-    <div
-        id="xrOverlay"
-        class="overlay xr"
-    >
+    <div id="xrOverlay">
 
         <div class="overlayContent">
 
-            <div class="rareText">
+            <div class="overlayLabel">
                 EXTREME RARE
             </div>
 
-            <div class="rareRarity">
+            <div class="overlayRarity">
                 XR
             </div>
 
@@ -382,10 +255,7 @@
     </div>
 
 
-
     <script src="script.js"></script>
 
-
 </body>
-
 </html>
