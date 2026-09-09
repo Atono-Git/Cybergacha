@@ -1,22 +1,41 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>CYBER GACHA</title>
 
-    <link rel="stylesheet" href="style.css">
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
 </head>
+
 
 <body>
 
-    <!-- 背景 -->
+
+    <!-- =========================
+         BACKGROUND
+    ========================== -->
+
     <div class="grid"></div>
+
     <div class="scanlines"></div>
 
 
-    <!-- ヘッダー -->
+    <!-- =========================
+         HEADER
+    ========================== -->
+
     <header>
 
         <div class="status">
@@ -36,15 +55,30 @@
 
     <main>
 
-        <!-- ガチャエリア -->
+
+        <!-- =========================
+             GACHA AREA
+        ========================== -->
+
         <div id="gachaArea">
 
-            <div class="scanner scanner1"></div>
-            <div class="scanner scanner2"></div>
+
+            <!-- スキャナー -->
+
+            <div
+                class="scanner scanner1"
+            ></div>
+
+            <div
+                class="scanner scanner2"
+            ></div>
 
 
             <!-- ガチャボックス -->
-            <div id="gachaBox">
+
+            <div
+                id="gachaBox"
+            >
 
                 <div class="boxTop">
 
@@ -54,6 +88,7 @@
 
 
                 <div class="boxBody">
+
 
                     <div class="boxScreen">
 
@@ -71,14 +106,24 @@
                     <div class="boxCore"></div>
 
 
-                    <div class="boxLine line1"></div>
-                    <div class="boxLine line2"></div>
-                    <div class="boxLine line3"></div>
+                    <div
+                        class="boxLine line1"
+                    ></div>
+
+                    <div
+                        class="boxLine line2"
+                    ></div>
+
+                    <div
+                        class="boxLine line3"
+                    ></div>
+
 
                 </div>
 
 
                 <div class="boxBottom"></div>
+
 
             </div>
 
@@ -87,10 +132,76 @@
                 TAP BOX
             </div>
 
+
         </div>
 
 
-        <!-- 結果 -->
+
+        <!-- =========================
+             GUARANTEE COUNTERS
+        ========================== -->
+
+        <div id="guaranteeArea">
+
+
+            <div class="guaranteeCard">
+
+                <div class="guaranteeTitle">
+                    SSR GUARANTEE
+                </div>
+
+                <div
+                    id="ssrCounter"
+                    class="guaranteeCounter"
+                >
+                    1 / 200
+                </div>
+
+                <div class="guaranteeBar">
+
+                    <div
+                        id="ssrBar"
+                        class="guaranteeBarFill"
+                    ></div>
+
+                </div>
+
+            </div>
+
+
+            <div class="guaranteeCard">
+
+                <div class="guaranteeTitle">
+                    XR GUARANTEE
+                </div>
+
+                <div
+                    id="xrCounter"
+                    class="guaranteeCounter"
+                >
+                    1 / 15000
+                </div>
+
+                <div class="guaranteeBar">
+
+                    <div
+                        id="xrBar"
+                        class="guaranteeBarFill"
+                    ></div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- =========================
+             RESULT
+        ========================== -->
+
         <div id="resultArea">
 
             <div id="resultLabel">
@@ -104,7 +215,11 @@
         </div>
 
 
-        <!-- 履歴 -->
+
+        <!-- =========================
+             HISTORY
+        ========================== -->
+
         <div id="historyArea">
 
             <h2>
@@ -115,11 +230,19 @@
 
         </div>
 
+
     </main>
 
 
-    <!-- SSR演出 -->
-    <div id="ssrOverlay" class="overlay">
+
+    <!-- =========================
+         SSR OVERLAY
+    ========================== -->
+
+    <div
+        id="ssrOverlay"
+        class="overlay"
+    >
 
         <div class="overlayContent">
 
@@ -140,8 +263,15 @@
     </div>
 
 
-    <!-- XR演出 -->
-    <div id="xrOverlay" class="overlay xr">
+
+    <!-- =========================
+         XR OVERLAY
+    ========================== -->
+
+    <div
+        id="xrOverlay"
+        class="overlay xr"
+    >
 
         <div class="overlayContent">
 
@@ -162,8 +292,14 @@
     </div>
 
 
-    <!-- JavaScript -->
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================== -->
+
     <script src="script.js"></script>
 
+
 </body>
+
 </html>
