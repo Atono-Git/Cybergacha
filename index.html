@@ -1,48 +1,75 @@
-```html
 <!DOCTYPE html>
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>CYBER GACHA</title>
+
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
+    <!-- 背景 -->
     <div class="grid"></div>
     <div class="scanlines"></div>
 
+
+    <!-- ヘッダー -->
     <header>
-        <div class="status">● SYSTEM ONLINE</div>
 
-        <h1>CYBER GACHA</h1>
+        <div class="status">
+            ● SYSTEM ONLINE
+        </div>
 
-        <p>TAP THE BOX TO OPEN</p>
+        <h1>
+            CYBER GACHA
+        </h1>
+
+        <p>
+            TAP THE BOX TO OPEN
+        </p>
+
     </header>
+
 
     <main>
 
-        <!-- ガチャ本体 -->
+        <!-- ガチャエリア -->
         <div id="gachaArea">
 
             <div class="scanner scanner1"></div>
             <div class="scanner scanner2"></div>
 
+
+            <!-- ガチャボックス -->
             <div id="gachaBox">
 
                 <div class="boxTop">
+
                     <div class="boxLight"></div>
+
                 </div>
+
 
                 <div class="boxBody">
 
                     <div class="boxScreen">
-                        <span>CYBER</span>
-                        <strong>GACHA</strong>
+
+                        <span>
+                            CYBER
+                        </span>
+
+                        <strong>
+                            GACHA
+                        </strong>
+
                     </div>
 
+
                     <div class="boxCore"></div>
+
 
                     <div class="boxLine line1"></div>
                     <div class="boxLine line2"></div>
@@ -50,9 +77,11 @@
 
                 </div>
 
+
                 <div class="boxBottom"></div>
 
             </div>
+
 
             <div id="tapText">
                 TAP BOX
@@ -78,7 +107,9 @@
         <!-- 履歴 -->
         <div id="historyArea">
 
-            <h2>HISTORY</h2>
+            <h2>
+                HISTORY
+            </h2>
 
             <div id="historyList"></div>
 
@@ -136,4 +167,3 @@
 
 </body>
 </html>
-```
