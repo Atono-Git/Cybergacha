@@ -122,11 +122,76 @@ const boxScreenMain =
     );
 
 
+const crystalContainer =
+    document.getElementById(
+        "crystalContainer"
+    );
+
+
+const ldmButton =
+    document.getElementById(
+        "ldmButton"
+    );
+
+
 /* =========================
    状態
 ========================= */
 
 let isRolling = false;
+
+
+/* =========================
+   LDM
+========================= */
+
+let ldmMode =
+    localStorage.getItem(
+        "cyberGachaLDM"
+    ) === "true";
+
+
+function updateLDM() {
+
+    document.body.classList.toggle(
+        "ldm-mode",
+        ldmMode
+    );
+
+
+    ldmButton.textContent =
+        ldmMode
+            ? "LDM: ON"
+            : "LDM: OFF";
+
+}
+
+
+ldmButton.addEventListener(
+    "click",
+    function () {
+
+        if (isRolling) {
+
+            return;
+
+        }
+
+
+        ldmMode =
+            !ldmMode;
+
+
+        localStorage.setItem(
+            "cyberGachaLDM",
+            String(ldmMode)
+        );
+
+
+        updateLDM();
+
+    }
+);
 
 
 /* =========================
@@ -148,10 +213,6 @@ let xrCount =
         )
     );
 
-
-/*
-   初回は0
-*/
 
 if (
     !Number.isFinite(ssrCount) ||
@@ -200,7 +261,6 @@ function saveCounters() {
 ========================= */
 
 function updateCounters() {
-
 
     ssrCounter.textContent =
         ssrCount +
@@ -313,7 +373,6 @@ function showResult(
         resultRarity.style.color =
             "#00eaff";
 
-
         resultRarity.style.textShadow =
             "0 0 15px #00eaff, 0 0 40px #00eaff";
 
@@ -326,7 +385,6 @@ function showResult(
 
         resultRarity.style.color =
             "#55ff99";
-
 
         resultRarity.style.textShadow =
             "0 0 15px #55ff99, 0 0 40px #55ff99";
@@ -341,20 +399,16 @@ function showResult(
         resultRarity.style.color =
             "#ffcc33";
 
-
         resultRarity.style.textShadow =
             "0 0 20px #ffcc33, 0 0 50px #ffcc33";
 
     }
 
 
-    else if (
-        rarity === "XR"
-    ) {
+    else {
 
         resultRarity.style.color =
             "#ffffff";
-
 
         resultRarity.style.textShadow =
             "0 0 20px white, 0 0 50px white";
@@ -399,7 +453,7 @@ function addHistory(
     }
 
 
-    if (
+    else if (
         rarity === "SSR"
     ) {
 
@@ -412,7 +466,7 @@ function addHistory(
     }
 
 
-    if (
+    else if (
         rarity === "XR"
     ) {
 
@@ -433,6 +487,283 @@ function addHistory(
 
 
 /* =========================
+   クリスタル削除
+========================= */
+
+function clearCrystals() {
+
+    crystalContainer.innerHTML = "";
+
+    crystalContainer.className = "";
+
+}
+
+
+/* =========================
+   クリスタル生成
+========================= */
+
+function createCrystals(
+    rarity
+) {
+
+    clearCrystals();
+
+
+    /*
+       LDMでは
+       クリスタル演出を停止
+    */
+
+    if (ldmMode) {
+
+        return;
+
+    }
+
+
+    let count = 35;
+
+
+    if (
+        rarity === "SR"
+    ) {
+
+        count = 55;
+
+    }
+
+
+    else if (
+        rarity === "SSR"
+    ) {
+
+        count = 85;
+
+    }
+
+
+    else if (
+        rarity === "XR"
+    ) {
+
+        count = 120;
+
+    }
+
+
+    for (
+        let i = 0;
+        i < count;
+        i++
+    ) {
+
+
+        const crystal =
+            document.createElement(
+                "div"
+            );
+
+
+        crystal.className =
+            "crystal";
+
+
+        /*
+           円周上のランダム位置
+        */
+
+        const angle =
+            Math.random() *
+            Math.PI *
+            2;
+
+
+        /*
+           BOXから遠い位置
+        */
+
+        const distance =
+            180 +
+            Math.random() *
+            220;
+
+
+        const startX =
+            Math.cos(angle) *
+            distance;
+
+
+        const startY =
+            Math.sin(angle) *
+            distance;
+
+
+        crystal.style.setProperty(
+            "--startX",
+            startX + "px"
+        );
+
+
+        crystal.style.setProperty(
+            "--startY",
+            startY + "px"
+        );
+
+
+        crystal.style.setProperty(
+            "--size",
+            (
+                4 +
+                Math.random() *
+                9
+            ) + "px"
+        );
+
+
+        crystal.style.setProperty(
+            "--duration",
+            (
+                0.9 +
+                Math.random() *
+                1.2
+            ) + "s"
+        );
+
+
+        crystal.style.setProperty(
+            "--delay",
+            (
+                Math.random() *
+                1.2
+            ) + "s"
+        );
+
+
+        /*
+           レア度カラー
+        */
+
+        if (
+            rarity === "SR"
+        ) {
+
+            crystal.classList.add(
+                "crystal-sr"
+            );
+
+        }
+
+
+        else if (
+            rarity === "SSR"
+        ) {
+
+            crystal.classList.add(
+                "crystal-ssr"
+            );
+
+        }
+
+
+        else if (
+            rarity === "XR"
+        ) {
+
+            crystal.classList.add(
+                "crystal-xr"
+            );
+
+        }
+
+
+        crystalContainer.appendChild(
+            crystal
+        );
+
+    }
+
+}
+
+
+/* =========================
+   クリスタル爆発
+========================= */
+
+function crystalBurst(
+    rarity
+) {
+
+    if (ldmMode) {
+
+        return;
+
+    }
+
+
+    crystalContainer.classList.add(
+        "burst"
+    );
+
+
+    if (
+        rarity === "SSR"
+    ) {
+
+        crystalContainer.classList.add(
+            "burst-ssr"
+        );
+
+    }
+
+
+    if (
+        rarity === "XR"
+    ) {
+
+        crystalContainer.classList.add(
+            "burst-xr"
+        );
+
+    }
+
+
+    setTimeout(
+        function () {
+
+            clearCrystals();
+
+        },
+        1300
+    );
+
+}
+
+
+/* =========================
+   メッセージ
+========================= */
+
+function setChargeMessage(
+    small,
+    main
+) {
+
+    boxScreenSmall.textContent =
+        small;
+
+
+    boxScreenMain.textContent =
+        main;
+
+
+    chargeMessage.textContent =
+        main;
+
+}
+
+
+/* =========================
    アニメーション解除
 ========================= */
 
@@ -440,6 +771,7 @@ function clearAnimationClasses() {
 
     gachaArea.classList.remove(
         "charging",
+        "limitBreak",
         "rare-r",
         "rare-sr",
         "rare-ssr",
@@ -488,7 +820,17 @@ ssrContinue.addEventListener(
             "show"
         );
 
+
         isRolling = false;
+
+
+        clearAnimationClasses();
+
+
+        setChargeMessage(
+            "SYSTEM",
+            "SYSTEM READY"
+        );
 
     }
 );
@@ -506,35 +848,24 @@ xrContinue.addEventListener(
             "show"
         );
 
+
         isRolling = false;
+
+
+        clearAnimationClasses();
+
+
+        setChargeMessage(
+            "SYSTEM",
+            "SYSTEM READY"
+        );
 
     }
 );
 
 
 /* =========================
-   演出メッセージ
-========================= */
-
-function setChargeMessage(
-    small,
-    main
-) {
-
-    boxScreenSmall.textContent =
-        small;
-
-    boxScreenMain.textContent =
-        main;
-
-    chargeMessage.textContent =
-        main;
-
-}
-
-
-/* =========================
-   ガチャ開始
+   ガチャ
 ========================= */
 
 function openGacha() {
@@ -558,9 +889,12 @@ function openGacha() {
     clearAnimationClasses();
 
 
+    clearCrystals();
+
+
     /*
        =================================
-       今回の結果を先に決定
+       結果決定
        =================================
     */
 
@@ -570,7 +904,7 @@ function openGacha() {
 
     /*
        =================================
-       今回の回数
+       カウンターを1進める
        =================================
     */
 
@@ -583,7 +917,9 @@ function openGacha() {
 
 
     /*
-       XR保証を最優先
+       =================================
+       XR保証
+       =================================
     */
 
     if (
@@ -597,7 +933,9 @@ function openGacha() {
 
 
     /*
+       =================================
        SSR保証
+       =================================
     */
 
     else if (
@@ -644,70 +982,42 @@ function openGacha() {
         ssrCount =
             nextSSRCount;
 
+
         xrCount =
             nextXRCount;
 
     }
 
 
-    saveCounters();
-
     updateCounters();
 
 
     /*
        =================================
-       レア度クラス
+       レア度
        =================================
     */
 
-    if (
-        rarity === "R"
-    ) {
-
-        gachaArea.classList.add(
-            "rare-r"
-        );
-
-    }
-
-
-    if (
-        rarity === "SR"
-    ) {
-
-        gachaArea.classList.add(
-            "rare-sr"
-        );
-
-    }
-
-
-    if (
-        rarity === "SSR"
-    ) {
-
-        gachaArea.classList.add(
-            "rare-ssr"
-        );
-
-    }
-
-
-    if (
-        rarity === "XR"
-    ) {
-
-        gachaArea.classList.add(
-            "rare-xr"
-        );
-
-    }
+    gachaArea.classList.add(
+        "rare-" +
+        rarity.toLowerCase()
+    );
 
 
     /*
        =================================
-       TAP BOXを消す
+       豪華演出用クリスタル
+       =================================
+    */
+
+    createCrystals(
+        rarity
+    );
+
+
+    /*
+       =================================
+       CHARGE START
        =================================
     */
 
@@ -748,7 +1058,7 @@ function openGacha() {
             );
 
         },
-        550
+        500
     );
 
 
@@ -767,7 +1077,7 @@ function openGacha() {
             );
 
         },
-        1100
+        1000
     );
 
 
@@ -781,16 +1091,17 @@ function openGacha() {
         function () {
 
             setChargeMessage(
-                "LIMIT",
-                "LIMIT BREAK"
+                "WARNING",
+                "ENERGY LIMIT"
             );
+
 
             gachaArea.classList.add(
                 "limitBreak"
             );
 
         },
-        1600
+        1500
     );
 
 
@@ -798,8 +1109,25 @@ function openGacha() {
        =================================
        STAGE 5
        =================================
+    */
 
-       通常より長めに溜める
+    setTimeout(
+        function () {
+
+            setChargeMessage(
+                "SYSTEM",
+                "LIMIT BREAK"
+            );
+
+        },
+        1850
+    );
+
+
+    /*
+       =================================
+       OPEN
+       =================================
     */
 
     setTimeout(
@@ -822,9 +1150,16 @@ function openGacha() {
 
 
             /*
-               =================================
-               開放フラッシュ
-               =================================
+               クリスタル爆発
+            */
+
+            crystalBurst(
+                rarity
+            );
+
+
+            /*
+               フラッシュ
             */
 
             if (
@@ -859,9 +1194,17 @@ function openGacha() {
 
 
             /*
-               =================================
-               REVEAL
-               =================================
+               OPEN
+            */
+
+            setChargeMessage(
+                "RESULT",
+                "REVEAL"
+            );
+
+
+            /*
+               結果表示
             */
 
             setTimeout(
@@ -884,9 +1227,7 @@ function openGacha() {
 
 
                     /*
-                       =================================
                        SSR
-                       =================================
                     */
 
                     if (
@@ -908,9 +1249,7 @@ function openGacha() {
 
 
                     /*
-                       =================================
                        XR
-                       =================================
                     */
 
                     else if (
@@ -933,7 +1272,6 @@ function openGacha() {
 
                     /*
                        R / SR
-                       =================================
                     */
 
                     else {
@@ -943,12 +1281,14 @@ function openGacha() {
 
                                 clearAnimationClasses();
 
-                                isRolling = false;
+                                clearCrystals();
 
                                 setChargeMessage(
                                     "SYSTEM",
                                     "SYSTEM READY"
                                 );
+
+                                isRolling = false;
 
                             },
                             900
@@ -965,7 +1305,6 @@ function openGacha() {
         },
         2300
     );
-
 
 }
 
@@ -985,11 +1324,17 @@ gachaBox.addEventListener(
 
 
 /* =========================
-   初期表示
+   初期化
 ========================= */
 
 resultRarity.textContent =
     "---";
+
+
+updateLDM();
+
+
+updateCounters();
 
 
 setChargeMessage(
@@ -998,17 +1343,16 @@ setChargeMessage(
 );
 
 
-updateCounters();
-
-
 console.log(
     "CYBER GACHA READY"
 );
+
 
 console.log(
     "SSR GUARANTEE:",
     SSR_GUARANTEE
 );
+
 
 console.log(
     "XR GUARANTEE:",
