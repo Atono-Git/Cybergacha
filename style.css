@@ -283,6 +283,9 @@ main {
             0.4
         );
 
+    transition:
+        0.25s ease;
+
 }
 
 
@@ -351,6 +354,9 @@ main {
             0.35
         );
 
+    transition:
+        0.25s ease;
+
 }
 
 
@@ -395,6 +401,8 @@ main {
             255,
             0.3
         ) inset;
+
+    overflow: hidden;
 
 }
 
@@ -453,6 +461,9 @@ main {
 
         0 0 25px #00eaff;
 
+    transition:
+        0.2s ease;
+
 }
 
 
@@ -473,6 +484,9 @@ main {
     background: #00eaff;
 
     opacity: 0.5;
+
+    transition:
+        0.2s ease;
 
 }
 
@@ -569,6 +583,100 @@ main {
 
 
 /* =========================
+   ENERGY RINGS
+========================= */
+
+.energyRing {
+
+    position: absolute;
+
+    left: 50%;
+
+    top: 50%;
+
+    width: 180px;
+
+    height: 180px;
+
+    border:
+        1px solid #00eaff;
+
+    border-radius: 50%;
+
+    transform:
+        translate(-50%, -50%)
+        scale(0);
+
+    opacity: 0;
+
+    pointer-events: none;
+
+}
+
+
+#gachaArea.charging .ringA {
+
+    animation:
+        energyExpand
+        1.4s linear infinite;
+
+}
+
+
+#gachaArea.charging .ringB {
+
+    animation:
+        energyExpand
+        1.4s linear
+        0.45s infinite;
+
+}
+
+
+#gachaArea.charging .ringC {
+
+    animation:
+        energyExpand
+        1.4s linear
+        0.9s infinite;
+
+}
+
+
+@keyframes energyExpand {
+
+    0% {
+
+        transform:
+            translate(-50%, -50%)
+            scale(0.3)
+            rotate(0deg);
+
+        opacity: 0;
+
+    }
+
+    15% {
+
+        opacity: 0.9;
+
+    }
+
+    100% {
+
+        transform:
+            translate(-50%, -50%)
+            scale(3.2)
+            rotate(180deg);
+
+        opacity: 0;
+
+    }
+
+}
+
+
+/* =========================
    TAP TEXT
 ========================= */
 
@@ -591,6 +699,87 @@ main {
         0 0 10px #00eaff;
 
     pointer-events: none;
+
+    transition:
+        opacity 0.2s ease;
+
+}
+
+
+#gachaArea.charging #tapText {
+
+    opacity: 0;
+
+}
+
+
+/* =========================
+   CHARGE MESSAGE
+========================= */
+
+#chargeMessage {
+
+    position: absolute;
+
+    left: 50%;
+
+    top: 22px;
+
+    transform:
+        translateX(-50%);
+
+    font-size: 11px;
+
+    letter-spacing: 4px;
+
+    white-space: nowrap;
+
+    text-shadow:
+        0 0 10px #00eaff;
+
+    pointer-events: none;
+
+    opacity: 0.8;
+
+}
+
+
+#gachaArea.charging #chargeMessage {
+
+    animation:
+        messageGlitch
+        0.18s
+        infinite;
+
+}
+
+
+@keyframes messageGlitch {
+
+    0% {
+        transform:
+            translateX(-50%);
+    }
+
+    25% {
+        transform:
+            translateX(-51%);
+    }
+
+    50% {
+        transform:
+            translateX(-49%);
+    }
+
+    75% {
+        transform:
+            translateX(-50%);
+    }
+
+    100% {
+        transform:
+            translateX(-50%);
+    }
 
 }
 
@@ -760,6 +949,54 @@ main {
 
         0 0 40px #00eaff;
 
+    opacity: 1;
+
+}
+
+
+#gachaArea.reveal ~ * #resultRarity {
+
+    animation:
+        resultPop
+        0.55s
+        ease-out;
+
+}
+
+
+@keyframes resultPop {
+
+    0% {
+
+        transform:
+            scale(0.3);
+
+        opacity: 0;
+
+        filter:
+            blur(12px);
+
+    }
+
+    60% {
+
+        transform:
+            scale(1.18);
+
+        opacity: 1;
+
+        filter:
+            blur(0);
+
+    }
+
+    100% {
+
+        transform:
+            scale(1);
+
+    }
+
 }
 
 
@@ -860,7 +1097,7 @@ main {
 
     animation:
         chargeRing
-        1s linear infinite;
+        0.65s linear infinite;
 
     pointer-events: none;
 
@@ -877,19 +1114,13 @@ main {
                 -50%
             )
             rotate(0deg)
-            scale(0.7);
+            scale(0.4);
 
         opacity: 0;
 
     }
 
     20% {
-
-        opacity: 1;
-
-    }
-
-    80% {
 
         opacity: 1;
 
@@ -903,7 +1134,7 @@ main {
                 -50%
             )
             rotate(360deg)
-            scale(1.5);
+            scale(1.8);
 
         opacity: 0;
 
@@ -920,7 +1151,7 @@ main {
 
     animation:
         scannerRotate
-        1.2s linear infinite;
+        0.7s linear infinite;
 
 }
 
@@ -929,7 +1160,7 @@ main {
 
     animation:
         scannerRotateReverse
-        1.8s linear infinite;
+        1s linear infinite;
 
 }
 
@@ -996,7 +1227,7 @@ main {
 
     animation:
         chargeBox
-        0.22s ease-in-out
+        0.16s ease-in-out
         infinite alternate;
 
     filter:
@@ -1007,6 +1238,10 @@ main {
 
         drop-shadow(
             0 0 35px #00eaff
+        )
+
+        drop-shadow(
+            0 0 70px #00eaff
         );
 
 }
@@ -1014,7 +1249,7 @@ main {
 
 @keyframes chargeBox {
 
-    from {
+    0% {
 
         transform:
             translateY(0)
@@ -1022,11 +1257,35 @@ main {
 
     }
 
-    to {
+    25% {
+
+        transform:
+            translateY(-4px)
+            scale(1.015);
+
+    }
+
+    50% {
 
         transform:
             translateY(-10px)
             scale(1.035);
+
+    }
+
+    75% {
+
+        transform:
+            translateY(-6px)
+            scale(1.025);
+
+    }
+
+    100% {
+
+        transform:
+            translateY(-14px)
+            scale(1.055);
 
     }
 
@@ -1041,7 +1300,7 @@ main {
 
     animation:
         corePulse
-        0.25s ease-in-out
+        0.2s ease-in-out
         infinite alternate;
 
 }
@@ -1067,7 +1326,7 @@ main {
 
         transform:
             translateX(-50%)
-            scale(1.5);
+            scale(1.8);
 
         box-shadow:
 
@@ -1075,7 +1334,7 @@ main {
 
             0 0 60px #00eaff,
 
-            0 0 100px #00eaff;
+            0 0 120px #00eaff;
 
     }
 
@@ -1090,7 +1349,7 @@ main {
 
     animation:
         lightFlash
-        0.18s linear infinite;
+        0.12s linear infinite;
 
 }
 
@@ -1098,16 +1357,213 @@ main {
 @keyframes lightFlash {
 
     0% {
-        opacity: 0.3;
+        opacity: 0.2;
+        transform:
+            translateX(-50%)
+            scaleX(0.5);
     }
 
     50% {
         opacity: 1;
+        transform:
+            translateX(-50%)
+            scaleX(1.4);
     }
 
     100% {
-        opacity: 0.3;
+        opacity: 0.2;
+        transform:
+            translateX(-50%)
+            scaleX(0.5);
     }
+
+}
+
+
+/* =========================
+   ライン点滅
+========================= */
+
+#gachaBox.charging .line1 {
+
+    animation:
+        lineCharge
+        0.45s
+        ease-in-out
+        infinite;
+
+}
+
+
+#gachaBox.charging .line2 {
+
+    animation:
+        lineCharge
+        0.45s
+        ease-in-out
+        0.15s
+        infinite;
+
+}
+
+
+#gachaBox.charging .line3 {
+
+    animation:
+        lineCharge
+        0.45s
+        ease-in-out
+        0.3s
+        infinite;
+
+}
+
+
+@keyframes lineCharge {
+
+    0% {
+        opacity: 0.2;
+        transform: scaleX(0.5);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scaleX(1);
+    }
+
+    100% {
+        opacity: 0.2;
+        transform: scaleX(0.5);
+    }
+
+}
+
+
+/* =========================
+   SCREEN GLITCH
+========================= */
+
+#gachaBox.charging .boxScreen {
+
+    animation:
+        screenGlitch
+        0.16s
+        steps(2)
+        infinite;
+
+}
+
+
+@keyframes screenGlitch {
+
+    0% {
+
+        transform:
+            translateX(-50%)
+            skewX(0deg);
+
+    }
+
+    30% {
+
+        transform:
+            translateX(-51%)
+            skewX(-2deg);
+
+    }
+
+    60% {
+
+        transform:
+            translateX(-49%)
+            skewX(2deg);
+
+    }
+
+    100% {
+
+        transform:
+            translateX(-50%)
+            skewX(0deg);
+
+    }
+
+}
+
+
+/* =========================
+   LIMIT BREAK
+========================= */
+
+#gachaArea.limitBreak {
+
+    animation:
+        areaShake
+        0.08s
+        linear
+        infinite;
+
+}
+
+
+#gachaArea.limitBreak .boxBody,
+#gachaArea.limitBreak .boxTop {
+
+    box-shadow:
+
+        0 0 30px #00eaff inset,
+
+        0 0 80px #00eaff,
+
+        0 0 140px
+        rgba(
+            0,
+            234,
+            255,
+            0.8
+        );
+
+}
+
+
+@keyframes areaShake {
+
+    0% {
+        transform:
+            translate(0, 0);
+    }
+
+    25% {
+        transform:
+            translate(3px, -2px);
+    }
+
+    50% {
+        transform:
+            translate(-3px, 2px);
+    }
+
+    75% {
+        transform:
+            translate(2px, 2px);
+    }
+
+    100% {
+        transform:
+            translate(0, 0);
+    }
+
+}
+
+
+/* =========================
+   R
+========================= */
+
+#gachaArea.rare-r .boxCore {
+
+    border-color:
+        #00eaff;
 
 }
 
@@ -1123,7 +1579,7 @@ main {
             85,
             255,
             153,
-            0.5
+            0.65
         );
 
 }
@@ -1142,6 +1598,15 @@ main {
 }
 
 
+#gachaArea.rare-sr .boxBody,
+#gachaArea.rare-sr .boxTop {
+
+    border-color:
+        #55ff99;
+
+}
+
+
 /* =========================
    SSR
 ========================= */
@@ -1153,7 +1618,7 @@ main {
             255,
             204,
             51,
-            0.7
+            0.8
         );
 
 }
@@ -1185,7 +1650,7 @@ main {
 
     animation:
         corePulseGold
-        0.12s ease-in-out
+        0.1s ease-in-out
         infinite alternate;
 
 }
@@ -1199,13 +1664,16 @@ main {
             translateX(-50%)
             scale(1);
 
+        box-shadow:
+            0 0 20px #ffcc33;
+
     }
 
     to {
 
         transform:
             translateX(-50%)
-            scale(1.8);
+            scale(2.2);
 
         box-shadow:
 
@@ -1213,7 +1681,7 @@ main {
 
             0 0 80px #ffcc33,
 
-            0 0 140px #ffcc33;
+            0 0 150px #ffcc33;
 
     }
 
@@ -1231,7 +1699,7 @@ main {
             255,
             255,
             255,
-            0.9
+            0.95
         );
 
 }
@@ -1246,7 +1714,15 @@ main {
 
         0 0 25px white inset,
 
-        0 0 70px white;
+        0 0 70px white,
+
+        0 0 130px
+        rgba(
+            255,
+            255,
+            255,
+            0.8
+        );
 
 }
 
@@ -1257,7 +1733,7 @@ main {
 
     animation:
         corePulseXR
-        0.08s ease-in-out
+        0.065s ease-in-out
         infinite alternate;
 
 }
@@ -1271,21 +1747,24 @@ main {
             translateX(-50%)
             scale(1);
 
+        box-shadow:
+            0 0 30px white;
+
     }
 
     to {
 
         transform:
             translateX(-50%)
-            scale(2);
+            scale(2.5);
 
         box-shadow:
 
-            0 0 30px white,
+            0 0 40px white,
 
             0 0 100px white,
 
-            0 0 180px white;
+            0 0 200px white;
 
     }
 
@@ -1312,7 +1791,7 @@ main {
 
     animation:
         screenFlash
-        0.35s ease-out
+        0.55s ease-out
         forwards;
 
 }
@@ -1324,8 +1803,16 @@ main {
         opacity: 0;
     }
 
-    15% {
+    12% {
         opacity: 1;
+    }
+
+    25% {
+        opacity: 0.15;
+    }
+
+    45% {
+        opacity: 0.8;
     }
 
     100% {
@@ -1355,7 +1842,7 @@ main {
 
     animation:
         rareFlash
-        0.5s ease-out
+        0.9s ease-out
         forwards;
 
 }
@@ -1367,8 +1854,20 @@ main {
         opacity: 0;
     }
 
+    10% {
+        opacity: 1;
+    }
+
     20% {
-        opacity: 0.9;
+        opacity: 0.15;
+    }
+
+    35% {
+        opacity: 0.95;
+    }
+
+    55% {
+        opacity: 0.3;
     }
 
     100% {
@@ -1398,7 +1897,7 @@ main {
 
     animation:
         xrFlash
-        0.8s ease-out
+        1.15s ease-out
         forwards;
 
 }
@@ -1410,20 +1909,105 @@ main {
         opacity: 0;
     }
 
-    10% {
+    8% {
         opacity: 1;
     }
 
-    20% {
+    15% {
+        opacity: 0.05;
+    }
+
+    23% {
+        opacity: 1;
+    }
+
+    31% {
         opacity: 0.1;
     }
 
-    30% {
-        opacity: 1;
+    42% {
+        opacity: 0.95;
+    }
+
+    60% {
+        opacity: 0.25;
     }
 
     100% {
         opacity: 0;
+    }
+
+}
+
+
+/* =========================
+   RESULT REVEAL
+========================= */
+
+#resultRarity {
+
+    transition:
+        transform 0.2s ease,
+        opacity 0.2s ease;
+
+}
+
+
+#gachaArea.reveal ~ #resultArea #resultRarity {
+
+    animation:
+        resultReveal
+        0.7s
+        cubic-bezier(
+            0.2,
+            1.4,
+            0.4,
+            1
+        );
+
+}
+
+
+@keyframes resultReveal {
+
+    0% {
+
+        opacity: 0;
+
+        transform:
+            scale(0.15)
+            rotateX(90deg);
+
+        filter:
+            blur(20px);
+
+    }
+
+    55% {
+
+        opacity: 1;
+
+        transform:
+            scale(1.2)
+            rotateX(0deg);
+
+        filter:
+            blur(0);
+
+    }
+
+    75% {
+
+        transform:
+            scale(0.92);
+
+    }
+
+    100% {
+
+        transform:
+            scale(1);
+
     }
 
 }
@@ -1462,6 +2046,28 @@ main {
 
     display: flex;
 
+    animation:
+        overlayIn
+        0.35s
+        ease-out;
+
+}
+
+
+@keyframes overlayIn {
+
+    from {
+
+        opacity: 0;
+
+    }
+
+    to {
+
+        opacity: 1;
+
+    }
+
 }
 
 
@@ -1497,7 +2103,14 @@ main {
 
         0 0 20px #ffcc33,
 
-        0 0 50px #ffcc33;
+        0 0 50px #ffcc33,
+
+        0 0 100px #ffcc33;
+
+    animation:
+        rareAppear
+        0.7s
+        ease-out;
 
 }
 
@@ -1510,7 +2123,45 @@ main {
 
         0 0 20px white,
 
-        0 0 50px white;
+        0 0 50px white,
+
+        0 0 120px white;
+
+}
+
+
+@keyframes rareAppear {
+
+    0% {
+
+        opacity: 0;
+
+        transform:
+            scale(0.2);
+
+        filter:
+            blur(20px);
+
+    }
+
+    60% {
+
+        opacity: 1;
+
+        transform:
+            scale(1.25);
+
+        filter:
+            blur(0);
+
+    }
+
+    100% {
+
+        transform:
+            scale(1);
+
+    }
 
 }
 
@@ -1604,6 +2255,15 @@ main {
         width: 420px;
 
         height: 420px;
+
+    }
+
+
+    .energyRing {
+
+        width: 140px;
+
+        height: 140px;
 
     }
 
