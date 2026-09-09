@@ -77,7 +77,7 @@ body {
 
     inset: 0;
 
-    z-index: 50;
+    z-index: 150;
 
     pointer-events: none;
 
@@ -139,21 +139,16 @@ body {
             0.25
         );
 
-    transition:
-        0.2s ease;
-
 }
 
 
 #ldmButton:hover {
 
-    background: #00eaff;
+    background:
+        #00eaff;
 
-    color: #001018;
-
-    box-shadow:
-
-        0 0 20px #00eaff;
+    color:
+        #001018;
 
 }
 
@@ -270,7 +265,7 @@ main {
 
     height: 300px;
 
-    z-index: 20;
+    z-index: 30;
 
     cursor: pointer;
 
@@ -289,7 +284,8 @@ main {
 
 #gachaBox:hover {
 
-    transform: scale(1.04);
+    transform:
+        scale(1.04);
 
     filter:
 
@@ -306,7 +302,8 @@ main {
 
 #gachaBox:active {
 
-    transform: scale(0.94);
+    transform:
+        scale(0.94);
 
 }
 
@@ -371,7 +368,8 @@ main {
 
     height: 8px;
 
-    background: #00eaff;
+    background:
+        #00eaff;
 
     box-shadow:
 
@@ -421,15 +419,8 @@ main {
             0.35
         );
 
-    transition:
-        0.25s ease;
-
 }
 
-
-/* =========================
-   SCREEN
-========================= */
 
 .boxScreen {
 
@@ -457,7 +448,8 @@ main {
 
     align-items: center;
 
-    background: #02090d;
+    background:
+        #02090d;
 
     box-shadow:
 
@@ -467,7 +459,8 @@ main {
             234,
             255,
             0.3
-        ) inset;
+        )
+        inset;
 
     overflow: hidden;
 
@@ -492,7 +485,6 @@ main {
     letter-spacing: 4px;
 
     text-shadow:
-
         0 0 10px #00eaff;
 
 }
@@ -528,14 +520,11 @@ main {
 
         0 0 25px #00eaff;
 
-    transition:
-        0.2s ease;
-
 }
 
 
 /* =========================
-   BOX LINES
+   LINES
 ========================= */
 
 .boxLine {
@@ -548,9 +537,11 @@ main {
 
     height: 1px;
 
-    background: #00eaff;
+    background:
+        #00eaff;
 
-    opacity: 0.5;
+    opacity:
+        0.5;
 
 }
 
@@ -589,13 +580,14 @@ main {
     border:
         2px solid #00eaff;
 
-    background: #04141b;
+    background:
+        #04141b;
 
 }
 
 
 /* =========================
-   SCANNER
+   SCANNERS
 ========================= */
 
 .scanner {
@@ -621,9 +613,11 @@ main {
             0.3
         );
 
-    border-radius: 50%;
+    border-radius:
+        50%;
 
-    pointer-events: none;
+    pointer-events:
+        none;
 
 }
 
@@ -658,9 +652,9 @@ main {
 
     top: 50%;
 
-    width: 230px;
+    width: 220px;
 
-    height: 230px;
+    height: 220px;
 
     transform:
         translate(
@@ -674,43 +668,45 @@ main {
             0,
             234,
             255,
-            0.3
+            0.35
         );
 
-    border-radius: 50%;
+    border-radius:
+        50%;
 
-    opacity: 0;
+    opacity:
+        0;
 
-    pointer-events: none;
-
-}
-
-
-.hudRing1 {
-
-    border-style: dashed;
+    pointer-events:
+        none;
 
 }
 
 
 .hudRing2 {
 
-    width: 310px;
+    width:
+        300px;
 
-    height: 310px;
+    height:
+        300px;
 
-    border-style: dotted;
+    border-style:
+        dotted;
 
 }
 
 
 .hudRing3 {
 
-    width: 370px;
+    width:
+        370px;
 
-    height: 370px;
+    height:
+        370px;
 
-    border-style: solid;
+    border-style:
+        solid;
 
     border-color:
         rgba(
@@ -723,17 +719,14 @@ main {
 }
 
 
-/* =========================
-   HUD ANIMATION
-========================= */
-
 #gachaArea.charging .hudRing1 {
 
-    opacity: 1;
+    opacity:
+        1;
 
     animation:
         hudRotate
-        2.4s
+        1.7s
         linear
         infinite;
 
@@ -742,11 +735,12 @@ main {
 
 #gachaArea.charging .hudRing2 {
 
-    opacity: 0.75;
+    opacity:
+        0.8;
 
     animation:
         hudRotateReverse
-        3.4s
+        2.5s
         linear
         infinite;
 
@@ -755,11 +749,12 @@ main {
 
 #gachaArea.charging .hudRing3 {
 
-    opacity: 0.45;
+    opacity:
+        0.55;
 
     animation:
         hudRotate
-        5s
+        3.8s
         linear
         infinite;
 
@@ -821,159 +816,45 @@ main {
 
 
 /* =========================
-   TAP TEXT
-========================= */
-
-#tapText {
-
-    position: absolute;
-
-    bottom: 5px;
-
-    left: 50%;
-
-    transform:
-        translateX(-50%);
-
-    font-size: 13px;
-
-    letter-spacing: 5px;
-
-    text-shadow:
-        0 0 10px #00eaff;
-
-    pointer-events: none;
-
-    transition:
-        opacity 0.2s ease;
-
-}
-
-
-#gachaArea.charging #tapText {
-
-    opacity: 0;
-
-}
-
-
-/* =========================
-   CHARGE MESSAGE
-========================= */
-
-#chargeMessage {
-
-    position: absolute;
-
-    left: 50%;
-
-    top: 22px;
-
-    transform:
-        translateX(-50%);
-
-    font-size: 11px;
-
-    letter-spacing: 4px;
-
-    white-space: nowrap;
-
-    text-shadow:
-        0 0 10px #00eaff;
-
-    pointer-events: none;
-
-    opacity: 0.8;
-
-}
-
-
-#gachaArea.charging #chargeMessage {
-
-    animation:
-        messageGlitch
-        0.14s
-        infinite;
-
-}
-
-
-@keyframes messageGlitch {
-
-    0% {
-
-        transform:
-            translateX(-50%);
-
-    }
-
-    25% {
-
-        transform:
-            translateX(-52%);
-
-    }
-
-    50% {
-
-        transform:
-            translateX(-48%);
-
-    }
-
-    75% {
-
-        transform:
-            translateX(-51%);
-
-    }
-
-    100% {
-
-        transform:
-            translateX(-50%);
-
-    }
-
-}
-
-
-/* =========================
-   CRYSTAL CONTAINER
+   CRYSTALS
 ========================= */
 
 #crystalContainer {
 
-    position: absolute;
+    position:
+        absolute;
 
-    inset: 0;
+    inset:
+        0;
 
-    z-index: 12;
+    z-index:
+        15;
 
-    pointer-events: none;
-
-    overflow: visible;
+    pointer-events:
+        none;
 
 }
 
 
-/* =========================
-   CRYSTALS
-========================= */
-
 .crystal {
 
-    position: absolute;
+    position:
+        absolute;
 
-    left: 50%;
+    left:
+        50%;
 
-    top: 50%;
+    top:
+        50%;
 
-    width: var(--size);
+    width:
+        var(--size);
 
-    height: var(--size);
+    height:
+        var(--size);
 
-    background: #00eaff;
+    background:
+        #00eaff;
 
     clip-path:
         polygon(
@@ -983,28 +864,38 @@ main {
             0% 50%
         );
 
-    opacity: 0;
-
-    filter:
-        drop-shadow(
-            0 0 5px #00eaff
-        );
+    opacity:
+        0;
 
     transform:
+
         translate(
             var(--startX),
             var(--startY)
         )
-        rotate(0deg)
-        scale(0.2);
+
+        rotate(
+            var(--rotation)
+        )
+
+        scale(
+            0.2
+        );
+
+    filter:
+
+        drop-shadow(
+            0 0 5px #00eaff
+        );
 
     animation:
+
         crystalConverge
         var(--duration)
         cubic-bezier(
-            0.15,
+            0.12,
             0.8,
-            0.25,
+            0.18,
             1
         )
         var(--delay)
@@ -1017,64 +908,85 @@ main {
 
     0% {
 
-        opacity: 0;
+        opacity:
+            0;
 
         transform:
+
             translate(
                 var(--startX),
                 var(--startY)
             )
-            rotate(0deg)
-            scale(0.15);
+
+            rotate(
+                0deg
+            )
+
+            scale(
+                0.1
+            );
 
     }
 
-    15% {
+    12% {
 
-        opacity: 1;
+        opacity:
+            1;
 
     }
 
-    70% {
+    55% {
 
-        opacity: 0.9;
+        opacity:
+            0.95;
+
+    }
+
+    85% {
+
+        opacity:
+            0.8;
 
     }
 
     100% {
 
-        opacity: 0;
+        opacity:
+            0;
 
         transform:
+
             translate(
                 0,
                 0
             )
+
             rotate(
-                360deg
+                720deg
             )
-            scale(1.4);
+
+            scale(
+                1.5
+            );
 
     }
 
 }
 
 
-/* =========================
-   CRYSTAL COLORS
-========================= */
-
 .crystal-sr {
 
-    background: #55ff99;
+    background:
+        #55ff99;
 
     filter:
+
         drop-shadow(
             0 0 7px #55ff99
         )
 
         drop-shadow(
-            0 0 14px #55ff99
+            0 0 15px #55ff99
         );
 
 }
@@ -1082,15 +994,17 @@ main {
 
 .crystal-ssr {
 
-    background: #ffcc33;
+    background:
+        #ffcc33;
 
     filter:
+
         drop-shadow(
             0 0 8px #ffcc33
         )
 
         drop-shadow(
-            0 0 18px #ffcc33
+            0 0 20px #ffcc33
         );
 
 }
@@ -1098,79 +1012,436 @@ main {
 
 .crystal-xr {
 
-    background: white;
+    background:
+        white;
 
     filter:
+
         drop-shadow(
-            0 0 8px white
+            0 0 10px white
         )
 
         drop-shadow(
-            0 0 20px white
+            0 0 25px white
         )
 
         drop-shadow(
-            0 0 35px white
+            0 0 45px white
         );
 
 }
 
 
 /* =========================
-   CRYSTAL BURST
+   PARTICLES
 ========================= */
 
-#crystalContainer.burst {
+#particleContainer {
 
-    animation:
-        crystalBurst
-        0.9s
-        cubic-bezier(
-            0.2,
-            0.8,
-            0.2,
-            1
-        )
-        forwards;
+    position:
+        absolute;
+
+    inset:
+        0;
+
+    z-index:
+        16;
+
+    pointer-events:
+        none;
 
 }
 
 
-@keyframes crystalBurst {
+.particle {
+
+    position:
+        absolute;
+
+    left:
+        50%;
+
+    top:
+        50%;
+
+    width:
+        var(--size);
+
+    height:
+        var(--size);
+
+    border-radius:
+        50%;
+
+    background:
+        #00eaff;
+
+    box-shadow:
+        0 0 8px #00eaff;
+
+    opacity:
+        0;
+
+    animation:
+        particleOrbit
+        var(--duration)
+        linear
+        var(--delay)
+        infinite;
+
+}
+
+
+@keyframes particleOrbit {
 
     0% {
 
-        transform:
-            scale(0.2);
+        opacity:
+            0;
 
-        opacity: 0;
+        transform:
+            rotate(0deg)
+            translateX(
+                var(--radius)
+            )
+            scale(
+                0.2
+            );
 
     }
 
     15% {
 
-        transform:
-            scale(0.7);
-
-        opacity: 1;
+        opacity:
+            1;
 
     }
 
-    35% {
+    75% {
 
-        transform:
-            scale(1.2);
-
-        opacity: 1;
+        opacity:
+            0.9;
 
     }
 
     100% {
 
-        transform:
-            scale(4);
+        opacity:
+            0;
 
-        opacity: 0;
+        transform:
+            rotate(360deg)
+            translateX(
+                var(--radius)
+            )
+            scale(
+                1.4
+            );
+
+    }
+
+}
+
+
+.particle-sr {
+
+    background:
+        #55ff99;
+
+    box-shadow:
+        0 0 10px #55ff99;
+
+}
+
+
+.particle-ssr {
+
+    background:
+        #ffcc33;
+
+    box-shadow:
+        0 0 12px #ffcc33;
+
+}
+
+
+.particle-xr {
+
+    background:
+        white;
+
+    box-shadow:
+        0 0 15px white;
+
+}
+
+
+/* =========================
+   BEAMS
+========================= */
+
+#beamContainer {
+
+    position:
+        absolute;
+
+    inset:
+        0;
+
+    z-index:
+        17;
+
+    pointer-events:
+        none;
+
+}
+
+
+.beam {
+
+    position:
+        absolute;
+
+    left:
+        50%;
+
+    top:
+        50%;
+
+    width:
+        2px;
+
+    height:
+        250px;
+
+    transform-origin:
+        50% 100%;
+
+    background:
+        linear-gradient(
+            to top,
+            rgba(
+                0,
+                234,
+                255,
+                0
+            ),
+            #00eaff,
+            rgba(
+                0,
+                234,
+                255,
+                0
+            )
+        );
+
+    opacity:
+        0;
+
+    animation:
+        beamRotate
+        1.1s
+        linear
+        infinite;
+
+}
+
+
+@keyframes beamRotate {
+
+    0% {
+
+        opacity:
+            0;
+
+        transform:
+            translate(
+                -50%,
+                -100%
+            )
+            rotate(
+                var(--angle)
+            )
+            scaleY(
+                0.2
+            );
+
+    }
+
+    25% {
+
+        opacity:
+            0.8;
+
+    }
+
+    70% {
+
+        opacity:
+            0.5;
+
+    }
+
+    100% {
+
+        opacity:
+            0;
+
+        transform:
+            translate(
+                -50%,
+                -100%
+            )
+            rotate(
+                calc(
+                    var(--angle) + 180deg
+                )
+            )
+            scaleY(
+                1.2
+            );
+
+    }
+
+}
+
+
+.beam-sr {
+
+    background:
+        linear-gradient(
+            to top,
+            transparent,
+            #55ff99,
+            transparent
+        );
+
+}
+
+
+.beam-ssr {
+
+    background:
+        linear-gradient(
+            to top,
+            transparent,
+            #ffcc33,
+            transparent
+        );
+
+}
+
+
+.beam-xr {
+
+    background:
+        linear-gradient(
+            to top,
+            transparent,
+            white,
+            transparent
+        );
+
+}
+
+
+/* =========================
+   SHOCKWAVE
+========================= */
+
+#shockwaveContainer {
+
+    position:
+        absolute;
+
+    left:
+        50%;
+
+    top:
+        50%;
+
+    width:
+        20px;
+
+    height:
+        20px;
+
+    z-index:
+        18;
+
+    border:
+        2px solid #00eaff;
+
+    border-radius:
+        50%;
+
+    transform:
+        translate(
+            -50%,
+            -50%
+        )
+        scale(
+            0
+        );
+
+    opacity:
+        0;
+
+    pointer-events:
+        none;
+
+}
+
+
+#shockwaveContainer.active {
+
+    animation:
+        shockwave
+        0.9s
+        ease-out
+        forwards;
+
+}
+
+
+@keyframes shockwave {
+
+    0% {
+
+        opacity:
+            1;
+
+        transform:
+            translate(
+                -50%,
+                -50%
+            )
+            scale(
+                0
+            );
+
+    }
+
+    25% {
+
+        opacity:
+            0.9;
+
+    }
+
+    100% {
+
+        opacity:
+            0;
+
+        transform:
+            translate(
+                -50%,
+                -50%
+            )
+            scale(
+                15
+            );
 
     }
 
@@ -1178,29 +1449,196 @@ main {
 
 
 /* =========================
-   BOX CHARGING
+   TAP
+========================= */
+
+#tapText {
+
+    position:
+        absolute;
+
+    bottom:
+        5px;
+
+    left:
+        50%;
+
+    transform:
+        translateX(
+            -50%
+        );
+
+    font-size:
+        13px;
+
+    letter-spacing:
+        5px;
+
+    text-shadow:
+        0 0 10px #00eaff;
+
+    pointer-events:
+        none;
+
+    transition:
+        opacity 0.2s ease;
+
+}
+
+
+#gachaArea.charging #tapText {
+
+    opacity:
+        0;
+
+}
+
+
+/* =========================
+   CHARGE MESSAGE
+========================= */
+
+#chargeMessage {
+
+    position:
+        absolute;
+
+    left:
+        50%;
+
+    top:
+        22px;
+
+    transform:
+        translateX(
+            -50%
+        );
+
+    font-size:
+        11px;
+
+    letter-spacing:
+        4px;
+
+    white-space:
+        nowrap;
+
+    text-shadow:
+        0 0 10px #00eaff;
+
+    pointer-events:
+        none;
+
+}
+
+
+#gachaArea.charging #chargeMessage {
+
+    animation:
+        messageGlitch
+        0.11s
+        infinite;
+
+}
+
+
+@keyframes messageGlitch {
+
+    0% {
+        transform:
+            translateX(-50%);
+    }
+
+    25% {
+        transform:
+            translateX(-53%);
+    }
+
+    50% {
+        transform:
+            translateX(-47%);
+    }
+
+    75% {
+        transform:
+            translateX(-52%);
+    }
+
+    100% {
+        transform:
+            translateX(-50%);
+    }
+
+}
+
+
+/* =========================
+   WARNING TEXT
+========================= */
+
+#warningText {
+
+    position:
+        absolute;
+
+    top:
+        48px;
+
+    left:
+        50%;
+
+    transform:
+        translateX(
+            -50%
+        );
+
+    font-size:
+        9px;
+
+    letter-spacing:
+        3px;
+
+    opacity:
+        0;
+
+    pointer-events:
+        none;
+
+}
+
+
+#gachaArea.charging #warningText {
+
+    opacity:
+        0.65;
+
+}
+
+
+/* =========================
+   BOX CHARGE
 ========================= */
 
 #gachaBox.charging {
 
     animation:
         chargeBox
-        0.14s
+        0.12s
         ease-in-out
         infinite alternate;
 
     filter:
 
         drop-shadow(
-            0 0 15px #00eaff
+            0 0 20px #00eaff
         )
 
         drop-shadow(
-            0 0 35px #00eaff
+            0 0 50px #00eaff
         )
 
         drop-shadow(
-            0 0 70px #00eaff
+            0 0 90px #00eaff
         );
 
 }
@@ -1212,39 +1650,54 @@ main {
 
         transform:
             translateY(0)
-            scale(1);
+            scale(1)
+            rotate(
+                -0.3deg
+            );
 
     }
 
     25% {
 
         transform:
-            translateY(-4px)
-            scale(1.015);
+            translateY(-5px)
+            scale(1.02)
+            rotate(
+                0.3deg
+            );
 
     }
 
     50% {
 
         transform:
-            translateY(-9px)
-            scale(1.03);
+            translateY(-10px)
+            scale(1.045)
+            rotate(
+                -0.4deg
+            );
 
     }
 
     75% {
 
         transform:
-            translateY(-6px)
-            scale(1.04);
+            translateY(-7px)
+            scale(1.06)
+            rotate(
+                0.4deg
+            );
 
     }
 
     100% {
 
         transform:
-            translateY(-14px)
-            scale(1.06);
+            translateY(-17px)
+            scale(1.08)
+            rotate(
+                -0.3deg
+            );
 
     }
 
@@ -1252,14 +1705,14 @@ main {
 
 
 /* =========================
-   CORE
+   CORE CHARGE
 ========================= */
 
 #gachaBox.charging .boxCore {
 
     animation:
         corePulse
-        0.18s
+        0.14s
         ease-in-out
         infinite alternate;
 
@@ -1286,15 +1739,15 @@ main {
 
         transform:
             translateX(-50%)
-            scale(1.8);
+            scale(2);
 
         box-shadow:
 
             0 0 20px #00eaff,
 
-            0 0 60px #00eaff,
+            0 0 70px #00eaff,
 
-            0 0 120px #00eaff;
+            0 0 140px #00eaff;
 
     }
 
@@ -1309,7 +1762,7 @@ main {
 
     animation:
         lightFlash
-        0.1s
+        0.08s
         linear
         infinite;
 
@@ -1320,31 +1773,40 @@ main {
 
     0% {
 
-        opacity: 0.2;
+        opacity:
+            0.2;
 
         transform:
             translateX(-50%)
-            scaleX(0.5);
+            scaleX(
+                0.4
+            );
 
     }
 
     50% {
 
-        opacity: 1;
+        opacity:
+            1;
 
         transform:
             translateX(-50%)
-            scaleX(1.4);
+            scaleX(
+                1.5
+            );
 
     }
 
     100% {
 
-        opacity: 0.2;
+        opacity:
+            0.2;
 
         transform:
             translateX(-50%)
-            scaleX(0.5);
+            scaleX(
+                0.4
+            );
 
     }
 
@@ -1359,8 +1821,7 @@ main {
 
     animation:
         lineCharge
-        0.4s
-        ease-in-out
+        0.35s
         infinite;
 
 }
@@ -1370,9 +1831,8 @@ main {
 
     animation:
         lineCharge
-        0.4s
-        ease-in-out
-        0.13s
+        0.35s
+        0.1s
         infinite;
 
 }
@@ -1382,9 +1842,8 @@ main {
 
     animation:
         lineCharge
-        0.4s
-        ease-in-out
-        0.26s
+        0.35s
+        0.2s
         infinite;
 
 }
@@ -1394,28 +1853,37 @@ main {
 
     0% {
 
-        opacity: 0.15;
+        opacity:
+            0.1;
 
         transform:
-            scaleX(0.5);
+            scaleX(
+                0.3
+            );
 
     }
 
     50% {
 
-        opacity: 1;
+        opacity:
+            1;
 
         transform:
-            scaleX(1);
+            scaleX(
+                1
+            );
 
     }
 
     100% {
 
-        opacity: 0.15;
+        opacity:
+            0.1;
 
         transform:
-            scaleX(0.5);
+            scaleX(
+                0.3
+            );
 
     }
 
@@ -1423,14 +1891,14 @@ main {
 
 
 /* =========================
-   SCREEN GLITCH
+   SCREEN
 ========================= */
 
 #gachaBox.charging .boxScreen {
 
     animation:
         screenGlitch
-        0.13s
+        0.1s
         steps(2)
         infinite;
 
@@ -1443,7 +1911,7 @@ main {
 
         transform:
             translateX(-50%)
-            skewX(0deg);
+            skewX(0);
 
     }
 
@@ -1451,7 +1919,7 @@ main {
 
         transform:
             translateX(-52%)
-            skewX(-2deg);
+            skewX(-3deg);
 
     }
 
@@ -1459,7 +1927,7 @@ main {
 
         transform:
             translateX(-48%)
-            skewX(2deg);
+            skewX(3deg);
 
     }
 
@@ -1467,7 +1935,7 @@ main {
 
         transform:
             translateX(-51%)
-            skewX(-1deg);
+            skewX(-2deg);
 
     }
 
@@ -1475,7 +1943,7 @@ main {
 
         transform:
             translateX(-50%)
-            skewX(0deg);
+            skewX(0);
 
     }
 
@@ -1490,7 +1958,7 @@ main {
 
     animation:
         areaShake
-        0.055s
+        0.045s
         linear
         infinite;
 
@@ -1502,11 +1970,11 @@ main {
 
     box-shadow:
 
-        0 0 30px #00eaff inset,
+        0 0 40px #00eaff inset,
 
-        0 0 80px #00eaff,
+        0 0 100px #00eaff,
 
-        0 0 150px
+        0 0 180px
         rgba(
             0,
             234,
@@ -1520,44 +1988,66 @@ main {
 @keyframes areaShake {
 
     0% {
+
         transform:
             translate(
                 0,
                 0
             );
+
     }
 
     25% {
+
         transform:
             translate(
-                4px,
-                -2px
+                5px,
+                -3px
             );
+
     }
 
     50% {
+
         transform:
             translate(
-                -4px,
-                3px
+                -5px,
+                4px
             );
+
     }
 
     75% {
+
         transform:
             translate(
-                3px,
-                2px
+                4px,
+                3px
             );
+
     }
 
     100% {
+
         transform:
             translate(
                 0,
                 0
             );
+
     }
+
+}
+
+
+/* =========================
+   R
+========================= */
+
+#gachaArea.rare-r .crystal {
+
+    background:
+        #00eaff;
 
 }
 
@@ -1573,7 +2063,7 @@ main {
             85,
             255,
             153,
-            0.65
+            0.7
         );
 
 }
@@ -1597,7 +2087,7 @@ main {
 
         0 0 20px #55ff99,
 
-        0 0 50px #55ff99;
+        0 0 60px #55ff99;
 
 }
 
@@ -1613,20 +2103,7 @@ main {
             255,
             204,
             51,
-            0.85
-        );
-
-}
-
-
-#gachaArea.rare-ssr .hudRing {
-
-    border-color:
-        rgba(
-            255,
-            204,
-            51,
-            0.45
+            0.9
         );
 
 }
@@ -1640,9 +2117,11 @@ main {
 
     box-shadow:
 
-        0 0 25px #ffcc33 inset,
+        0 0 30px #ffcc33 inset,
 
-        0 0 60px
+        0 0 70px #ffcc33,
+
+        0 0 130px
         rgba(
             255,
             204,
@@ -1659,15 +2138,15 @@ main {
         #ffcc33;
 
     animation:
-        corePulseGold
-        0.09s
+        goldCore
+        0.07s
         ease-in-out
         infinite alternate;
 
 }
 
 
-@keyframes corePulseGold {
+@keyframes goldCore {
 
     from {
 
@@ -1675,25 +2154,21 @@ main {
             translateX(-50%)
             scale(1);
 
-        box-shadow:
-
-            0 0 20px #ffcc33;
-
     }
 
     to {
 
         transform:
             translateX(-50%)
-            scale(2.3);
+            scale(2.5);
 
         box-shadow:
 
-            0 0 30px #ffcc33,
+            0 0 40px #ffcc33,
 
-            0 0 90px #ffcc33,
+            0 0 100px #ffcc33,
 
-            0 0 160px #ffcc33;
+            0 0 190px #ffcc33;
 
     }
 
@@ -1717,19 +2192,6 @@ main {
 }
 
 
-#gachaArea.rare-xr .hudRing {
-
-    border-color:
-        rgba(
-            255,
-            255,
-            255,
-            0.65
-        );
-
-}
-
-
 #gachaArea.rare-xr .boxBody,
 #gachaArea.rare-xr .boxTop {
 
@@ -1738,17 +2200,11 @@ main {
 
     box-shadow:
 
-        0 0 30px white inset,
+        0 0 40px white inset,
 
-        0 0 80px white,
+        0 0 100px white,
 
-        0 0 150px
-        rgba(
-            255,
-            255,
-            255,
-            0.9
-        );
+        0 0 190px white;
 
 }
 
@@ -1759,15 +2215,15 @@ main {
         white;
 
     animation:
-        corePulseXR
-        0.055s
+        whiteCore
+        0.045s
         ease-in-out
         infinite alternate;
 
 }
 
 
-@keyframes corePulseXR {
+@keyframes whiteCore {
 
     from {
 
@@ -1775,25 +2231,21 @@ main {
             translateX(-50%)
             scale(1);
 
-        box-shadow:
-
-            0 0 30px white;
-
     }
 
     to {
 
         transform:
             translateX(-50%)
-            scale(2.6);
+            scale(3);
 
         box-shadow:
 
-            0 0 40px white,
+            0 0 50px white,
 
-            0 0 120px white,
+            0 0 130px white,
 
-            0 0 220px white;
+            0 0 240px white;
 
     }
 
@@ -1806,47 +2258,63 @@ main {
 
 #gachaArea.flash::before {
 
-    content: "";
+    content:
+        "";
 
-    position: fixed;
+    position:
+        fixed;
 
-    inset: 0;
+    inset:
+        0;
 
-    z-index: 90;
+    z-index:
+        120;
 
-    background: white;
+    background:
+        white;
 
-    pointer-events: none;
+    pointer-events:
+        none;
 
     animation:
-        screenFlash
-        0.6s
+        normalFlash
+        0.7s
         ease-out
         forwards;
 
 }
 
 
-@keyframes screenFlash {
+@keyframes normalFlash {
 
     0% {
-        opacity: 0;
+        opacity:
+            0;
     }
 
     10% {
-        opacity: 1;
+        opacity:
+            1;
     }
 
     18% {
-        opacity: 0.05;
+        opacity:
+            0.05;
     }
 
-    35% {
-        opacity: 0.85;
+    32% {
+        opacity:
+            0.85;
+    }
+
+    50% {
+        opacity:
+            0.15;
     }
 
     100% {
-        opacity: 0;
+        opacity:
+            0;
     }
 
 }
@@ -1858,56 +2326,68 @@ main {
 
 #gachaArea.flash-ssr::before {
 
-    content: "";
+    content:
+        "";
 
-    position: fixed;
+    position:
+        fixed;
 
-    inset: 0;
+    inset:
+        0;
 
-    z-index: 90;
+    z-index:
+        120;
 
     background:
         #ffcc33;
 
-    pointer-events: none;
+    pointer-events:
+        none;
 
     animation:
-        rareFlash
-        1s
+        ssrFlash
+        1.1s
         ease-out
         forwards;
 
 }
 
 
-@keyframes rareFlash {
+@keyframes ssrFlash {
 
     0% {
-        opacity: 0;
+        opacity:
+            0;
     }
 
     8% {
-        opacity: 1;
+        opacity:
+            1;
     }
 
-    17% {
-        opacity: 0.08;
+    15% {
+        opacity:
+            0.05;
     }
 
-    28% {
-        opacity: 0.9;
+    25% {
+        opacity:
+            0.95;
     }
 
-    45% {
-        opacity: 0.15;
+    38% {
+        opacity:
+            0.1;
     }
 
-    65% {
-        opacity: 0.65;
+    55% {
+        opacity:
+            0.8;
     }
 
     100% {
-        opacity: 0;
+        opacity:
+            0;
     }
 
 }
@@ -1919,22 +2399,27 @@ main {
 
 #gachaArea.flash-xr::before {
 
-    content: "";
+    content:
+        "";
 
-    position: fixed;
+    position:
+        fixed;
 
-    inset: 0;
+    inset:
+        0;
 
-    z-index: 90;
+    z-index:
+        120;
 
     background:
         white;
 
-    pointer-events: none;
+    pointer-events:
+        none;
 
     animation:
         xrFlash
-        1.3s
+        1.5s
         ease-out
         forwards;
 
@@ -1944,39 +2429,48 @@ main {
 @keyframes xrFlash {
 
     0% {
-        opacity: 0;
+        opacity:
+            0;
     }
 
-    7% {
-        opacity: 1;
+    5% {
+        opacity:
+            1;
     }
 
-    13% {
-        opacity: 0.03;
+    11% {
+        opacity:
+            0;
     }
 
-    20% {
-        opacity: 1;
+    18% {
+        opacity:
+            1;
     }
 
-    27% {
-        opacity: 0.05;
+    24% {
+        opacity:
+            0.05;
     }
 
-    37% {
-        opacity: 1;
+    33% {
+        opacity:
+            1;
     }
 
-    50% {
-        opacity: 0.12;
+    43% {
+        opacity:
+            0.05;
     }
 
-    65% {
-        opacity: 0.7;
+    58% {
+        opacity:
+            0.9;
     }
 
     100% {
-        opacity: 0;
+        opacity:
+            0;
     }
 
 }
@@ -1986,11 +2480,50 @@ main {
    RESULT
 ========================= */
 
+#resultArea {
+
+    min-height:
+        130px;
+
+    margin-top:
+        10px;
+
+}
+
+
+#resultLabel {
+
+    font-size:
+        12px;
+
+    letter-spacing:
+        4px;
+
+    opacity:
+        0.6;
+
+}
+
+
 #resultRarity {
 
-    transition:
-        transform 0.2s ease,
-        opacity 0.2s ease;
+    margin-top:
+        15px;
+
+    font-size:
+        70px;
+
+    font-weight:
+        bold;
+
+    letter-spacing:
+        8px;
+
+    text-shadow:
+
+        0 0 15px #00eaff,
+
+        0 0 40px #00eaff;
 
 }
 
@@ -1999,11 +2532,11 @@ main {
 
     animation:
         resultReveal
-        0.7s
+        0.8s
         cubic-bezier(
-            0.2,
+            0.15,
             1.4,
-            0.4,
+            0.3,
             1
         );
 
@@ -2014,41 +2547,59 @@ main {
 
     0% {
 
-        opacity: 0;
+        opacity:
+            0;
 
         transform:
-            scale(0.15)
-            rotateX(90deg);
+            scale(
+                0.05
+            )
+            rotateX(
+                90deg
+            );
 
         filter:
-            blur(20px);
+            blur(
+                25px
+            );
 
     }
 
     55% {
 
-        opacity: 1;
+        opacity:
+            1;
 
         transform:
-            scale(1.2)
-            rotateX(0deg);
+            scale(
+                1.25
+            )
+            rotateX(
+                0
+            );
 
         filter:
-            blur(0);
+            blur(
+                0
+            );
 
     }
 
     75% {
 
         transform:
-            scale(0.92);
+            scale(
+                0.9
+            );
 
     }
 
     100% {
 
         transform:
-            scale(1);
+            scale(
+                1
+            );
 
     }
 
@@ -2056,12 +2607,13 @@ main {
 
 
 /* =========================
-   GUARANTEE AREA
+   GUARANTEE
 ========================= */
 
 #guaranteeArea {
 
-    display: grid;
+    display:
+        grid;
 
     grid-template-columns:
         repeat(
@@ -2069,11 +2621,14 @@ main {
             1fr
         );
 
-    gap: 15px;
+    gap:
+        15px;
 
-    width: 100%;
+    width:
+        100%;
 
-    max-width: 700px;
+    max-width:
+        700px;
 
     margin:
         0 auto 25px;
@@ -2117,24 +2672,31 @@ main {
 
 .guaranteeTitle {
 
-    font-size: 11px;
+    font-size:
+        11px;
 
-    letter-spacing: 3px;
+    letter-spacing:
+        3px;
 
-    opacity: 0.75;
+    opacity:
+        0.75;
 
 }
 
 
 .guaranteeCounter {
 
-    margin-top: 8px;
+    margin-top:
+        8px;
 
-    font-size: 21px;
+    font-size:
+        21px;
 
-    font-weight: bold;
+    font-weight:
+        bold;
 
-    letter-spacing: 2px;
+    letter-spacing:
+        2px;
 
     text-shadow:
         0 0 8px #00eaff;
@@ -2144,11 +2706,14 @@ main {
 
 .guaranteeBar {
 
-    width: 100%;
+    width:
+        100%;
 
-    height: 4px;
+    height:
+        4px;
 
-    margin-top: 10px;
+    margin-top:
+        10px;
 
     background:
         rgba(
@@ -2158,18 +2723,22 @@ main {
             0.12
         );
 
-    overflow: hidden;
+    overflow:
+        hidden;
 
 }
 
 
 .guaranteeBarFill {
 
-    width: 0%;
+    width:
+        0%;
 
-    height: 100%;
+    height:
+        100%;
 
-    background: #00eaff;
+    background:
+        #00eaff;
 
     box-shadow:
         0 0 10px #00eaff;
@@ -2181,77 +2750,41 @@ main {
 
 
 /* =========================
-   RESULT
-========================= */
-
-#resultArea {
-
-    min-height: 130px;
-
-    margin-top: 10px;
-
-}
-
-
-#resultLabel {
-
-    font-size: 12px;
-
-    letter-spacing: 4px;
-
-    opacity: 0.6;
-
-}
-
-
-#resultRarity {
-
-    margin-top: 15px;
-
-    font-size: 70px;
-
-    font-weight: bold;
-
-    letter-spacing: 8px;
-
-    text-shadow:
-
-        0 0 15px #00eaff,
-
-        0 0 40px #00eaff;
-
-}
-
-
-/* =========================
    HISTORY
 ========================= */
 
 #historyArea {
 
-    margin-top: 30px;
+    margin-top:
+        30px;
 
 }
 
 
 #historyArea h2 {
 
-    font-size: 14px;
+    font-size:
+        14px;
 
-    letter-spacing: 4px;
+    letter-spacing:
+        4px;
 
 }
 
 
 #historyList {
 
-    display: flex;
+    display:
+        flex;
 
-    flex-wrap: wrap;
+    flex-wrap:
+        wrap;
 
-    gap: 8px;
+    gap:
+        8px;
 
-    justify-content: center;
+    justify-content:
+        center;
 
 }
 
@@ -2272,7 +2805,8 @@ main {
             0.7
         );
 
-    font-weight: bold;
+    font-weight:
+        bold;
 
 }
 
@@ -2283,17 +2817,23 @@ main {
 
 .overlay {
 
-    position: fixed;
+    position:
+        fixed;
 
-    inset: 0;
+    inset:
+        0;
 
-    z-index: 100;
+    z-index:
+        300;
 
-    display: none;
+    display:
+        none;
 
-    align-items: center;
+    align-items:
+        center;
 
-    justify-content: center;
+    justify-content:
+        center;
 
     background:
         rgba(
@@ -2308,7 +2848,8 @@ main {
 
 .overlay.show {
 
-    display: flex;
+    display:
+        flex;
 
     animation:
         overlayIn
@@ -2322,13 +2863,15 @@ main {
 
     from {
 
-        opacity: 0;
+        opacity:
+            0;
 
     }
 
     to {
 
-        opacity: 1;
+        opacity:
+            1;
 
     }
 
@@ -2337,16 +2880,19 @@ main {
 
 .overlayContent {
 
-    text-align: center;
+    text-align:
+        center;
 
 }
 
 
 .rareText {
 
-    font-size: 20px;
+    font-size:
+        20px;
 
-    letter-spacing: 8px;
+    letter-spacing:
+        8px;
 
 }
 
@@ -2356,11 +2902,14 @@ main {
     margin:
         20px 0;
 
-    font-size: 120px;
+    font-size:
+        120px;
 
-    font-weight: bold;
+    font-weight:
+        bold;
 
-    letter-spacing: 8px;
+    letter-spacing:
+        8px;
 
     color:
         #ffcc33;
@@ -2401,32 +2950,44 @@ main {
 
     0% {
 
-        opacity: 0;
+        opacity:
+            0;
 
         transform:
-            scale(0.2);
+            scale(
+                0.2
+            );
 
         filter:
-            blur(20px);
+            blur(
+                20px
+            );
 
     }
 
     60% {
 
-        opacity: 1;
+        opacity:
+            1;
 
         transform:
-            scale(1.25);
+            scale(
+                1.25
+            );
 
         filter:
-            blur(0);
+            blur(
+                0
+            );
 
     }
 
     100% {
 
         transform:
-            scale(1);
+            scale(
+                1
+            );
 
     }
 
@@ -2447,13 +3008,17 @@ main {
     padding:
         14px 30px;
 
-    font-size: 14px;
+    font-size:
+        14px;
 
-    letter-spacing: 3px;
+    letter-spacing:
+        3px;
 
-    cursor: pointer;
+    cursor:
+        pointer;
 
-    touch-action: manipulation;
+    touch-action:
+        manipulation;
 
 }
 
@@ -2476,7 +3041,7 @@ main {
 body.ldm-mode .grid {
 
     opacity:
-        0.45;
+        0.4;
 
 }
 
@@ -2484,7 +3049,33 @@ body.ldm-mode .grid {
 body.ldm-mode .scanlines {
 
     opacity:
-        0.5;
+        0.45;
+
+}
+
+
+body.ldm-mode #crystalContainer,
+body.ldm-mode #particleContainer,
+body.ldm-mode #beamContainer {
+
+    display:
+        none;
+
+}
+
+
+body.ldm-mode .hudRing {
+
+    opacity:
+        0.18 !important;
+
+}
+
+
+body.ldm-mode .scanner {
+
+    opacity:
+        0.4;
 
 }
 
@@ -2497,7 +3088,7 @@ body.ldm-mode #gachaBox {
 }
 
 
-body.ldm-mode #gachaBox:hover {
+body.ldm-mode #gachaBox.charging {
 
     filter:
         drop-shadow(
@@ -2506,7 +3097,7 @@ body.ldm-mode #gachaBox:hover {
                 0,
                 234,
                 255,
-                0.5
+                0.4
             )
         );
 
@@ -2542,7 +3133,7 @@ body.ldm-mode .boxCore {
 
     box-shadow:
 
-        0 0 7px
+        0 0 8px
         rgba(
             0,
             234,
@@ -2553,235 +3144,78 @@ body.ldm-mode .boxCore {
 }
 
 
-body.ldm-mode .boxLight {
-
-    opacity:
-        0.55;
-
-}
-
-
-body.ldm-mode .scanner {
-
-    opacity:
-        0.4;
-
-}
-
-
-body.ldm-mode .hudRing {
-
-    opacity:
-        0.2 !important;
-
-}
-
-
-body.ldm-mode #crystalContainer {
-
-    display:
-        none;
-
-}
-
-
 /* =========================
-   LDM CHARGE
+   LDM FLASH完全無効
 ========================= */
 
-body.ldm-mode #gachaBox.charging {
-
-    filter:
-        drop-shadow(
-            0 0 8px
-            rgba(
-                0,
-                234,
-                255,
-                0.45
-            )
-        );
-
-}
-
-
-body.ldm-mode #gachaBox.charging .boxCore {
-
-    animation:
-        ldmCorePulse
-        0.25s
-        ease-in-out
-        infinite alternate;
-
-}
-
-
-@keyframes ldmCorePulse {
-
-    from {
-
-        transform:
-            translateX(-50%)
-            scale(1);
-
-    }
-
-    to {
-
-        transform:
-            translateX(-50%)
-            scale(1.35);
-
-    }
-
-}
-
-
-/* =========================
-   LDM FLASH
-========================= */
-
-body.ldm-mode #gachaArea.flash::before {
-
-    opacity:
-        0.3;
-
-}
-
-
-body.ldm-mode #gachaArea.flash-ssr::before {
-
-    opacity:
-        0.3;
-
-}
-
-
+body.ldm-mode #gachaArea.flash::before,
+body.ldm-mode #gachaArea.flash-ssr::before,
 body.ldm-mode #gachaArea.flash-xr::before {
 
-    opacity:
-        0.25;
+    display:
+        none !important;
+
+    animation:
+        none !important;
 
 }
 
 
 /* =========================
-   LDM SSR
+   LDM LIMIT
 ========================= */
 
-body.ldm-mode #gachaArea.rare-ssr .boxBody,
-body.ldm-mode #gachaArea.rare-ssr .boxTop {
-
-    box-shadow:
-
-        0 0 10px
-        rgba(
-            255,
-            204,
-            51,
-            0.3
-        )
-        inset,
-
-        0 0 18px
-        rgba(
-            255,
-            204,
-            51,
-            0.3
-        );
-
-}
-
-
-body.ldm-mode #gachaArea.rare-ssr .boxCore {
+body.ldm-mode #gachaArea.limitBreak {
 
     animation:
-        ldmGoldPulse
-        0.18s
-        ease-in-out
-        infinite alternate;
+        ldmShake
+        0.1s
+        linear
+        infinite;
 
 }
 
 
-@keyframes ldmGoldPulse {
+@keyframes ldmShake {
 
-    from {
-
+    0% {
         transform:
-            translateX(-50%)
-            scale(1);
-
+            translate(
+                0,
+                0
+            );
     }
 
-    to {
-
+    25% {
         transform:
-            translateX(-50%)
-            scale(1.45);
-
+            translate(
+                2px,
+                -1px
+            );
     }
 
-}
-
-
-/* =========================
-   LDM XR
-========================= */
-
-body.ldm-mode #gachaArea.rare-xr .boxBody,
-body.ldm-mode #gachaArea.rare-xr .boxTop {
-
-    box-shadow:
-
-        0 0 12px
-        rgba(
-            255,
-            255,
-            255,
-            0.35
-        )
-        inset,
-
-        0 0 22px
-        rgba(
-            255,
-            255,
-            255,
-            0.35
-        );
-
-}
-
-
-body.ldm-mode #gachaArea.rare-xr .boxCore {
-
-    animation:
-        ldmXRpulse
-        0.14s
-        ease-in-out
-        infinite alternate;
-
-}
-
-
-@keyframes ldmXRpulse {
-
-    from {
-
+    50% {
         transform:
-            translateX(-50%)
-            scale(1);
-
+            translate(
+                -2px,
+                1px
+            );
     }
 
-    to {
-
+    75% {
         transform:
-            translateX(-50%)
-            scale(1.6);
+            translate(
+                1px,
+                1px
+            );
+    }
 
+    100% {
+        transform:
+            translate(
+                0,
+                0
+            );
     }
 
 }
@@ -2795,23 +3229,27 @@ body.ldm-mode #gachaArea.rare-xr .boxCore {
 
     header {
 
-        padding-top: 45px;
+        padding-top:
+            45px;
 
     }
 
 
     h1 {
 
-        font-size: 38px;
+        font-size:
+            38px;
 
-        letter-spacing: 4px;
+        letter-spacing:
+            4px;
 
     }
 
 
     #gachaArea {
 
-        height: 430px;
+        height:
+            430px;
 
     }
 
@@ -2819,7 +3257,9 @@ body.ldm-mode #gachaArea.rare-xr .boxCore {
     #gachaBox {
 
         transform:
-            scale(0.85);
+            scale(
+                0.85
+            );
 
     }
 
@@ -2827,66 +3267,80 @@ body.ldm-mode #gachaArea.rare-xr .boxCore {
     #gachaBox:hover {
 
         transform:
-            scale(0.88);
+            scale(
+                0.88
+            );
 
     }
 
 
     .scanner1 {
 
-        width: 330px;
+        width:
+            330px;
 
-        height: 330px;
+        height:
+            330px;
 
     }
 
 
     .scanner2 {
 
-        width: 420px;
+        width:
+            420px;
 
-        height: 420px;
+        height:
+            420px;
 
     }
 
 
     .hudRing1 {
 
-        width: 190px;
+        width:
+            190px;
 
-        height: 190px;
+        height:
+            190px;
 
     }
 
 
     .hudRing2 {
 
-        width: 250px;
+        width:
+            250px;
 
-        height: 250px;
+        height:
+            250px;
 
     }
 
 
     .hudRing3 {
 
-        width: 310px;
+        width:
+            310px;
 
-        height: 310px;
+        height:
+            310px;
 
     }
 
 
     #resultRarity {
 
-        font-size: 60px;
+        font-size:
+            60px;
 
     }
 
 
     .rareRarity {
 
-        font-size: 90px;
+        font-size:
+            90px;
 
     }
 
@@ -2896,21 +3350,25 @@ body.ldm-mode #gachaArea.rare-xr .boxCore {
         grid-template-columns:
             1fr;
 
-        gap: 10px;
+        gap:
+            10px;
 
     }
 
 
     #ldmButton {
 
-        top: 12px;
+        top:
+            12px;
 
-        right: 12px;
+        right:
+            12px;
 
         padding:
             8px 11px;
 
-        font-size: 9px;
+        font-size:
+            9px;
 
     }
 
