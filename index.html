@@ -1,0 +1,259 @@
+```html
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CYBER GACHA SYSTEM</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- 背景 -->
+    <div class="grid"></div>
+    <div class="scanlines"></div>
+
+    <!-- システム情報 -->
+    <div class="system-info">
+        <div>CYBER GACHA SYSTEM</div>
+        <div id="systemStatus">● SYSTEM ONLINE</div>
+    </div>
+
+    <!-- メイン画面 -->
+    <main id="mainScreen">
+
+        <div class="title-area">
+            <div class="small-title">RANDOMIZED REWARD SYSTEM</div>
+            <h1>CYBER<br><span>GACHA</span></h1>
+        </div>
+
+        <!-- ガチャボックス -->
+        <div id="gachaArea">
+
+            <div class="scanner">
+                <div class="scanner-line"></div>
+            </div>
+
+            <div id="gachaBox" class="gacha-box">
+                <div class="box-top"></div>
+                <div class="box-body">
+                    <div class="box-symbol">◇</div>
+                    <div class="box-text">SYSTEM<br>LOCKED</div>
+                </div>
+                <div class="box-bottom"></div>
+            </div>
+
+            <div id="energyRing" class="energy-ring"></div>
+            <div id="particles"></div>
+
+        </div>
+
+        <!-- 結果 -->
+        <div id="resultArea" class="result-area hidden">
+            <div class="result-label">RESULT</div>
+            <div id="resultRarity" class="result-rarity">R</div>
+            <div id="resultText"></div>
+        </div>
+
+        <!-- ガチャ操作 -->
+        <div class="controls">
+
+            <div class="pull-count">
+                <span>ROLL COUNT</span>
+                <strong id="rollCountDisplay">1</strong>
+            </div>
+
+            <button id="minusButton">−</button>
+            <button id="plusButton">＋</button>
+
+            <button id="rollButton" class="roll-button">
+                <span>OPEN</span>
+                <small id="rollButtonSub">1 ROLL</small>
+            </button>
+
+        </div>
+
+        <!-- 確率 -->
+        <div class="probability-display">
+            <div>R <span id="rRate">90%</span></div>
+            <div>SR <span id="srRate">8.5%</span></div>
+            <div>SSR <span id="ssrRate">1.4999%</span></div>
+            <div>XR <span id="xrRate">0.0001%</span></div>
+        </div>
+
+        <!-- 履歴 -->
+        <div class="history">
+            <div class="history-title">ROLL HISTORY</div>
+            <div id="historyList"></div>
+        </div>
+
+    </main>
+
+    <!-- XR専用オーバーレイ -->
+    <div id="xrOverlay" class="rarity-overlay xr-overlay">
+
+        <div class="glitch-text" data-text="SYSTEM ERROR">
+            SYSTEM ERROR
+        </div>
+
+        <div class="unknown">
+            UNKNOWN RARITY DETECTED
+        </div>
+
+        <div class="xr-big">
+            X<span>R</span>
+        </div>
+
+        <div class="xr-sub">
+            EXTREME RARITY
+        </div>
+
+        <div class="xr-particles"></div>
+
+        <button id="xrCloseButton">
+            CONTINUE
+        </button>
+
+    </div>
+
+    <!-- SSR専用オーバーレイ -->
+    <div id="ssrOverlay" class="rarity-overlay ssr-overlay">
+
+        <div class="ssr-warning">
+            ⚠ HIGH ENERGY DETECTED ⚠
+        </div>
+
+        <div class="ssr-big">
+            SSR
+        </div>
+
+        <div class="ssr-sub">
+            SUPER SPECIAL RARITY
+        </div>
+
+        <button id="ssrCloseButton">
+            CONTINUE
+        </button>
+
+    </div>
+
+    <!-- 管理者画面 -->
+    <div id="adminPanel">
+
+        <div class="admin-header">
+            <div>
+                <span class="admin-small">SECURE SYSTEM</span>
+                <h2>ADMIN CONSOLE</h2>
+            </div>
+
+            <button id="adminClose">×</button>
+        </div>
+
+        <div class="admin-content">
+
+            <section class="admin-section">
+
+                <h3>GACHA CONFIGURATION</h3>
+
+                <label>
+                    ROLL COUNT
+                    <input id="adminRollCount"
+                           type="number"
+                           min="1"
+                           max="9999"
+                           value="1">
+                </label>
+
+                <div class="quick-rolls">
+                    <button data-roll="1">1 ROLL</button>
+                    <button data-roll="10">10 ROLL</button>
+                    <button data-roll="100">100 ROLL</button>
+                    <button data-roll="1000">1000 ROLL</button>
+                </div>
+
+            </section>
+
+            <section class="admin-section">
+
+                <h3>RARITY CONFIGURATION</h3>
+
+                <div class="rarity-input">
+                    <label>R</label>
+                    <input id="rateR" type="number" min="0" step="0.0001" value="90">
+                    <span>%</span>
+                </div>
+
+                <div class="rarity-input">
+                    <label>SR</label>
+                    <input id="rateSR" type="number" min="0" step="0.0001" value="8.5">
+                    <span>%</span>
+                </div>
+
+                <div class="rarity-input">
+                    <label>SSR</label>
+                    <input id="rateSSR" type="number" min="0" step="0.0001" value="1.4999">
+                    <span>%</span>
+                </div>
+
+                <div class="rarity-input">
+                    <label>XR</label>
+                    <input id="rateXR" type="number" min="0" step="0.0001" value="0.0001">
+                    <span>%</span>
+                </div>
+
+                <div id="totalDisplay" class="total-display">
+                    TOTAL : 100.0000%
+                </div>
+
+            </section>
+
+            <section class="admin-section">
+
+                <h3>DEBUG / TEST MODE</h3>
+
+                <div class="force-buttons">
+
+                    <button data-force="R">FORCE R</button>
+                    <button data-force="SR">FORCE SR</button>
+                    <button data-force="SSR">FORCE SSR</button>
+                    <button data-force="XR">FORCE XR</button>
+                    <button data-force="RANDOM" class="active">
+                        RANDOM
+                    </button>
+
+                </div>
+
+                <div id="forceStatus">
+                    MODE : RANDOM
+                </div>
+
+            </section>
+
+            <button id="applyButton" class="apply-button">
+                APPLY CONFIGURATION
+            </button>
+
+            <button id="resetButton" class="reset-button">
+                RESET DEFAULT
+            </button>
+
+        </div>
+
+        <div class="admin-footer">
+            PRESS Q TO CLOSE CONSOLE
+        </div>
+
+    </div>
+
+    <!-- 管理者アクセス表示 -->
+    <div id="adminAccess">
+        <div>&gt; ADMIN ACCESS GRANTED</div>
+        <div>&gt; SYSTEM CONFIGURATION ENABLED</div>
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
+```
