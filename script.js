@@ -33,64 +33,129 @@ const XR_GUARANTEE = 15000;
 ========================= */
 
 const gachaBox =
-    document.getElementById("gachaBox");
+    document.getElementById(
+        "gachaBox"
+    );
+
 
 const gachaArea =
-    document.getElementById("gachaArea");
+    document.getElementById(
+        "gachaArea"
+    );
+
 
 const resultRarity =
-    document.getElementById("resultRarity");
+    document.getElementById(
+        "resultRarity"
+    );
+
 
 const historyList =
-    document.getElementById("historyList");
+    document.getElementById(
+        "historyList"
+    );
+
 
 const ssrOverlay =
-    document.getElementById("ssrOverlay");
+    document.getElementById(
+        "ssrOverlay"
+    );
+
 
 const xrOverlay =
-    document.getElementById("xrOverlay");
+    document.getElementById(
+        "xrOverlay"
+    );
+
 
 const ssrContinue =
-    document.getElementById("ssrContinue");
+    document.getElementById(
+        "ssrContinue"
+    );
+
 
 const xrContinue =
-    document.getElementById("xrContinue");
+    document.getElementById(
+        "xrContinue"
+    );
+
 
 const ssrCounter =
-    document.getElementById("ssrCounter");
+    document.getElementById(
+        "ssrCounter"
+    );
+
 
 const xrCounter =
-    document.getElementById("xrCounter");
+    document.getElementById(
+        "xrCounter"
+    );
+
 
 const ssrBar =
-    document.getElementById("ssrBar");
+    document.getElementById(
+        "ssrBar"
+    );
+
 
 const xrBar =
-    document.getElementById("xrBar");
+    document.getElementById(
+        "xrBar"
+    );
+
 
 const chargeMessage =
-    document.getElementById("chargeMessage");
+    document.getElementById(
+        "chargeMessage"
+    );
+
 
 const boxScreenSmall =
-    document.getElementById("boxScreenSmall");
+    document.getElementById(
+        "boxScreenSmall"
+    );
+
 
 const boxScreenMain =
-    document.getElementById("boxScreenMain");
+    document.getElementById(
+        "boxScreenMain"
+    );
+
 
 const crystalContainer =
-    document.getElementById("crystalContainer");
+    document.getElementById(
+        "crystalContainer"
+    );
+
 
 const particleContainer =
-    document.getElementById("particleContainer");
+    document.getElementById(
+        "particleContainer"
+    );
+
 
 const beamContainer =
-    document.getElementById("beamContainer");
+    document.getElementById(
+        "beamContainer"
+    );
+
 
 const shockwaveContainer =
-    document.getElementById("shockwaveContainer");
+    document.getElementById(
+        "shockwaveContainer"
+    );
+
 
 const ldmButton =
-    document.getElementById("ldmButton");
+    document.getElementById(
+        "ldmButton"
+    );
+
+
+const skipButton =
+    document.getElementById(
+        "skipButton"
+    );
 
 
 /* =========================
@@ -117,6 +182,7 @@ function updateLDM() {
         ldmMode
     );
 
+
     ldmButton.textContent =
         ldmMode
             ? "LDM: ON"
@@ -129,18 +195,79 @@ ldmButton.addEventListener(
     "click",
     function () {
 
-        if (isRolling) {
+        if (
+            isRolling
+        ) {
+
             return;
+
         }
 
-        ldmMode = !ldmMode;
+
+        ldmMode =
+            !ldmMode;
+
 
         localStorage.setItem(
             "cyberGachaLDM",
-            String(ldmMode)
+            String(
+                ldmMode
+            )
         );
 
+
         updateLDM();
+
+    }
+);
+
+
+/* =========================
+   SKIP MODE
+========================= */
+
+let skipMode =
+    localStorage.getItem(
+        "cyberGachaSkip"
+    ) === "true";
+
+
+function updateSkip() {
+
+    skipButton.textContent =
+        skipMode
+            ? "SKIP: ON"
+            : "SKIP: OFF";
+
+}
+
+
+skipButton.addEventListener(
+    "click",
+    function () {
+
+        if (
+            isRolling
+        ) {
+
+            return;
+
+        }
+
+
+        skipMode =
+            !skipMode;
+
+
+        localStorage.setItem(
+            "cyberGachaSkip",
+            String(
+                skipMode
+            )
+        );
+
+
+        updateSkip();
 
     }
 );
@@ -167,7 +294,9 @@ let xrCount =
 
 
 if (
-    !Number.isFinite(ssrCount) ||
+    !Number.isFinite(
+        ssrCount
+    ) ||
     ssrCount < 0 ||
     ssrCount >= SSR_GUARANTEE
 ) {
@@ -178,7 +307,9 @@ if (
 
 
 if (
-    !Number.isFinite(xrCount) ||
+    !Number.isFinite(
+        xrCount
+    ) ||
     xrCount < 0 ||
     xrCount >= XR_GUARANTEE
 ) {
@@ -189,19 +320,24 @@ if (
 
 
 /* =========================
-   カウンター保存
+   保存
 ========================= */
 
 function saveCounters() {
 
     localStorage.setItem(
         "cyberGachaSSRCount",
-        String(ssrCount)
+        String(
+            ssrCount
+        )
     );
+
 
     localStorage.setItem(
         "cyberGachaXRCount",
-        String(xrCount)
+        String(
+            xrCount
+        )
     );
 
 }
@@ -229,14 +365,16 @@ function updateCounters() {
         (
             ssrCount /
             SSR_GUARANTEE
-        ) * 100;
+        ) *
+        100;
 
 
     const xrProgress =
         (
             xrCount /
             XR_GUARANTEE
-        ) * 100;
+        ) *
+        100;
 
 
     ssrBar.style.width =
@@ -265,7 +403,8 @@ function updateCounters() {
 function drawRarity() {
 
     const random =
-        Math.random() * 100;
+        Math.random() *
+        100;
 
 
     if (
@@ -324,6 +463,7 @@ function showResult(
         resultRarity.style.color =
             "#00eaff";
 
+
         resultRarity.style.textShadow =
             "0 0 15px #00eaff, 0 0 40px #00eaff";
 
@@ -336,6 +476,7 @@ function showResult(
 
         resultRarity.style.color =
             "#55ff99";
+
 
         resultRarity.style.textShadow =
             "0 0 15px #55ff99, 0 0 40px #55ff99";
@@ -350,6 +491,7 @@ function showResult(
         resultRarity.style.color =
             "#ffcc33";
 
+
         resultRarity.style.textShadow =
             "0 0 20px #ffcc33, 0 0 50px #ffcc33";
 
@@ -361,6 +503,7 @@ function showResult(
         resultRarity.style.color =
             "white";
 
+
         resultRarity.style.textShadow =
             "0 0 20px white, 0 0 50px white";
 
@@ -370,7 +513,7 @@ function showResult(
 
 
 /* =========================
-   履歴
+   HISTORY
 ========================= */
 
 function addHistory(
@@ -398,6 +541,7 @@ function addHistory(
         item.style.color =
             "#55ff99";
 
+
         item.style.borderColor =
             "#55ff99";
 
@@ -411,6 +555,7 @@ function addHistory(
         item.style.color =
             "#ffcc33";
 
+
         item.style.borderColor =
             "#ffcc33";
 
@@ -423,6 +568,7 @@ function addHistory(
 
         item.style.color =
             "white";
+
 
         item.style.borderColor =
             "white";
@@ -474,7 +620,7 @@ function clearBeams() {
 
 
 /* =========================
-   全エフェクト削除
+   エフェクト削除
 ========================= */
 
 function clearEffects() {
@@ -485,8 +631,10 @@ function clearEffects() {
 
     clearBeams();
 
+
     shockwaveContainer.className =
         "";
+
 
     shockwaveContainer.style.borderColor =
         "";
@@ -505,10 +653,6 @@ function createCrystals(
     clearCrystals();
 
 
-    /*
-       LDMではクリスタルなし
-    */
-
     if (
         ldmMode
     ) {
@@ -518,14 +662,16 @@ function createCrystals(
     }
 
 
-    let count = 45;
+    let count =
+        45;
 
 
     if (
         rarity === "SR"
     ) {
 
-        count = 75;
+        count =
+            75;
 
     }
 
@@ -534,7 +680,8 @@ function createCrystals(
         rarity === "SSR"
     ) {
 
-        count = 110;
+        count =
+            110;
 
     }
 
@@ -543,7 +690,8 @@ function createCrystals(
         rarity === "XR"
     ) {
 
-        count = 160;
+        count =
+            160;
 
     }
 
@@ -553,6 +701,7 @@ function createCrystals(
         i < count;
         i++
     ) {
+
 
         const crystal =
             document.createElement(
@@ -577,12 +726,16 @@ function createCrystals(
 
 
         const startX =
-            Math.cos(angle) *
+            Math.cos(
+                angle
+            ) *
             distance;
 
 
         const startY =
-            Math.sin(angle) *
+            Math.sin(
+                angle
+            ) *
             distance;
 
 
@@ -698,14 +851,16 @@ function createParticles(
     }
 
 
-    let count = 30;
+    let count =
+        30;
 
 
     if (
         rarity === "SR"
     ) {
 
-        count = 50;
+        count =
+            50;
 
     }
 
@@ -714,7 +869,8 @@ function createParticles(
         rarity === "SSR"
     ) {
 
-        count = 75;
+        count =
+            75;
 
     }
 
@@ -723,7 +879,8 @@ function createParticles(
         rarity === "XR"
     ) {
 
-        count = 110;
+        count =
+            110;
 
     }
 
@@ -846,14 +1003,16 @@ function createBeams(
     }
 
 
-    let count = 8;
+    let count =
+        8;
 
 
     if (
         rarity === "SR"
     ) {
 
-        count = 10;
+        count =
+            10;
 
     }
 
@@ -862,7 +1021,8 @@ function createBeams(
         rarity === "SSR"
     ) {
 
-        count = 14;
+        count =
+            14;
 
     }
 
@@ -871,7 +1031,8 @@ function createBeams(
         rarity === "XR"
     ) {
 
-        count = 20;
+        count =
+            20;
 
     }
 
@@ -1027,8 +1188,10 @@ function setChargeMessage(
     boxScreenSmall.textContent =
         small;
 
+
     boxScreenMain.textContent =
         main;
+
 
     chargeMessage.textContent =
         main;
@@ -1037,7 +1200,7 @@ function setChargeMessage(
 
 
 /* =========================
-   アニメーションクラス解除
+   アニメーション解除
 ========================= */
 
 function clearAnimationClasses() {
@@ -1075,7 +1238,7 @@ function clearAnimationClasses() {
 
 
 /* =========================
-   オーバーレイを閉じる
+   オーバーレイ
 ========================= */
 
 function closeOverlays() {
@@ -1083,6 +1246,7 @@ function closeOverlays() {
     ssrOverlay.classList.remove(
         "show"
     );
+
 
     xrOverlay.classList.remove(
         "show"
@@ -1154,6 +1318,81 @@ xrContinue.addEventListener(
 
 
 /* =========================
+   SKIP結果
+========================= */
+
+function skipResult(
+    rarity
+) {
+
+    /*
+       R / SRのみここに来る
+    */
+
+
+    clearAnimationClasses();
+
+
+    clearEffects();
+
+
+    gachaArea.classList.add(
+        "rare-" +
+        rarity.toLowerCase()
+    );
+
+
+    gachaArea.classList.add(
+        "reveal"
+    );
+
+
+    setChargeMessage(
+        "RESULT",
+        "REVEAL"
+    );
+
+
+    showResult(
+        rarity
+    );
+
+
+    addHistory(
+        rarity
+    );
+
+
+    /*
+       少しだけ待って
+       SYSTEM READY
+    */
+
+    setTimeout(
+        function () {
+
+            clearAnimationClasses();
+
+
+            clearEffects();
+
+
+            setChargeMessage(
+                "SYSTEM",
+                "SYSTEM READY"
+            );
+
+
+            isRolling = false;
+
+        },
+        350
+    );
+
+}
+
+
+/* =========================
    ガチャ開始
 ========================= */
 
@@ -1169,7 +1408,8 @@ function openGacha() {
     }
 
 
-    isRolling = true;
+    isRolling =
+        true;
 
 
     closeOverlays();
@@ -1216,7 +1456,8 @@ function openGacha() {
         XR_GUARANTEE
     ) {
 
-        rarity = "XR";
+        rarity =
+            "XR";
 
     }
 
@@ -1232,7 +1473,8 @@ function openGacha() {
         SSR_GUARANTEE
     ) {
 
-        rarity = "SSR";
+        rarity =
+            "SSR";
 
     }
 
@@ -1247,9 +1489,11 @@ function openGacha() {
         rarity === "XR"
     ) {
 
-        ssrCount = 0;
+        ssrCount =
+            0;
 
-        xrCount = 0;
+        xrCount =
+            0;
 
     }
 
@@ -1258,7 +1502,8 @@ function openGacha() {
         rarity === "SSR"
     ) {
 
-        ssrCount = 0;
+        ssrCount =
+            0;
 
         xrCount =
             nextXRCount;
@@ -1282,7 +1527,33 @@ function openGacha() {
 
     /*
        =========================
-       レア度クラス
+       SKIP MODE
+       
+       R / SRだけ即結果
+       
+       SSR / XRは絶対に
+       スキップしない
+       =========================
+    */
+
+    if (
+        skipMode &&
+        rarity !== "SSR" &&
+        rarity !== "XR"
+    ) {
+
+        skipResult(
+            rarity
+        );
+
+        return;
+
+    }
+
+
+    /*
+       =========================
+       通常演出
        =========================
     */
 
@@ -1294,7 +1565,7 @@ function openGacha() {
 
     /*
        =========================
-       エフェクト準備
+       エフェクト生成
        =========================
     */
 
@@ -1448,8 +1719,8 @@ function openGacha() {
 
 
             /*
-               通常モードだけ
-               エフェクトを再充填
+               通常モードのみ
+               再充填
             */
 
             if (
@@ -1559,12 +1830,8 @@ function openGacha() {
                =========================
                FLASH
                
-               LDMでは絶対に発生させない
+               LDMでは完全に発生しない
                =========================
-            */
-
-            /*
-               念のため既存クラスも消す
             */
 
             gachaArea.classList.remove(
@@ -1703,12 +1970,15 @@ function openGacha() {
 
                                 clearAnimationClasses();
 
+
                                 clearEffects();
+
 
                                 setChargeMessage(
                                     "SYSTEM",
                                     "SYSTEM READY"
                                 );
+
 
                                 isRolling = false;
 
@@ -1732,7 +2002,7 @@ function openGacha() {
 
 
 /* =========================
-   BOXをクリック
+   BOX CLICK
 ========================= */
 
 gachaBox.addEventListener(
@@ -1756,6 +2026,9 @@ resultRarity.textContent =
 updateLDM();
 
 
+updateSkip();
+
+
 updateCounters();
 
 
@@ -1763,12 +2036,6 @@ setChargeMessage(
     "CYBER",
     "GACHA"
 );
-
-
-/*
-   ENERGY LEVELは完全撤去。
-   warningTextも使用しない。
-*/
 
 
 console.log(
