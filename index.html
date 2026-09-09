@@ -13,28 +13,23 @@
     <div class="grid"></div>
     <div class="scanlines"></div>
 
-    <!-- ADMIN -->
-    <button id="adminButton">ADMIN</button>
-
-    <!-- HEADER -->
     <header>
-        <div class="status">
-            ● SYSTEM ONLINE
-        </div>
+        <div class="status">● SYSTEM ONLINE</div>
 
         <h1>CYBER GACHA</h1>
+
         <p>TAP THE BOX TO OPEN</p>
     </header>
 
-    <!-- GACHA -->
     <main>
 
+        <!-- ガチャ本体 -->
         <div id="gachaArea">
 
             <div class="scanner scanner1"></div>
             <div class="scanner scanner2"></div>
 
-            <div id="gachaBox" tabindex="0" role="button">
+            <div id="gachaBox">
 
                 <div class="boxTop">
                     <div class="boxLight"></div>
@@ -65,139 +60,78 @@
 
         </div>
 
-        <!-- RESULT -->
+
+        <!-- 結果 -->
         <div id="resultArea">
-            <div id="resultLabel">RESULT</div>
-            <div id="resultRarity">---</div>
+
+            <div id="resultLabel">
+                RESULT
+            </div>
+
+            <div id="resultRarity">
+                ---
+            </div>
+
         </div>
 
-        <!-- HISTORY -->
+
+        <!-- 履歴 -->
         <div id="historyArea">
+
             <h2>HISTORY</h2>
+
             <div id="historyList"></div>
+
         </div>
 
     </main>
 
-    <!-- SSR -->
+
+    <!-- SSR演出 -->
     <div id="ssrOverlay" class="overlay">
+
         <div class="overlayContent">
-            <div class="rareText">SUPER RARE</div>
-            <div class="rareRarity">SSR</div>
-            <button id="ssrContinue">CONTINUE</button>
+
+            <div class="rareText">
+                SUPER RARE
+            </div>
+
+            <div class="rareRarity">
+                SSR
+            </div>
+
+            <button id="ssrContinue">
+                CONTINUE
+            </button>
+
         </div>
+
     </div>
 
-    <!-- XR -->
+
+    <!-- XR演出 -->
     <div id="xrOverlay" class="overlay xr">
+
         <div class="overlayContent">
-            <div class="rareText">EXTREME RARE</div>
-            <div class="rareRarity">XR</div>
-            <button id="xrContinue">CONTINUE</button>
-        </div>
-    </div>
 
-    <!-- ADMIN PANEL -->
-    <div id="adminPanel">
-
-        <div class="adminHeader">
-            <h2>ADMIN PANEL</h2>
-            <button id="adminClose">×</button>
-        </div>
-
-        <div class="adminSection">
-
-            <label>ROLL COUNT</label>
-
-            <input
-                id="rollCountInput"
-                type="number"
-                min="1"
-                max="9999"
-                value="1"
-            >
-
-            <div class="quickButtons">
-                <button data-count="1">1</button>
-                <button data-count="10">10</button>
-                <button data-count="100">100</button>
-                <button data-count="1000">1000</button>
+            <div class="rareText">
+                EXTREME RARE
             </div>
 
-        </div>
-
-        <div class="adminSection">
-
-            <label>RARITY RATE</label>
-
-            <div class="rateRow">
-                <span>R</span>
-                <input id="rateR" type="number" step="0.0001">
-                <span>%</span>
+            <div class="rareRarity">
+                XR
             </div>
 
-            <div class="rateRow">
-                <span>SR</span>
-                <input id="rateSR" type="number" step="0.0001">
-                <span>%</span>
-            </div>
-
-            <div class="rateRow">
-                <span>SSR</span>
-                <input id="rateSSR" type="number" step="0.0001">
-                <span>%</span>
-            </div>
-
-            <div class="rateRow">
-                <span>XR</span>
-                <input id="rateXR" type="number" step="0.0001">
-                <span>%</span>
-            </div>
-
-            <div id="totalDisplay">
-                TOTAL: 100%
-            </div>
-
-        </div>
-
-        <div class="adminSection">
-
-            <label>TEST RARITY</label>
-
-            <div class="forceButtons">
-
-                <button data-force="RANDOM" class="selected">
-                    RANDOM
-                </button>
-
-                <button data-force="R">R</button>
-                <button data-force="SR">SR</button>
-                <button data-force="SSR">SSR</button>
-                <button data-force="XR">XR</button>
-
-            </div>
-
-            <div id="forceStatus">
-                MODE: RANDOM
-            </div>
-
-        </div>
-
-        <div class="adminActions">
-
-            <button id="applyButton">
-                APPLY
-            </button>
-
-            <button id="resetButton">
-                RESET
+            <button id="xrContinue">
+                CONTINUE
             </button>
 
         </div>
 
     </div>
 
-    <!-- 重要：必ず最後に読み込む -->
+
+    <!-- JavaScript -->
     <script src="script.js"></script>
 
 </body>
