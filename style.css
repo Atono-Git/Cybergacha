@@ -8,170 +8,207 @@ html,
 body {
     margin: 0;
     width: 100%;
-    height: 100%;
-    overflow-x: hidden;
-    font-family: Arial, Helvetica, sans-serif;
-    background: #05080d;
-    color: #00eaff;
+    min-height: 100%;
 }
 
 body {
-    position: relative;
     min-height: 100vh;
+
+    overflow-x: hidden;
+
+    background: #05080d;
+
+    color: #00eaff;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    text-align: center;
 }
 
-/* BACKGROUND */
+
+/* =========================
+   BACKGROUND
+========================= */
 
 .grid {
     position: fixed;
+
     inset: 0;
+
     z-index: -3;
 
+    pointer-events: none;
+
     background-image:
-        linear-gradient(rgba(0, 220, 255, 0.06) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0, 220, 255, 0.06) 1px, transparent 1px);
+        linear-gradient(
+            rgba(0, 220, 255, 0.06) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(0, 220, 255, 0.06) 1px,
+            transparent 1px
+        );
 
     background-size: 40px 40px;
 }
 
+
 .scanlines {
     position: fixed;
+
     inset: 0;
-    z-index: 20;
+
+    z-index: 50;
 
     pointer-events: none;
 
-    background: repeating-linear-gradient(
-        to bottom,
-        transparent 0px,
-        transparent 3px,
-        rgba(255,255,255,0.025) 4px
-    );
+    background:
+        repeating-linear-gradient(
+            to bottom,
+            transparent 0px,
+            transparent 3px,
+            rgba(255,255,255,0.025) 4px
+        );
 }
 
-/* HEADER */
+
+/* =========================
+   HEADER
+========================= */
 
 header {
-    text-align: center;
     padding-top: 60px;
+
+    position: relative;
+
+    z-index: 5;
 }
+
 
 .status {
     font-size: 12px;
+
     letter-spacing: 3px;
+
     margin-bottom: 15px;
 }
 
+
 h1 {
     margin: 0;
+
     font-size: clamp(38px, 8vw, 80px);
+
     letter-spacing: 8px;
+
     text-shadow:
         0 0 10px #00eaff,
         0 0 30px #00eaff;
 }
 
+
 header p {
     margin-top: 15px;
-    letter-spacing: 5px;
+
     font-size: 14px;
+
+    letter-spacing: 5px;
 }
 
-/* ADMIN BUTTON */
 
-#adminButton {
-    position: fixed;
-    right: 20px;
-    top: 20px;
-
-    z-index: 100;
-
-    border: 1px solid #00eaff;
-    background: rgba(0, 20, 30, 0.95);
-    color: #00eaff;
-
-    padding: 12px 20px;
-
-    font-weight: bold;
-    letter-spacing: 2px;
-
-    cursor: pointer;
-
-    box-shadow:
-        0 0 10px rgba(0,234,255,0.4);
-
-    touch-action: manipulation;
-}
-
-#adminButton:hover {
-    background: #00eaff;
-    color: #001018;
-}
-
-/* MAIN */
+/* =========================
+   MAIN
+========================= */
 
 main {
     width: 100%;
+
     max-width: 900px;
-    margin: auto;
-    padding: 30px 20px 80px;
+
+    margin: 0 auto;
+
+    padding:
+        20px
+        20px
+        80px;
 }
 
-/* GACHA AREA */
+
+/* =========================
+   GACHA AREA
+========================= */
 
 #gachaArea {
     position: relative;
 
     width: 100%;
+
     height: 480px;
 
     display: flex;
+
     align-items: center;
+
     justify-content: center;
 }
 
-/* BOX */
+
+/* =========================
+   GACHA BOX
+========================= */
 
 #gachaBox {
     position: relative;
 
     width: 260px;
+
     height: 300px;
 
-    cursor: pointer;
-
     z-index: 10;
+
+    cursor: pointer;
 
     user-select: none;
 
     touch-action: manipulation;
 
     transition:
-        transform 0.15s,
-        filter 0.15s;
+        transform 0.12s ease,
+        filter 0.12s ease;
 }
 
+
 #gachaBox:hover {
+    transform: scale(1.04);
+
     filter:
         drop-shadow(0 0 15px #00eaff)
         drop-shadow(0 0 30px #00eaff);
-
-    transform: scale(1.03);
 }
+
 
 #gachaBox:active {
     transform: scale(0.94);
 }
 
-/* BOX TOP */
+
+/* =========================
+   BOX TOP
+========================= */
 
 .boxTop {
     position: absolute;
 
     top: 0;
+
     left: 20px;
 
     width: 220px;
+
     height: 60px;
 
     border: 2px solid #00eaff;
@@ -188,15 +225,18 @@ main {
         0 0 20px rgba(0,234,255,0.4);
 }
 
+
 .boxLight {
     position: absolute;
 
-    left: 50%;
     top: 15px;
+
+    left: 50%;
 
     transform: translateX(-50%);
 
     width: 100px;
+
     height: 8px;
 
     background: #00eaff;
@@ -206,15 +246,20 @@ main {
         0 0 25px #00eaff;
 }
 
-/* BOX BODY */
+
+/* =========================
+   BOX BODY
+========================= */
 
 .boxBody {
     position: absolute;
 
-    left: 0;
     top: 45px;
 
+    left: 0;
+
     width: 260px;
+
     height: 220px;
 
     border: 2px solid #00eaff;
@@ -231,25 +276,32 @@ main {
         0 0 30px rgba(0,234,255,0.35);
 }
 
-/* SCREEN */
+
+/* =========================
+   SCREEN
+========================= */
 
 .boxScreen {
     position: absolute;
 
-    left: 50%;
     top: 45px;
+
+    left: 50%;
 
     transform: translateX(-50%);
 
     width: 180px;
+
     height: 80px;
 
     border: 1px solid #00eaff;
 
     display: flex;
+
     flex-direction: column;
 
     justify-content: center;
+
     align-items: center;
 
     background: #02090d;
@@ -258,32 +310,41 @@ main {
         0 0 15px rgba(0,234,255,0.3) inset;
 }
 
+
 .boxScreen span {
     font-size: 11px;
+
     letter-spacing: 4px;
 }
+
 
 .boxScreen strong {
     margin-top: 5px;
 
     font-size: 26px;
+
     letter-spacing: 4px;
 
     text-shadow:
         0 0 10px #00eaff;
 }
 
-/* CORE */
+
+/* =========================
+   CORE
+========================= */
 
 .boxCore {
     position: absolute;
 
     left: 50%;
+
     bottom: 25px;
 
     transform: translateX(-50%);
 
     width: 30px;
+
     height: 30px;
 
     border: 2px solid #00eaff;
@@ -295,12 +356,16 @@ main {
         0 0 25px #00eaff;
 }
 
-/* LINES */
+
+/* =========================
+   BOX LINES
+========================= */
 
 .boxLine {
     position: absolute;
 
     left: 20px;
+
     right: 20px;
 
     height: 1px;
@@ -310,27 +375,35 @@ main {
     opacity: 0.5;
 }
 
+
 .line1 {
     top: 15px;
 }
+
 
 .line2 {
     bottom: 15px;
 }
 
+
 .line3 {
     top: 160px;
 }
 
-/* BOTTOM */
+
+/* =========================
+   BOX BOTTOM
+========================= */
 
 .boxBottom {
     position: absolute;
 
     left: 15px;
+
     bottom: 0;
 
     width: 230px;
+
     height: 25px;
 
     border: 2px solid #00eaff;
@@ -338,15 +411,20 @@ main {
     background: #04141b;
 }
 
-/* SCANNERS */
+
+/* =========================
+   SCANNER
+========================= */
 
 .scanner {
     position: absolute;
 
     left: 50%;
+
     top: 50%;
 
-    transform: translate(-50%, -50%);
+    transform:
+        translate(-50%, -50%);
 
     border: 1px solid rgba(0,234,255,0.3);
 
@@ -355,17 +433,24 @@ main {
     pointer-events: none;
 }
 
+
 .scanner1 {
     width: 420px;
+
     height: 420px;
 }
 
+
 .scanner2 {
     width: 550px;
+
     height: 550px;
 }
 
-/* TAP TEXT */
+
+/* =========================
+   TAP TEXT
+========================= */
 
 #tapText {
     position: absolute;
@@ -386,26 +471,32 @@ main {
     pointer-events: none;
 }
 
-/* RESULT */
+
+/* =========================
+   RESULT
+========================= */
 
 #resultArea {
-    text-align: center;
-
     min-height: 130px;
 
     margin-top: 10px;
 }
 
+
 #resultLabel {
     font-size: 12px;
+
     letter-spacing: 4px;
+
     opacity: 0.6;
 }
+
 
 #resultRarity {
     margin-top: 15px;
 
     font-size: 70px;
+
     font-weight: bold;
 
     letter-spacing: 8px;
@@ -415,22 +506,26 @@ main {
         0 0 40px #00eaff;
 }
 
-/* HISTORY */
+
+/* =========================
+   HISTORY
+========================= */
 
 #historyArea {
     margin-top: 30px;
 }
 
-#historyArea h2 {
-    text-align: center;
 
+#historyArea h2 {
     font-size: 14px;
 
     letter-spacing: 4px;
 }
 
+
 #historyList {
     display: flex;
+
     flex-wrap: wrap;
 
     gap: 8px;
@@ -438,64 +533,138 @@ main {
     justify-content: center;
 }
 
-.historyItem {
-    border: 1px solid #00eaff;
 
+.historyItem {
     padding: 8px 14px;
+
+    border: 1px solid #00eaff;
 
     background: rgba(0,20,30,0.7);
 
     font-weight: bold;
 }
 
-/* OVERLAY */
+
+/* =========================
+   ROLL ANIMATION
+========================= */
+
+#gachaBox.rolling {
+    animation:
+        boxShake 0.75s ease-in-out;
+}
+
+
+@keyframes boxShake {
+
+    0% {
+        transform:
+            translateX(0)
+            rotate(0deg);
+    }
+
+    15% {
+        transform:
+            translateX(-12px)
+            rotate(-3deg);
+    }
+
+    30% {
+        transform:
+            translateX(12px)
+            rotate(3deg);
+    }
+
+    45% {
+        transform:
+            translateX(-12px)
+            rotate(-3deg);
+    }
+
+    60% {
+        transform:
+            translateX(12px)
+            rotate(3deg);
+    }
+
+    75% {
+        transform:
+            translateX(-6px)
+            rotate(-2deg);
+    }
+
+    100% {
+        transform:
+            translateX(0)
+            rotate(0deg);
+    }
+}
+
+
+/* =========================
+   OVERLAY
+========================= */
 
 .overlay {
     position: fixed;
 
     inset: 0;
 
-    z-index: 200;
+    z-index: 100;
 
     display: none;
 
     align-items: center;
+
     justify-content: center;
 
-    background: rgba(0, 5, 10, 0.92);
-
-    pointer-events: auto;
+    background:
+        rgba(0,5,10,0.94);
 }
+
 
 .overlay.show {
     display: flex;
 }
 
+
 .overlayContent {
     text-align: center;
 }
 
+
 .rareText {
     font-size: 20px;
+
     letter-spacing: 8px;
 }
+
 
 .rareRarity {
     margin: 20px 0;
 
     font-size: 120px;
+
     font-weight: bold;
 
+    letter-spacing: 8px;
+
+    color: #ffcc33;
+
     text-shadow:
-        0 0 20px #00eaff,
-        0 0 50px #00eaff;
+        0 0 20px #ffcc33,
+        0 0 50px #ffcc33;
 }
 
+
 .xr .rareRarity {
+    color: white;
+
     text-shadow:
         0 0 20px white,
         0 0 50px white;
 }
+
 
 .overlay button {
     border: 1px solid #00eaff;
@@ -515,254 +684,27 @@ main {
     touch-action: manipulation;
 }
 
-/* ADMIN PANEL */
 
-#adminPanel {
-    position: fixed;
-
-    right: 0;
-    top: 0;
-
-    width: min(420px, 100vw);
-    height: 100vh;
-
-    z-index: 300;
-
-    padding: 25px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #07151c,
-            #020609
-        );
-
-    border-left: 1px solid #00eaff;
-
-    box-shadow:
-        -10px 0 40px rgba(0,234,255,0.2);
-
-    transform: translateX(100%);
-
-    transition: transform 0.25s ease;
-
-    overflow-y: auto;
-}
-
-#adminPanel.open {
-    transform: translateX(0);
-}
-
-.adminHeader {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    margin-bottom: 30px;
-}
-
-.adminHeader h2 {
-    margin: 0;
-
-    font-size: 20px;
-
-    letter-spacing: 3px;
-}
-
-#adminClose {
-    width: 45px;
-    height: 45px;
-
-    border: 1px solid #00eaff;
-
-    background: transparent;
-
-    color: #00eaff;
-
-    font-size: 28px;
-
-    cursor: pointer;
-
-    touch-action: manipulation;
-}
-
-.adminSection {
-    margin-bottom: 30px;
-
-    padding-bottom: 25px;
-
-    border-bottom: 1px solid rgba(0,234,255,0.2);
-}
-
-.adminSection label {
-    display: block;
-
-    margin-bottom: 12px;
-
-    font-size: 12px;
-
-    letter-spacing: 3px;
-}
-
-#rollCountInput {
-    width: 100%;
-
-    padding: 12px;
-
-    border: 1px solid #00eaff;
-
-    background: #02080c;
-
-    color: #00eaff;
-
-    font-size: 18px;
-}
-
-.quickButtons {
-    display: grid;
-
-    grid-template-columns: repeat(4, 1fr);
-
-    gap: 7px;
-
-    margin-top: 10px;
-}
-
-.quickButtons button,
-.forceButtons button,
-.adminActions button {
-    border: 1px solid #00eaff;
-
-    background: #03131a;
-
-    color: #00eaff;
-
-    padding: 12px;
-
-    cursor: pointer;
-
-    touch-action: manipulation;
-}
-
-.quickButtons button:hover,
-.forceButtons button:hover,
-.adminActions button:hover,
-#adminClose:hover {
+.overlay button:hover {
     background: #00eaff;
+
     color: #001018;
 }
 
-.rateRow {
-    display: grid;
 
-    grid-template-columns: 50px 1fr 20px;
-
-    gap: 8px;
-
-    align-items: center;
-
-    margin-bottom: 8px;
-}
-
-.rateRow input {
-    width: 100%;
-
-    padding: 9px;
-
-    border: 1px solid #00eaff;
-
-    background: #02080c;
-
-    color: #00eaff;
-}
-
-#totalDisplay {
-    margin-top: 15px;
-
-    padding: 10px;
-
-    text-align: center;
-
-    border: 1px solid #00eaff;
-}
-
-.forceButtons {
-    display: grid;
-
-    grid-template-columns: repeat(3, 1fr);
-
-    gap: 7px;
-}
-
-.forceButtons .selected {
-    background: #00eaff;
-    color: #001018;
-}
-
-#forceStatus {
-    margin-top: 12px;
-
-    font-size: 12px;
-
-    letter-spacing: 2px;
-
-    text-align: center;
-}
-
-.adminActions {
-    display: grid;
-
-    grid-template-columns: 1fr 1fr;
-
-    gap: 10px;
-}
-
-.adminActions button {
-    font-weight: bold;
-}
-
-/* ANIMATION */
-
-#gachaBox.rolling {
-    animation: boxShake 0.7s ease-in-out;
-}
-
-@keyframes boxShake {
-    0% {
-        transform: translateX(0) rotate(0);
-    }
-
-    20% {
-        transform: translateX(-12px) rotate(-3deg);
-    }
-
-    40% {
-        transform: translateX(12px) rotate(3deg);
-    }
-
-    60% {
-        transform: translateX(-8px) rotate(-2deg);
-    }
-
-    80% {
-        transform: translateX(8px) rotate(2deg);
-    }
-
-    100% {
-        transform: translateX(0) rotate(0);
-    }
-}
-
-/* MOBILE */
+/* =========================
+   MOBILE
+========================= */
 
 @media (max-width: 600px) {
 
     header {
-        padding-top: 90px;
+        padding-top: 45px;
     }
 
     h1 {
         font-size: 38px;
+
         letter-spacing: 4px;
     }
 
@@ -780,12 +722,18 @@ main {
 
     .scanner1 {
         width: 330px;
+
         height: 330px;
     }
 
     .scanner2 {
         width: 420px;
+
         height: 420px;
+    }
+
+    #resultRarity {
+        font-size: 60px;
     }
 
     .rareRarity {
