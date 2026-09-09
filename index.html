@@ -33,6 +33,15 @@
 
 
     <!-- =========================
+         LDM BUTTON
+    ========================== -->
+
+    <button id="ldmButton">
+        LDM: OFF
+    </button>
+
+
+    <!-- =========================
          HEADER
     ========================== -->
 
@@ -63,7 +72,9 @@
         <div id="gachaArea">
 
 
-            <!-- スキャナー -->
+            <!-- =====================
+                 SCANNERS
+            ====================== -->
 
             <div
                 class="scanner scanner1"
@@ -74,20 +85,42 @@
             ></div>
 
 
-            <!-- 演出用エネルギーリング -->
+            <!-- =====================
+                 HUD RINGS
+            ====================== -->
 
-            <div class="energyRing ringA"></div>
+            <div
+                class="hudRing hudRing1"
+            ></div>
 
-            <div class="energyRing ringB"></div>
+            <div
+                class="hudRing hudRing2"
+            ></div>
 
-            <div class="energyRing ringC"></div>
+            <div
+                class="hudRing hudRing3"
+            ></div>
 
 
-            <!-- ガチャボックス -->
+            <!-- =====================
+                 CRYSTALS
+            ====================== -->
+
+            <div
+                id="crystalContainer"
+            ></div>
+
+
+            <!-- =====================
+                 GACHA BOX
+            ====================== -->
 
             <div
                 id="gachaBox"
             >
+
+
+                <!-- BOX TOP -->
 
                 <div class="boxTop">
 
@@ -96,8 +129,12 @@
                 </div>
 
 
+                <!-- BOX BODY -->
+
                 <div class="boxBody">
 
+
+                    <!-- SCREEN -->
 
                     <div class="boxScreen">
 
@@ -112,8 +149,14 @@
                     </div>
 
 
-                    <div class="boxCore"></div>
+                    <!-- CORE -->
 
+                    <div
+                        class="boxCore"
+                    ></div>
+
+
+                    <!-- LINES -->
 
                     <div
                         class="boxLine line1"
@@ -131,18 +174,26 @@
                 </div>
 
 
+                <!-- BOX BOTTOM -->
+
                 <div class="boxBottom"></div>
 
 
             </div>
 
 
+            <!-- =====================
+                 TAP TEXT
+            ====================== -->
+
             <div id="tapText">
                 TAP BOX
             </div>
 
 
-            <!-- 演出用メッセージ -->
+            <!-- =====================
+                 CHARGE MESSAGE
+            ====================== -->
 
             <div id="chargeMessage">
                 SYSTEM READY
@@ -159,6 +210,8 @@
 
         <div id="guaranteeArea">
 
+
+            <!-- SSR -->
 
             <div class="guaranteeCard">
 
@@ -184,6 +237,8 @@
 
             </div>
 
+
+            <!-- XR -->
 
             <div class="guaranteeCard">
 
