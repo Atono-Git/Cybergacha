@@ -1,1260 +1,795 @@
 ```css
 * {
     box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
 }
 
 html,
 body {
     margin: 0;
-    min-height: 100%;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #05080d;
+    color: #00eaff;
 }
 
 body {
-    background:
-        radial-gradient(
-            circle at center,
-            #071522 0%,
-            #02060b 55%,
-            #000000 100%
-        );
-
-    color: #ffffff;
-
-    font-family:
-        "Courier New",
-        Consolas,
-        monospace;
-
-    overflow-x: hidden;
+    position: relative;
+    min-height: 100vh;
 }
 
+/* BACKGROUND */
 
-/* =========================================
-   BACKGROUND
-========================================= */
-
-.background-grid {
+.grid {
     position: fixed;
     inset: 0;
-
-    pointer-events: none;
-
-    opacity: 0.25;
+    z-index: -3;
 
     background-image:
-        linear-gradient(
-            rgba(0, 220, 255, 0.12) 1px,
-            transparent 1px
-        ),
-        linear-gradient(
-            90deg,
-            rgba(0, 220, 255, 0.12) 1px,
-            transparent 1px
-        );
+        linear-gradient(rgba(0, 220, 255, 0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 220, 255, 0.06) 1px, transparent 1px);
 
-    background-size: 50px 50px;
-
-    transform:
-        perspective(500px)
-        rotateX(55deg)
-        scale(2);
-
-    transform-origin:
-        center bottom;
+    background-size: 40px 40px;
 }
-
 
 .scanlines {
     position: fixed;
     inset: 0;
+    z-index: 20;
 
     pointer-events: none;
 
-    z-index: 1000;
-
-    background:
-        repeating-linear-gradient(
-            to bottom,
-            transparent 0px,
-            transparent 3px,
-            rgba(255,255,255,0.025) 4px
-        );
+    background: repeating-linear-gradient(
+        to bottom,
+        transparent 0px,
+        transparent 3px,
+        rgba(255,255,255,0.025) 4px
+    );
 }
 
+/* HEADER */
 
-/* =========================================
-   SYSTEM
-========================================= */
-
-.system-status {
-    position: absolute;
-
-    top: 20px;
-    left: 22px;
-
-    font-size: 11px;
-
-    letter-spacing: 2px;
-
-    color: #00eaff;
-
-    z-index: 10;
+header {
+    text-align: center;
+    padding-top: 60px;
 }
 
-.system-status span {
-    display: block;
-
-    margin-top: 5px;
-
-    font-size: 9px;
-
-    color: #6c9baa;
+.status {
+    font-size: 12px;
+    letter-spacing: 3px;
+    margin-bottom: 15px;
 }
 
+h1 {
+    margin: 0;
+    font-size: clamp(38px, 8vw, 80px);
+    letter-spacing: 8px;
+    text-shadow:
+        0 0 10px #00eaff,
+        0 0 30px #00eaff;
+}
 
-/* =========================================
-   ADMIN BUTTON
-========================================= */
+header p {
+    margin-top: 15px;
+    letter-spacing: 5px;
+    font-size: 14px;
+}
 
-.admin-button {
-    position: absolute;
+/* ADMIN BUTTON */
 
-    top: 18px;
+#adminButton {
+    position: fixed;
     right: 20px;
+    top: 20px;
 
-    z-index: 20;
-
-    padding: 10px 16px;
-
-    background:
-        rgba(0, 25, 40, 0.85);
+    z-index: 100;
 
     border: 1px solid #00eaff;
-
+    background: rgba(0, 20, 30, 0.95);
     color: #00eaff;
 
-    font-family: inherit;
+    padding: 12px 20px;
 
+    font-weight: bold;
     letter-spacing: 2px;
 
     cursor: pointer;
 
-    transition: 0.2s;
+    box-shadow:
+        0 0 10px rgba(0,234,255,0.4);
+
+    touch-action: manipulation;
 }
 
-.admin-button:hover {
-    background: rgba(0, 234, 255, 0.15);
+#adminButton:hover {
+    background: #00eaff;
+    color: #001018;
 }
 
-
-/* =========================================
-   MAIN
-========================================= */
+/* MAIN */
 
 main {
     width: 100%;
-
-    min-height: 100vh;
-
-    padding:
-        90px 20px 50px;
-
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: center;
+    max-width: 900px;
+    margin: auto;
+    padding: 30px 20px 80px;
 }
 
-
-/* =========================================
-   TITLE
-========================================= */
-
-.title {
-    text-align: center;
-}
-
-.subtitle {
-    font-size: 10px;
-
-    letter-spacing: 5px;
-
-    color: #6e919e;
-}
-
-h1 {
-    margin: 12px 0 0;
-
-    font-size:
-        clamp(42px, 8vw, 78px);
-
-    line-height: 0.85;
-
-    letter-spacing: 8px;
-
-    text-shadow:
-        0 0 10px #00eaff,
-        0 0 30px #006eff;
-}
-
-h1 span {
-    color: #00eaff;
-}
-
-.instruction {
-    margin-top: 15px;
-
-    font-size: 10px;
-
-    letter-spacing: 4px;
-
-    color: #7eabb9;
-
-    animation:
-        instructionBlink 2s
-        ease-in-out infinite;
-}
-
-@keyframes instructionBlink {
-    0%,
-    100% {
-        opacity: 0.4;
-    }
-
-    50% {
-        opacity: 1;
-    }
-}
-
-
-/* =========================================
-   GACHA AREA
-========================================= */
+/* GACHA AREA */
 
 #gachaArea {
     position: relative;
 
-    width: 360px;
-    height: 360px;
-
-    margin-top: 25px;
+    width: 100%;
+    height: 480px;
 
     display: flex;
-
     align-items: center;
-
     justify-content: center;
 }
 
+/* BOX */
 
-/* =========================================
-   SCANNERS
-========================================= */
-
-.scanner {
-    position: absolute;
-
-    border: 1px solid
-        rgba(0, 234, 255, 0.25);
-
-    transform: rotate(45deg);
-
-    pointer-events: none;
-}
-
-.scanner-1 {
-    width: 270px;
-    height: 270px;
-}
-
-.scanner-2 {
-    width: 220px;
-    height: 220px;
-
-    border-style: dashed;
-
-    animation:
-        scannerRotate
-        8s linear infinite;
-}
-
-@keyframes scannerRotate {
-    from {
-        transform: rotate(45deg);
-    }
-
-    to {
-        transform: rotate(405deg);
-    }
-}
-
-
-/* =========================================
-   SCAN LINE
-========================================= */
-
-.scan-line {
-    position: absolute;
-
-    width: 270px;
-
-    height: 2px;
-
-    background: #00eaff;
-
-    box-shadow:
-        0 0 15px #00eaff,
-        0 0 30px #0077ff;
-
-    animation:
-        scanMove
-        2.5s linear infinite;
-
-    pointer-events: none;
-}
-
-@keyframes scanMove {
-    0% {
-        transform:
-            translateY(-130px);
-
-        opacity: 0;
-    }
-
-    20% {
-        opacity: 1;
-    }
-
-    80% {
-        opacity: 1;
-    }
-
-    100% {
-        transform:
-            translateY(130px);
-
-        opacity: 0;
-    }
-}
-
-
-/* =========================================
-   GACHA BOX
-========================================= */
-
-.gacha-box {
+#gachaBox {
     position: relative;
 
-    width: 155px;
-    height: 165px;
+    width: 260px;
+    height: 300px;
 
     cursor: pointer;
 
-    z-index: 5;
+    z-index: 10;
 
     user-select: none;
 
-    filter:
-        drop-shadow(
-            0 0 10px #00eaff
-        )
-        drop-shadow(
-            0 0 35px rgba(
-                0,
-                120,
-                255,
-                0.45
-            )
-        );
-
-    animation:
-        boxFloat
-        3s ease-in-out infinite;
+    touch-action: manipulation;
 
     transition:
-        filter 0.2s;
+        transform 0.15s,
+        filter 0.15s;
 }
 
-.gacha-box:hover {
+#gachaBox:hover {
     filter:
-        drop-shadow(
-            0 0 15px #00eaff
-        )
-        drop-shadow(
-            0 0 50px rgba(
-                0,
-                160,
-                255,
-                0.7
-            )
-        );
+        drop-shadow(0 0 15px #00eaff)
+        drop-shadow(0 0 30px #00eaff);
+
+    transform: scale(1.03);
 }
 
-.gacha-box:focus-visible {
-    outline:
-        2px solid #ffffff;
-
-    outline-offset: 10px;
+#gachaBox:active {
+    transform: scale(0.94);
 }
 
-@keyframes boxFloat {
-    0%,
-    100% {
-        transform:
-            translateY(0);
-    }
+/* BOX TOP */
 
-    50% {
-        transform:
-            translateY(-8px);
-    }
-}
-
-
-/* =========================================
-   BOX BODY
-========================================= */
-
-.box-body {
+.boxTop {
     position: absolute;
 
-    left: 0;
-    right: 0;
+    top: 0;
+    left: 20px;
 
-    top: 25px;
-    bottom: 15px;
+    width: 220px;
+    height: 60px;
 
-    border:
-        2px solid #00eaff;
+    border: 2px solid #00eaff;
 
     background:
         linear-gradient(
             135deg,
-            rgba(0, 234, 255, 0.20),
-            rgba(0, 40, 80, 0.80)
+            #08232d,
+            #031017
         );
 
-    clip-path:
-        polygon(
-            15% 0,
-            85% 0,
-            100% 15%,
-            100% 85%,
-            85% 100%,
-            15% 100%,
-            0 85%,
-            0 15%
-        );
+    box-shadow:
+        0 0 10px #00eaff inset,
+        0 0 20px rgba(0,234,255,0.4);
 }
 
-
-/* =========================================
-   BOX TOP
-========================================= */
-
-.box-top {
-    position: absolute;
-
-    width: 100%;
-    height: 48px;
-
-    top: 0;
-
-    border:
-        2px solid #00eaff;
-
-    background:
-        rgba(0, 100, 180, 0.35);
-
-    clip-path:
-        polygon(
-            15% 0,
-            85% 0,
-            100% 100%,
-            0 100%
-        );
-}
-
-
-/* =========================================
-   BOX BOTTOM
-========================================= */
-
-.box-bottom {
-    position: absolute;
-
-    width: 100%;
-    height: 35px;
-
-    bottom: 0;
-
-    border:
-        2px solid #00eaff;
-
-    background:
-        rgba(0, 80, 130, 0.35);
-
-    clip-path:
-        polygon(
-            0 0,
-            100% 0,
-            85% 100%,
-            15% 100%
-        );
-}
-
-
-/* =========================================
-   BOX CORE
-========================================= */
-
-.box-core {
+.boxLight {
     position: absolute;
 
     left: 50%;
-    top: 35%;
+    top: 15px;
 
-    transform:
-        translate(-50%, -50%);
+    transform: translateX(-50%);
 
-    font-size: 48px;
+    width: 100px;
+    height: 8px;
 
-    color: #00eaff;
+    background: #00eaff;
+
+    box-shadow:
+        0 0 10px #00eaff,
+        0 0 25px #00eaff;
+}
+
+/* BOX BODY */
+
+.boxBody {
+    position: absolute;
+
+    left: 0;
+    top: 45px;
+
+    width: 260px;
+    height: 220px;
+
+    border: 2px solid #00eaff;
+
+    background:
+        linear-gradient(
+            135deg,
+            #061b24,
+            #02070a
+        );
+
+    box-shadow:
+        0 0 15px #00eaff inset,
+        0 0 30px rgba(0,234,255,0.35);
+}
+
+/* SCREEN */
+
+.boxScreen {
+    position: absolute;
+
+    left: 50%;
+    top: 45px;
+
+    transform: translateX(-50%);
+
+    width: 180px;
+    height: 80px;
+
+    border: 1px solid #00eaff;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    background: #02090d;
+
+    box-shadow:
+        0 0 15px rgba(0,234,255,0.3) inset;
+}
+
+.boxScreen span {
+    font-size: 11px;
+    letter-spacing: 4px;
+}
+
+.boxScreen strong {
+    margin-top: 5px;
+
+    font-size: 26px;
+    letter-spacing: 4px;
 
     text-shadow:
-        0 0 15px #00eaff;
+        0 0 10px #00eaff;
 }
 
-.box-label {
+/* CORE */
+
+.boxCore {
     position: absolute;
 
-    left: 0;
-    right: 0;
+    left: 50%;
+    bottom: 25px;
 
-    bottom: 35px;
+    transform: translateX(-50%);
 
-    text-align: center;
+    width: 30px;
+    height: 30px;
 
-    font-size: 9px;
-
-    letter-spacing: 3px;
-
-    color: #b8f9ff;
-}
-
-.box-lock {
-    position: absolute;
-
-    left: 0;
-    right: 0;
-
-    bottom: 19px;
-
-    text-align: center;
-
-    font-size: 7px;
-
-    letter-spacing: 2px;
-
-    color: #6f9da9;
-}
-
-
-/* =========================================
-   ENERGY RINGS
-========================================= */
-
-.energy-ring {
-    position: absolute;
+    border: 2px solid #00eaff;
 
     border-radius: 50%;
 
-    border:
-        1px solid
-        rgba(0, 234, 255, 0.35);
+    box-shadow:
+        0 0 10px #00eaff,
+        0 0 25px #00eaff;
+}
+
+/* LINES */
+
+.boxLine {
+    position: absolute;
+
+    left: 20px;
+    right: 20px;
+
+    height: 1px;
+
+    background: #00eaff;
+
+    opacity: 0.5;
+}
+
+.line1 {
+    top: 15px;
+}
+
+.line2 {
+    bottom: 15px;
+}
+
+.line3 {
+    top: 160px;
+}
+
+/* BOTTOM */
+
+.boxBottom {
+    position: absolute;
+
+    left: 15px;
+    bottom: 0;
+
+    width: 230px;
+    height: 25px;
+
+    border: 2px solid #00eaff;
+
+    background: #04141b;
+}
+
+/* SCANNERS */
+
+.scanner {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    transform: translate(-50%, -50%);
+
+    border: 1px solid rgba(0,234,255,0.3);
+
+    border-radius: 50%;
 
     pointer-events: none;
 }
 
-.ring-1 {
-    width: 245px;
-    height: 245px;
-
-    animation:
-        ringRotate
-        10s linear infinite;
+.scanner1 {
+    width: 420px;
+    height: 420px;
 }
 
-.ring-2 {
-    width: 300px;
-    height: 300px;
-
-    border-style: dashed;
-
-    animation:
-        ringRotateReverse
-        15s linear infinite;
+.scanner2 {
+    width: 550px;
+    height: 550px;
 }
 
-@keyframes ringRotate {
-    to {
-        transform:
-            rotate(360deg);
-    }
-}
+/* TAP TEXT */
 
-@keyframes ringRotateReverse {
-    to {
-        transform:
-            rotate(-360deg);
-    }
-}
+#tapText {
+    position: absolute;
 
+    bottom: 5px;
 
-/* =========================================
-   RESULT
-========================================= */
+    left: 50%;
 
-.result-area {
-    text-align: center;
+    transform: translateX(-50%);
 
-    min-height: 90px;
-}
+    font-size: 13px;
 
-.hidden {
-    display: none !important;
-}
-
-.result-title {
-    font-size: 9px;
-
-    letter-spacing: 4px;
-
-    color: #668a98;
-}
-
-.result-rarity {
-    margin-top: 5px;
-
-    font-size: 48px;
-
-    font-weight: bold;
-
-    color: #00eaff;
+    letter-spacing: 5px;
 
     text-shadow:
-        0 0 15px #00eaff;
+        0 0 10px #00eaff;
+
+    pointer-events: none;
 }
 
-#resultText {
-    font-size: 10px;
+/* RESULT */
 
-    color: #9db6bf;
+#resultArea {
+    text-align: center;
+
+    min-height: 130px;
+
+    margin-top: 10px;
 }
 
-
-/* =========================================
-   HISTORY
-========================================= */
-
-.history {
-    width:
-        min(700px, 95vw);
-
-    margin-top: 25px;
-
-    border-top:
-        1px solid #123a49;
-
-    padding-top: 10px;
+#resultLabel {
+    font-size: 12px;
+    letter-spacing: 4px;
+    opacity: 0.6;
 }
 
-.history-title {
-    font-size: 9px;
+#resultRarity {
+    margin-top: 15px;
 
-    letter-spacing: 3px;
+    font-size: 70px;
+    font-weight: bold;
 
-    color: #63818d;
+    letter-spacing: 8px;
+
+    text-shadow:
+        0 0 15px #00eaff,
+        0 0 40px #00eaff;
+}
+
+/* HISTORY */
+
+#historyArea {
+    margin-top: 30px;
+}
+
+#historyArea h2 {
+    text-align: center;
+
+    font-size: 14px;
+
+    letter-spacing: 4px;
 }
 
 #historyList {
     display: flex;
-
     flex-wrap: wrap;
 
-    gap: 5px;
+    gap: 8px;
 
-    margin-top: 8px;
+    justify-content: center;
 }
 
-.history-item {
-    padding:
-        5px 9px;
+.historyItem {
+    border: 1px solid #00eaff;
 
-    border:
-        1px solid #174656;
+    padding: 8px 14px;
 
-    font-size: 10px;
+    background: rgba(0,20,30,0.7);
 
-    color: #b7d4dd;
-
-    background:
-        rgba(0, 20, 35, 0.5);
+    font-weight: bold;
 }
 
-
-/* =========================================
-   OVERLAY
-========================================= */
+/* OVERLAY */
 
 .overlay {
     position: fixed;
 
     inset: 0;
 
-    z-index: 500;
+    z-index: 200;
 
     display: none;
 
     align-items: center;
-
     justify-content: center;
 
-    flex-direction: column;
+    background: rgba(0, 5, 10, 0.92);
 
-    text-align: center;
-
-    background: #000000;
+    pointer-events: auto;
 }
 
-.overlay.active {
+.overlay.show {
     display: flex;
 }
 
-
-/* =========================================
-   SSR
-========================================= */
-
-.ssr-overlay {
-    background:
-        radial-gradient(
-            circle,
-            rgba(255, 220, 0, 0.20),
-            #000000 65%
-        );
+.overlayContent {
+    text-align: center;
 }
 
-.warning {
-    color: #ffe600;
-
-    font-size: 13px;
-
-    letter-spacing: 5px;
-
-    animation:
-        warningBlink
-        0.5s infinite alternate;
-}
-
-@keyframes warningBlink {
-    from {
-        opacity: 0.4;
-    }
-
-    to {
-        opacity: 1;
-    }
-}
-
-.ssr-rarity {
-    margin-top: 25px;
-
-    font-size:
-        clamp(90px, 20vw, 180px);
-
-    font-weight: bold;
-
-    color: #ffe600;
-
-    text-shadow:
-        0 0 15px #ffe600,
-        0 0 50px #ff8800;
-}
-
-.ssr-description {
-    letter-spacing: 5px;
-
-    color: #ffffff;
-}
-
-
-/* =========================================
-   XR
-========================================= */
-
-.xr-overlay {
-    background:
-        radial-gradient(
-            circle,
-            rgba(255,255,255,0.15),
-            #000000 65%
-        );
-}
-
-.xr-error {
-    color: #ff1744;
-
+.rareText {
     font-size: 20px;
-
-    letter-spacing: 6px;
-
-    animation:
-        glitch
-        0.12s infinite;
-}
-
-@keyframes glitch {
-    0% {
-        transform:
-            translate(0);
-    }
-
-    50% {
-        transform:
-            translate(-4px, 2px);
-    }
-
-    100% {
-        transform:
-            translate(4px, -2px);
-    }
-}
-
-.xr-unknown {
-    margin-top: 20px;
-
-    color: #aaaaaa;
-
-    font-size: 11px;
-
-    letter-spacing: 4px;
-}
-
-.xr-rarity {
-    margin-top: 15px;
-
-    font-size:
-        clamp(110px, 25vw, 230px);
-
-    font-weight: bold;
-
-    letter-spacing: 25px;
-
-    color: #ffffff;
-
-    text-shadow:
-        0 0 10px #ffffff,
-        0 0 30px #00eaff,
-        0 0 70px #a000ff,
-        0 0 120px #ff00d9;
-
-    animation:
-        xrPulse
-        1s ease-in-out
-        infinite alternate;
-}
-
-.xr-rarity span {
-    color: #00eaff;
-}
-
-@keyframes xrPulse {
-    from {
-        transform:
-            scale(1);
-    }
-
-    to {
-        transform:
-            scale(1.06);
-    }
-}
-
-.xr-description {
-    color: #00eaff;
-
     letter-spacing: 8px;
 }
 
-.xr-message {
-    margin-top: 20px;
+.rareRarity {
+    margin: 20px 0;
 
-    color: #777777;
+    font-size: 120px;
+    font-weight: bold;
 
-    font-size: 10px;
-
-    letter-spacing: 4px;
+    text-shadow:
+        0 0 20px #00eaff,
+        0 0 50px #00eaff;
 }
 
+.xr .rareRarity {
+    text-shadow:
+        0 0 20px white,
+        0 0 50px white;
+}
 
-/* =========================================
-   CONTINUE
-========================================= */
+.overlay button {
+    border: 1px solid #00eaff;
 
-.continue-button {
-    margin-top: 40px;
+    background: #03131a;
 
-    padding:
-        12px 35px;
+    color: #00eaff;
 
-    background:
-        rgba(0, 0, 0, 0.4);
+    padding: 14px 30px;
 
-    border:
-        1px solid #ffffff;
+    font-size: 14px;
 
-    color: #ffffff;
-
-    font-family: inherit;
+    letter-spacing: 3px;
 
     cursor: pointer;
+
+    touch-action: manipulation;
 }
 
+/* ADMIN PANEL */
 
-/* =========================================
-   ADMIN PANEL
-========================================= */
-
-.admin-panel {
+#adminPanel {
     position: fixed;
 
-    top: 0;
     right: 0;
+    top: 0;
 
-    z-index: 800;
-
-    width:
-        min(440px, 95vw);
-
+    width: min(420px, 100vw);
     height: 100vh;
 
-    background:
-        rgba(2, 9, 16, 0.98);
+    z-index: 300;
 
-    border-left:
-        1px solid #00eaff;
+    padding: 25px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #07151c,
+            #020609
+        );
+
+    border-left: 1px solid #00eaff;
 
     box-shadow:
-        -10px 0 40px
-        rgba(0, 234, 255, 0.15);
+        -10px 0 40px rgba(0,234,255,0.2);
 
-    transform:
-        translateX(100%);
+    transform: translateX(100%);
 
-    transition:
-        transform 0.35s ease;
+    transition: transform 0.25s ease;
 
     overflow-y: auto;
 }
 
-.admin-panel.open {
-    transform:
-        translateX(0);
+#adminPanel.open {
+    transform: translateX(0);
 }
 
-.admin-header {
+.adminHeader {
     display: flex;
-
+    align-items: center;
     justify-content: space-between;
 
-    align-items: center;
-
-    padding: 25px;
-
-    border-bottom:
-        1px solid #123e4e;
+    margin-bottom: 30px;
 }
 
-.admin-label {
-    font-size: 8px;
-
-    letter-spacing: 3px;
-
-    color: #668895;
-}
-
-.admin-header h2 {
-    margin: 5px 0 0;
-
-    color: #00eaff;
+.adminHeader h2 {
+    margin: 0;
 
     font-size: 20px;
 
     letter-spacing: 3px;
 }
 
-.close-button {
-    border: 0;
+#adminClose {
+    width: 45px;
+    height: 45px;
+
+    border: 1px solid #00eaff;
 
     background: transparent;
 
     color: #00eaff;
 
-    font-family: inherit;
-
-    font-size: 35px;
+    font-size: 28px;
 
     cursor: pointer;
+
+    touch-action: manipulation;
 }
 
-.admin-content {
-    padding: 25px;
+.adminSection {
+    margin-bottom: 30px;
+
+    padding-bottom: 25px;
+
+    border-bottom: 1px solid rgba(0,234,255,0.2);
 }
 
-.admin-section {
-    margin-bottom: 28px;
-
-    padding-bottom: 22px;
-
-    border-bottom:
-        1px solid #113541;
-}
-
-.admin-section h3 {
-    margin:
-        0 0 15px;
-
-    color: #00eaff;
-
-    font-size: 11px;
-
-    letter-spacing: 2px;
-}
-
-.admin-section label {
+.adminSection label {
     display: block;
 
-    color: #8daab4;
+    margin-bottom: 12px;
 
-    font-size: 10px;
+    font-size: 12px;
+
+    letter-spacing: 3px;
 }
 
-.admin-section input {
+#rollCountInput {
     width: 100%;
 
-    margin-top: 7px;
+    padding: 12px;
 
-    padding: 10px;
+    border: 1px solid #00eaff;
 
-    background: #02080e;
+    background: #02080c;
 
-    border:
-        1px solid #1a5669;
-
-    color: #ffffff;
-
-    font-family: inherit;
-
-    font-size: 16px;
-
-    outline: none;
-}
-
-.quick-buttons {
-    display: grid;
-
-    grid-template-columns:
-        repeat(4, 1fr);
-
-    gap: 6px;
-
-    margin-top: 8px;
-}
-
-.quick-buttons button,
-.force-grid button {
-    min-height: 44px;
-
-    background: #061520;
-
-    border:
-        1px solid #185268;
-
-    color: #9ac6d2;
-
-    font-family: inherit;
-
-    cursor: pointer;
-}
-
-.quick-buttons button:hover,
-.force-grid button:hover,
-.force-grid button.selected {
     color: #00eaff;
 
-    border-color: #00eaff;
-
-    background:
-        rgba(0, 234, 255, 0.10);
+    font-size: 18px;
 }
 
-.rate-row {
+.quickButtons {
     display: grid;
 
-    grid-template-columns:
-        50px 1fr 20px;
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 7px;
+
+    margin-top: 10px;
+}
+
+.quickButtons button,
+.forceButtons button,
+.adminActions button {
+    border: 1px solid #00eaff;
+
+    background: #03131a;
+
+    color: #00eaff;
+
+    padding: 12px;
+
+    cursor: pointer;
+
+    touch-action: manipulation;
+}
+
+.quickButtons button:hover,
+.forceButtons button:hover,
+.adminActions button:hover,
+#adminClose:hover {
+    background: #00eaff;
+    color: #001018;
+}
+
+.rateRow {
+    display: grid;
+
+    grid-template-columns: 50px 1fr 20px;
+
+    gap: 8px;
 
     align-items: center;
 
-    gap: 5px;
-
-    margin-bottom: 7px;
-
-    color: #ffffff;
+    margin-bottom: 8px;
 }
 
-.rate-row input {
-    margin: 0;
+.rateRow input {
+    width: 100%;
+
+    padding: 9px;
+
+    border: 1px solid #00eaff;
+
+    background: #02080c;
+
+    color: #00eaff;
 }
 
-.total {
+#totalDisplay {
     margin-top: 15px;
 
     padding: 10px;
 
     text-align: center;
 
-    border:
-        1px solid #185268;
-
-    color: #00eaff;
-
-    font-size: 11px;
+    border: 1px solid #00eaff;
 }
 
-.total.invalid {
-    color: #ff3158;
-
-    border-color: #ff3158;
-}
-
-.force-grid {
+.forceButtons {
     display: grid;
 
-    grid-template-columns:
-        repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
 
-    gap: 6px;
+    gap: 7px;
 }
 
-.force-grid button:first-child {
-    grid-column:
-        1 / -1;
+.forceButtons .selected {
+    background: #00eaff;
+    color: #001018;
 }
 
-.force-status {
+#forceStatus {
     margin-top: 12px;
 
-    color: #00eaff;
+    font-size: 12px;
 
-    font-size: 10px;
-}
-
-.apply-button {
-    width: 100%;
-
-    min-height: 50px;
-
-    background:
-        rgba(0, 234, 255, 0.10);
-
-    border:
-        1px solid #00eaff;
-
-    color: #00eaff;
-
-    font-family: inherit;
-
-    cursor: pointer;
-}
-
-.reset-button {
-    width: 100%;
-
-    min-height: 44px;
-
-    margin-top: 8px;
-
-    background: transparent;
-
-    border:
-        1px solid #555555;
-
-    color: #888888;
-
-    font-family: inherit;
-
-    cursor: pointer;
-}
-
-.admin-footer {
-    padding: 20px;
+    letter-spacing: 2px;
 
     text-align: center;
-
-    color: #3d626e;
-
-    font-size: 8px;
-
-    letter-spacing: 3px;
 }
 
+.adminActions {
+    display: grid;
 
-/* =========================================
-   MOBILE
-========================================= */
+    grid-template-columns: 1fr 1fr;
+
+    gap: 10px;
+}
+
+.adminActions button {
+    font-weight: bold;
+}
+
+/* ANIMATION */
+
+#gachaBox.rolling {
+    animation: boxShake 0.7s ease-in-out;
+}
+
+@keyframes boxShake {
+    0% {
+        transform: translateX(0) rotate(0);
+    }
+
+    20% {
+        transform: translateX(-12px) rotate(-3deg);
+    }
+
+    40% {
+        transform: translateX(12px) rotate(3deg);
+    }
+
+    60% {
+        transform: translateX(-8px) rotate(-2deg);
+    }
+
+    80% {
+        transform: translateX(8px) rotate(2deg);
+    }
+
+    100% {
+        transform: translateX(0) rotate(0);
+    }
+}
+
+/* MOBILE */
 
 @media (max-width: 600px) {
 
-    main {
-        padding-top: 80px;
+    header {
+        padding-top: 90px;
+    }
+
+    h1 {
+        font-size: 38px;
+        letter-spacing: 4px;
     }
 
     #gachaArea {
-        width: 310px;
-        height: 310px;
+        height: 430px;
     }
 
-    .scanner-1 {
-        width: 230px;
-        height: 230px;
+    #gachaBox {
+        transform: scale(0.85);
     }
 
-    .scanner-2 {
-        width: 190px;
-        height: 190px;
+    #gachaBox:hover {
+        transform: scale(0.88);
     }
 
-    .scan-line {
-        width: 230px;
+    .scanner1 {
+        width: 330px;
+        height: 330px;
     }
 
-    .gacha-box {
-        transform:
-            scale(0.9);
+    .scanner2 {
+        width: 420px;
+        height: 420px;
     }
 
-    .admin-button {
-        top: 15px;
-        right: 15px;
-    }
-
-    .system-status {
-        left: 15px;
-        top: 18px;
-        font-size: 8px;
+    .rareRarity {
+        font-size: 90px;
     }
 }
 ```
