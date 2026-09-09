@@ -104,6 +104,24 @@ const xrBar =
     );
 
 
+const chargeMessage =
+    document.getElementById(
+        "chargeMessage"
+    );
+
+
+const boxScreenSmall =
+    document.getElementById(
+        "boxScreenSmall"
+    );
+
+
+const boxScreenMain =
+    document.getElementById(
+        "boxScreenMain"
+    );
+
+
 /* =========================
    状態
 ========================= */
@@ -111,23 +129,9 @@ const xrBar =
 let isRolling = false;
 
 
-/*
-   何回目の抽選なのか
-
-   初期値は1
-
-   例：
-
-   1 / 200
-   2 / 200
-   3 / 200
-
-   SSRを引いたら
-
-   1 / 200
-
-   に戻る
-*/
+/* =========================
+   カウンター
+========================= */
 
 let ssrCount =
     Number(
@@ -146,27 +150,27 @@ let xrCount =
 
 
 /*
-   保存データがない場合
+   初回は0
 */
 
 if (
     !Number.isFinite(ssrCount) ||
-    ssrCount < 1 ||
-    ssrCount > SSR_GUARANTEE
+    ssrCount < 0 ||
+    ssrCount >= SSR_GUARANTEE
 ) {
 
-    ssrCount = 1;
+    ssrCount = 0;
 
 }
 
 
 if (
     !Number.isFinite(xrCount) ||
-    xrCount < 1 ||
-    xrCount > XR_GUARANTEE
+    xrCount < 0 ||
+    xrCount >= XR_GUARANTEE
 ) {
 
-    xrCount = 1;
+    xrCount = 0;
 
 }
 
@@ -198,10 +202,6 @@ function saveCounters() {
 function updateCounters() {
 
 
-    /*
-       表示
-    */
-
     ssrCounter.textContent =
         ssrCount +
         " / " +
@@ -214,20 +214,16 @@ function updateCounters() {
         XR_GUARANTEE;
 
 
-    /*
-       プログレスバー
-    */
-
     const ssrProgress =
         (
-            (ssrCount - 1) /
+            ssrCount /
             SSR_GUARANTEE
         ) * 100;
 
 
     const xrProgress =
         (
-            (xrCount - 1) /
+            xrCount /
             XR_GUARANTEE
         ) * 100;
 
@@ -257,34 +253,18 @@ function updateCounters() {
 
 function drawRarity() {
 
-
-    /*
-       0 ～ 100
-    */
-
     const random =
         Math.random() * 100;
 
 
-    /*
-       R
-       90%
-    */
-
     if (
-        random <
-        R_RATE
+        random < R_RATE
     ) {
 
         return "R";
 
     }
 
-
-    /*
-       SR
-       8.5%
-    */
 
     if (
         random <
@@ -296,11 +276,6 @@ function drawRarity() {
 
     }
 
-
-    /*
-       SSR
-       1.4999%
-    */
 
     if (
         random <
@@ -314,11 +289,6 @@ function drawRarity() {
     }
 
 
-    /*
-       XR
-       0.0001%
-    */
-
     return "XR";
 
 }
@@ -331,7 +301,6 @@ function drawRarity() {
 function showResult(
     rarity
 ) {
-
 
     resultRarity.textContent =
         rarity;
@@ -417,6 +386,45 @@ function addHistory(
         rarity;
 
 
+    if (
+        rarity === "SR"
+    ) {
+
+        item.style.color =
+            "#55ff99";
+
+        item.style.borderColor =
+            "#55ff99";
+
+    }
+
+
+    if (
+        rarity === "SSR"
+    ) {
+
+        item.style.color =
+            "#ffcc33";
+
+        item.style.borderColor =
+            "#ffcc33";
+
+    }
+
+
+    if (
+        rarity === "XR"
+    ) {
+
+        item.style.color =
+            "#ffffff";
+
+        item.style.borderColor =
+            "#ffffff";
+
+    }
+
+
     historyList.prepend(
         item
     );
@@ -432,12 +440,14 @@ function clearAnimationClasses() {
 
     gachaArea.classList.remove(
         "charging",
+        "rare-r",
         "rare-sr",
         "rare-ssr",
         "rare-xr",
         "flash",
         "flash-ssr",
-        "flash-xr"
+        "flash-xr",
+        "reveal"
     );
 
 
@@ -478,6 +488,8 @@ ssrContinue.addEventListener(
             "show"
         );
 
+        isRolling = false;
+
     }
 );
 
@@ -494,8 +506,31 @@ xrContinue.addEventListener(
             "show"
         );
 
+        isRolling = false;
+
     }
 );
+
+
+/* =========================
+   演出メッセージ
+========================= */
+
+function setChargeMessage(
+    small,
+    main
+) {
+
+    boxScreenSmall.textContent =
+        small;
+
+    boxScreenMain.textContent =
+        main;
+
+    chargeMessage.textContent =
+        main;
+
+}
 
 
 /* =========================
@@ -504,10 +539,6 @@ xrContinue.addEventListener(
 
 function openGacha() {
 
-
-    /*
-       連打防止
-    */
 
     if (
         isRolling
@@ -529,7 +560,7 @@ function openGacha() {
 
     /*
        =================================
-       今回の抽選
+       今回の結果を先に決定
        =================================
     */
 
@@ -539,7 +570,7 @@ function openGacha() {
 
     /*
        =================================
-       カウンターを進める
+       今回の回数
        =================================
     */
 
@@ -552,36 +583,7 @@ function openGacha() {
 
 
     /*
-       =================================
-       SSR確定
-       =================================
-
-       200回目ならSSR確定
-
-       ただしXRもSSR以上なので、
-       XRが出た場合もSSRカウンターを
-       リセットする
-    */
-
-    if (
-        nextSSRCount >=
-        SSR_GUARANTEE
-    ) {
-
-        rarity = "SSR";
-
-    }
-
-
-    /*
-       =================================
-       XR確定
-       =================================
-
-       15000回目ならXR確定
-
-       XRのほうを先に判定することで
-       XR確定が優先される
+       XR保証を最優先
     */
 
     if (
@@ -595,111 +597,80 @@ function openGacha() {
 
 
     /*
-       =================================
-       カウンター更新
-       =================================
+       SSR保証
     */
+
+    else if (
+        nextSSRCount >=
+        SSR_GUARANTEE
+    ) {
+
+        rarity = "SSR";
+
+    }
 
 
     /*
-       XR
+       =================================
+       カウンター更新
+       =================================
     */
 
     if (
         rarity === "XR"
     ) {
 
-        ssrCount = 1;
+        ssrCount = 0;
 
-        xrCount = 1;
+        xrCount = 0;
 
     }
 
-
-    /*
-       SSR
-    */
 
     else if (
         rarity === "SSR"
     ) {
 
-        ssrCount = 1;
+        ssrCount = 0;
 
         xrCount =
-            Math.min(
-                nextXRCount,
-                XR_GUARANTEE
-            );
+            nextXRCount;
 
     }
 
-
-    /*
-       R / SR
-    */
 
     else {
 
         ssrCount =
-            Math.min(
-                nextSSRCount,
-                SSR_GUARANTEE
-            );
-
+            nextSSRCount;
 
         xrCount =
-            Math.min(
-                nextXRCount,
-                XR_GUARANTEE
-            );
+            nextXRCount;
 
     }
 
 
-    /*
-       保存
-    */
-
     saveCounters();
-
-
-    /*
-       表示
-    */
 
     updateCounters();
 
 
     /*
-       デバッグ用
-    */
-
-    console.log(
-        "RESULT:",
-        rarity
-    );
-
-    console.log(
-        "SSR COUNT:",
-        ssrCount +
-        "/" +
-        SSR_GUARANTEE
-    );
-
-    console.log(
-        "XR COUNT:",
-        xrCount +
-        "/" +
-        XR_GUARANTEE
-    );
-
-
-    /*
        =================================
-       レア度による演出
+       レア度クラス
        =================================
     */
+
+    if (
+        rarity === "R"
+    ) {
+
+        gachaArea.classList.add(
+            "rare-r"
+        );
+
+    }
+
 
     if (
         rarity === "SR"
@@ -735,7 +706,9 @@ function openGacha() {
 
 
     /*
-       チャージ開始
+       =================================
+       TAP BOXを消す
+       =================================
     */
 
     gachaArea.classList.add(
@@ -750,20 +723,96 @@ function openGacha() {
 
     /*
        =================================
-       1.8秒チャージ
+       STAGE 1
+       =================================
+    */
+
+    setChargeMessage(
+        "SYSTEM",
+        "SYSTEM CHECK"
+    );
+
+
+    /*
+       =================================
+       STAGE 2
        =================================
     */
 
     setTimeout(
         function () {
 
+            setChargeMessage(
+                "ENERGY",
+                "ENERGY CHARGE"
+            );
 
-            /*
-               チャージ終了
-            */
+        },
+        550
+    );
+
+
+    /*
+       =================================
+       STAGE 3
+       =================================
+    */
+
+    setTimeout(
+        function () {
+
+            setChargeMessage(
+                "CORE",
+                "CORE OVERLOAD"
+            );
+
+        },
+        1100
+    );
+
+
+    /*
+       =================================
+       STAGE 4
+       =================================
+    */
+
+    setTimeout(
+        function () {
+
+            setChargeMessage(
+                "LIMIT",
+                "LIMIT BREAK"
+            );
+
+            gachaArea.classList.add(
+                "limitBreak"
+            );
+
+        },
+        1600
+    );
+
+
+    /*
+       =================================
+       STAGE 5
+       =================================
+
+       通常より長めに溜める
+    */
+
+    setTimeout(
+        function () {
+
 
             gachaArea.classList.remove(
                 "charging"
+            );
+
+
+            gachaArea.classList.remove(
+                "limitBreak"
             );
 
 
@@ -774,27 +823,27 @@ function openGacha() {
 
             /*
                =================================
-               フラッシュ
+               開放フラッシュ
                =================================
             */
 
             if (
-                rarity === "SSR"
+                rarity === "XR"
             ) {
 
                 gachaArea.classList.add(
-                    "flash-ssr"
+                    "flash-xr"
                 );
 
             }
 
 
             else if (
-                rarity === "XR"
+                rarity === "SSR"
             ) {
 
                 gachaArea.classList.add(
-                    "flash-xr"
+                    "flash-ssr"
                 );
 
             }
@@ -811,90 +860,112 @@ function openGacha() {
 
             /*
                =================================
-               結果
-               =================================
-            */
-
-            showResult(
-                rarity
-            );
-
-
-            addHistory(
-                rarity
-            );
-
-
-            /*
-               =================================
-               SSR
-               =================================
-            */
-
-            if (
-                rarity === "SSR"
-            ) {
-
-                setTimeout(
-                    function () {
-
-                        ssrOverlay.classList.add(
-                            "show"
-                        );
-
-                    },
-                    400
-                );
-
-            }
-
-
-            /*
-               =================================
-               XR
-               =================================
-            */
-
-            if (
-                rarity === "XR"
-            ) {
-
-                setTimeout(
-                    function () {
-
-                        xrOverlay.classList.add(
-                            "show"
-                        );
-
-                    },
-                    500
-                );
-
-            }
-
-
-            /*
-               =================================
-               フラッシュ終了
+               REVEAL
                =================================
             */
 
             setTimeout(
                 function () {
 
-                    clearAnimationClasses();
+
+                    gachaArea.classList.add(
+                        "reveal"
+                    );
+
+
+                    showResult(
+                        rarity
+                    );
+
+
+                    addHistory(
+                        rarity
+                    );
+
+
+                    /*
+                       =================================
+                       SSR
+                       =================================
+                    */
+
+                    if (
+                        rarity === "SSR"
+                    ) {
+
+                        setTimeout(
+                            function () {
+
+                                ssrOverlay.classList.add(
+                                    "show"
+                                );
+
+                            },
+                            500
+                        );
+
+                    }
+
+
+                    /*
+                       =================================
+                       XR
+                       =================================
+                    */
+
+                    else if (
+                        rarity === "XR"
+                    ) {
+
+                        setTimeout(
+                            function () {
+
+                                xrOverlay.classList.add(
+                                    "show"
+                                );
+
+                            },
+                            650
+                        );
+
+                    }
+
+
+                    /*
+                       R / SR
+                       =================================
+                    */
+
+                    else {
+
+                        setTimeout(
+                            function () {
+
+                                clearAnimationClasses();
+
+                                isRolling = false;
+
+                                setChargeMessage(
+                                    "SYSTEM",
+                                    "SYSTEM READY"
+                                );
+
+                            },
+                            900
+                        );
+
+                    }
+
 
                 },
-                800
+                180
             );
 
 
-            isRolling = false;
-
-
         },
-        1800
+        2300
     );
+
 
 }
 
@@ -919,6 +990,12 @@ gachaBox.addEventListener(
 
 resultRarity.textContent =
     "---";
+
+
+setChargeMessage(
+    "CYBER",
+    "GACHA"
+);
 
 
 updateCounters();
