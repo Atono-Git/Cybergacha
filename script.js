@@ -1,13 +1,9 @@
 ```javascript
-/* =========================================
-   CYBER GACHA SYSTEM
-========================================= */
-
 "use strict";
 
 
 /* =========================================
-   DEFAULT SETTINGS
+   DEFAULT
 ========================================= */
 
 const DEFAULT_RATES = {
@@ -30,7 +26,7 @@ let rollCount = 1;
 
 let forceRarity = "RANDOM";
 
-let rolling = false;
+let isRolling = false;
 
 
 /* =========================================
@@ -40,14 +36,41 @@ let rolling = false;
 const gachaBox =
     document.getElementById("gachaBox");
 
-const rollButton =
-    document.getElementById("rollButton");
+const adminButton =
+    document.getElementById("adminButton");
 
-const rollCountDisplay =
-    document.getElementById("rollCountDisplay");
+const adminPanel =
+    document.getElementById("adminPanel");
 
-const rollButtonSub =
-    document.getElementById("rollButtonSub");
+const adminClose =
+    document.getElementById("adminClose");
+
+const rollCountInput =
+    document.getElementById("rollCountInput");
+
+const rateR =
+    document.getElementById("rateR");
+
+const rateSR =
+    document.getElementById("rateSR");
+
+const rateSSR =
+    document.getElementById("rateSSR");
+
+const rateXR =
+    document.getElementById("rateXR");
+
+const totalDisplay =
+    document.getElementById("totalDisplay");
+
+const applyButton =
+    document.getElementById("applyButton");
+
+const resetButton =
+    document.getElementById("resetButton");
+
+const forceStatus =
+    document.getElementById("forceStatus");
 
 const resultArea =
     document.getElementById("resultArea");
@@ -61,404 +84,169 @@ const resultText =
 const historyList =
     document.getElementById("historyList");
 
-const adminPanel =
-    document.getElementById("adminPanel");
-
-const adminAccess =
-    document.getElementById("adminAccess");
+const ssrOverlay =
+    document.getElementById("ssrOverlay");
 
 const xrOverlay =
     document.getElementById("xrOverlay");
 
-const ssrOverlay =
-    document.getElementById("ssrOverlay");
+const ssrContinue =
+    document.getElementById("ssrContinue");
+
+const xrContinue =
+    document.getElementById("xrContinue");
 
 
 /* =========================================
-   SAFETY CHECK
+   ADMIN OPEN / CLOSE
 ========================================= */
 
-if (
-    !gachaBox ||
-    !rollButton ||
-    !rollCountDisplay ||
-    !rollButtonSub ||
-    !resultArea ||
-    !resultRarity ||
-    !resultText ||
-    !historyList ||
-    !adminPanel ||
-    !xrOverlay ||
-    !ssrOverlay
-) {
-    console.error(
-        "CYBER GACHA SYSTEM: HTML ELEMENT ERROR"
-    );
-}
+function openAdmin() {
 
-
-/* =========================================
-   ROLL COUNT DISPLAY
-========================================= */
-
-function updateRollDisplay() {
-
-    rollCountDisplay.textContent =
-        String(rollCount);
-
-    rollButtonSub.textContent =
-        `${rollCount} ROLL`;
-}
-
-
-/* =========================================
-   MINUS
-========================================= */
-
-const minusButton =
-    document.getElementById("minusButton");
-
-if (minusButton) {
-
-    minusButton.addEventListener(
-        "click",
-        function () {
-
-            if (rolling) return;
-
-            if (rollCount > 1) {
-
-                rollCount--;
-
-                updateRollDisplay();
-
-            }
-
-        }
-    );
-
-}
-
-
-/* =========================================
-   PLUS
-========================================= */
-
-const plusButton =
-    document.getElementById("plusButton");
-
-if (plusButton) {
-
-    plusButton.addEventListener(
-        "click",
-        function () {
-
-            if (rolling) return;
-
-            if (rollCount < 9999) {
-
-                rollCount++;
-
-                updateRollDisplay();
-
-            }
-
-        }
-    );
-
-}
-
-
-/* =========================================
-   ADMIN PANEL
-========================================= */
-
-function toggleAdmin() {
-
-    if (rolling) return;
-
-    adminPanel.classList.toggle("open");
-
-    if (adminPanel.classList.contains("open")) {
-
-        if (adminAccess) {
-
-            adminAccess.classList.add("show");
-
-            setTimeout(
-                function () {
-
-                    adminAccess.classList.remove(
-                        "show"
-                    );
-
-                },
-                1800
-            );
-
-        }
-
+    if (isRolling) {
+        return;
     }
 
+    adminPanel.classList.add("open");
 }
 
 
-/* =========================================
-   KEYBOARD
-========================================= */
+function closeAdmin() {
 
-document.addEventListener(
-    "keydown",
-    function (event) {
-
-        const active =
-            document.activeElement;
-
-        const tag =
-            active ?
-            active.tagName :
-            "";
-
-        const editing =
-            tag === "INPUT" ||
-            tag === "TEXTAREA" ||
-            tag === "SELECT";
+    adminPanel.classList.remove("open");
+}
 
 
-        /* =========================
-           Q = ADMIN
-        ========================= */
-
-        if (
-            event.key.toLowerCase() === "q" &&
-            !event.repeat &&
-            !editing
-        ) {
-
-            event.preventDefault();
-
-            toggleAdmin();
-
-            return;
-        }
+adminButton.addEventListener(
+    "click",
+    openAdmin
+);
 
 
-        /* =========================
-           SPACE = GACHA
-        ========================= */
-
-        if (
-            event.code === "Space" &&
-            !event.repeat &&
-            !editing
-        ) {
-
-            event.preventDefault();
-
-            if (
-                adminPanel.classList.contains(
-                    "open"
-                )
-            ) {
-                return;
-            }
-
-            startGacha();
-
-        }
-
-    }
+adminClose.addEventListener(
+    "click",
+    closeAdmin
 );
 
 
 /* =========================================
-   ADMIN CLOSE
+   ROLL COUNT
 ========================================= */
 
-const adminClose =
-    document.getElementById("adminClose");
+function updateRollCount() {
 
-if (adminClose) {
+    let value =
+        Number(rollCountInput.value);
 
-    adminClose.addEventListener(
-        "click",
-        function () {
+    if (!Number.isFinite(value)) {
+        value = 1;
+    }
 
-            adminPanel.classList.remove(
-                "open"
-            );
+    value =
+        Math.floor(value);
 
-        }
-    );
+    if (value < 1) {
+        value = 1;
+    }
 
+    if (value > 9999) {
+        value = 9999;
+    }
+
+    rollCount = value;
+
+    rollCountInput.value =
+        String(value);
 }
 
 
-/* =========================================
-   ADMIN ROLL COUNT
-========================================= */
-
-const adminRollCount =
-    document.getElementById(
-        "adminRollCount"
-    );
-
-if (adminRollCount) {
-
-    adminRollCount.addEventListener(
-        "input",
-        function () {
-
-            let value =
-                Number(this.value);
-
-            if (!Number.isFinite(value)) {
-                value = 1;
-            }
-
-            value =
-                Math.floor(value);
-
-            if (value < 1) {
-                value = 1;
-            }
-
-            if (value > 9999) {
-                value = 9999;
-            }
-
-            rollCount = value;
-
-            this.value =
-                String(value);
-
-            updateRollDisplay();
-
-        }
-    );
-
-}
+rollCountInput.addEventListener(
+    "change",
+    updateRollCount
+);
 
 
 /* =========================================
-   QUICK ROLL
+   QUICK COUNT BUTTONS
 ========================================= */
 
 document
-    .querySelectorAll(
-        ".quick-rolls button"
-    )
-    .forEach(
-        function (button) {
+    .querySelectorAll("[data-count]")
+    .forEach(function (button) {
 
-            button.addEventListener(
-                "click",
-                function () {
+        button.addEventListener(
+            "click",
+            function () {
 
-                    const value =
-                        Number(
-                            this.dataset.roll
-                        );
+                const value =
+                    Number(
+                        this.dataset.count
+                    );
 
-                    if (
-                        !Number.isFinite(value)
-                    ) {
-                        return;
-                    }
-
-                    rollCount =
-                        Math.max(
-                            1,
-                            Math.min(
-                                9999,
-                                Math.floor(value)
-                            )
-                        );
-
-                    if (adminRollCount) {
-
-                        adminRollCount.value =
-                            String(rollCount);
-
-                    }
-
-                    updateRollDisplay();
-
+                if (
+                    !Number.isFinite(value)
+                ) {
+                    return;
                 }
-            );
 
-        }
-    );
+                rollCount =
+                    Math.max(
+                        1,
+                        Math.min(
+                            9999,
+                            Math.floor(value)
+                        )
+                    );
 
+                rollCountInput.value =
+                    String(rollCount);
 
-/* =========================================
-   RARITY INPUTS
-========================================= */
+            }
+        );
 
-const rateInputs = {
-
-    R:
-        document.getElementById("rateR"),
-
-    SR:
-        document.getElementById("rateSR"),
-
-    SSR:
-        document.getElementById("rateSSR"),
-
-    XR:
-        document.getElementById("rateXR")
-
-};
-
-
-const totalDisplay =
-    document.getElementById(
-        "totalDisplay"
-    );
+    });
 
 
 /* =========================================
-   CHECK TOTAL
+   TOTAL
 ========================================= */
 
-function getInputRates() {
+function readRates() {
 
     return {
 
         R:
             Math.max(
                 0,
-                Number(rateInputs.R.value) || 0
+                Number(rateR.value) || 0
             ),
 
         SR:
             Math.max(
                 0,
-                Number(rateInputs.SR.value) || 0
+                Number(rateSR.value) || 0
             ),
 
         SSR:
             Math.max(
                 0,
-                Number(rateInputs.SSR.value) || 0
+                Number(rateSSR.value) || 0
             ),
 
         XR:
             Math.max(
                 0,
-                Number(rateInputs.XR.value) || 0
+                Number(rateXR.value) || 0
             )
 
     };
-
 }
 
 
 function checkTotal() {
 
     const inputRates =
-        getInputRates();
+        readRates();
 
     const total =
         inputRates.R +
@@ -467,52 +255,53 @@ function checkTotal() {
         inputRates.XR;
 
 
-    if (totalDisplay) {
+    totalDisplay.textContent =
+        "TOTAL : " +
+        total.toFixed(4) +
+        "%";
 
-        totalDisplay.textContent =
-            `TOTAL : ${total.toFixed(4)}%`;
 
-        if (
-            Math.abs(total - 100) >
-            0.000001
-        ) {
+    if (
+        Math.abs(total - 100) >
+        0.000001
+    ) {
 
-            totalDisplay.classList.add(
-                "invalid"
-            );
+        totalDisplay.classList.add(
+            "invalid"
+        );
 
-        } else {
-
-            totalDisplay.classList.remove(
-                "invalid"
-            );
-
-        }
+        return false;
 
     }
 
 
-    return (
-        Math.abs(total - 100) <=
-        0.000001
+    totalDisplay.classList.remove(
+        "invalid"
     );
 
+    return true;
 }
 
 
-Object.values(rateInputs)
-    .forEach(
-        function (input) {
+rateR.addEventListener(
+    "input",
+    checkTotal
+);
 
-            if (!input) return;
+rateSR.addEventListener(
+    "input",
+    checkTotal
+);
 
-            input.addEventListener(
-                "input",
-                checkTotal
-            );
+rateSSR.addEventListener(
+    "input",
+    checkTotal
+);
 
-        }
-    );
+rateXR.addEventListener(
+    "input",
+    checkTotal
+);
 
 
 /* =========================================
@@ -520,198 +309,160 @@ Object.values(rateInputs)
 ========================================= */
 
 document
-    .querySelectorAll(
-        "[data-force]"
-    )
-    .forEach(
-        function (button) {
+    .querySelectorAll("[data-force]")
+    .forEach(function (button) {
 
-            button.addEventListener(
-                "click",
-                function () {
+        button.addEventListener(
+            "click",
+            function () {
 
-                    document
-                        .querySelectorAll(
-                            "[data-force]"
-                        )
-                        .forEach(
-                            function (b) {
+                document
+                    .querySelectorAll(
+                        "[data-force]"
+                    )
+                    .forEach(
+                        function (item) {
 
-                                b.classList.remove(
-                                    "active"
-                                );
+                            item.classList.remove(
+                                "selected"
+                            );
 
-                            }
-                        );
-
-
-                    this.classList.add(
-                        "active"
+                        }
                     );
 
 
-                    forceRarity =
-                        this.dataset.force;
+                this.classList.add(
+                    "selected"
+                );
 
 
-                    const status =
-                        document.getElementById(
-                            "forceStatus"
-                        );
+                forceRarity =
+                    this.dataset.force;
 
-                    if (status) {
 
-                        status.textContent =
-                            `MODE : ${forceRarity}`;
+                forceStatus.textContent =
+                    "MODE : " +
+                    forceRarity;
 
-                    }
+            }
+        );
 
-                }
-            );
-
-        }
-    );
+    });
 
 
 /* =========================================
    APPLY
 ========================================= */
 
-const applyButton =
-    document.getElementById(
-        "applyButton"
-    );
+applyButton.addEventListener(
+    "click",
+    function () {
 
-if (applyButton) {
+        updateRollCount();
 
-    applyButton.addEventListener(
-        "click",
-        function () {
+        if (!checkTotal()) {
 
-            if (!checkTotal()) {
-
-                alert(
-                    "確率の合計を100%にしてください。"
-                );
-
-                return;
-
-            }
-
-
-            rates =
-                getInputRates();
-
-
-            adminPanel.classList.remove(
-                "open"
+            alert(
+                "確率の合計を100%にしてください。"
             );
 
+            return;
         }
-    );
 
-}
+
+        rates =
+            readRates();
+
+
+        closeAdmin();
+
+    }
+);
 
 
 /* =========================================
    RESET
 ========================================= */
 
-const resetButton =
-    document.getElementById(
-        "resetButton"
-    );
+resetButton.addEventListener(
+    "click",
+    function () {
 
-if (resetButton) {
-
-    resetButton.addEventListener(
-        "click",
-        function () {
-
-            rates = {
-                ...DEFAULT_RATES
-            };
+        rates = {
+            ...DEFAULT_RATES
+        };
 
 
-            rateInputs.R.value =
-                DEFAULT_RATES.R;
+        rateR.value =
+            DEFAULT_RATES.R;
 
-            rateInputs.SR.value =
-                DEFAULT_RATES.SR;
+        rateSR.value =
+            DEFAULT_RATES.SR;
 
-            rateInputs.SSR.value =
-                DEFAULT_RATES.SSR;
+        rateSSR.value =
+            DEFAULT_RATES.SSR;
 
-            rateInputs.XR.value =
-                DEFAULT_RATES.XR;
-
-
-            forceRarity =
-                "RANDOM";
+        rateXR.value =
+            DEFAULT_RATES.XR;
 
 
-            document
-                .querySelectorAll(
-                    "[data-force]"
-                )
-                .forEach(
-                    function (button) {
+        rollCount = 1;
 
-                        button.classList.remove(
-                            "active"
-                        );
-
-                    }
-                );
+        rollCountInput.value =
+            "1";
 
 
-            const randomButton =
-                document.querySelector(
-                    '[data-force="RANDOM"]'
-                );
-
-            if (randomButton) {
-
-                randomButton.classList.add(
-                    "active"
-                );
-
-            }
+        forceRarity =
+            "RANDOM";
 
 
-            const status =
-                document.getElementById(
-                    "forceStatus"
-                );
+        document
+            .querySelectorAll(
+                "[data-force]"
+            )
+            .forEach(
+                function (button) {
 
-            if (status) {
+                    button.classList.remove(
+                        "selected"
+                    );
 
-                status.textContent =
-                    "MODE : RANDOM";
-
-            }
+                }
+            );
 
 
-            checkTotal();
+        const randomButton =
+            document.querySelector(
+                '[data-force="RANDOM"]'
+            );
 
-        }
-    );
 
-}
+        randomButton.classList.add(
+            "selected"
+        );
+
+
+        forceStatus.textContent =
+            "MODE : RANDOM";
+
+
+        checkTotal();
+
+    }
+);
 
 
 /* =========================================
-   RANDOM RARITY
+   RANDOM
 ========================================= */
 
-function getRandomRarity() {
+function getRarity() {
 
     if (
         forceRarity !== "RANDOM"
     ) {
 
         return forceRarity;
-
     }
 
 
@@ -719,40 +470,53 @@ function getRandomRarity() {
         Math.random() * 100;
 
 
-    if (
-        random < rates.XR
-    ) {
+    let border = 0;
 
+
+    /*
+       XR
+    */
+
+    border += rates.XR;
+
+    if (
+        random < border
+    ) {
         return "XR";
-
     }
 
 
-    if (
-        random <
-        rates.XR +
-        rates.SSR
-    ) {
+    /*
+       SSR
+    */
 
+    border += rates.SSR;
+
+    if (
+        random < border
+    ) {
         return "SSR";
-
     }
 
+
+    /*
+       SR
+    */
+
+    border += rates.SR;
 
     if (
-        random <
-        rates.XR +
-        rates.SSR +
-        rates.SR
+        random < border
     ) {
-
         return "SR";
-
     }
 
+
+    /*
+       R
+    */
 
     return "R";
-
 }
 
 
@@ -760,54 +524,48 @@ function getRandomRarity() {
    BOX ANIMATION
 ========================================= */
 
-function animateBox() {
+function shakeBox() {
 
     return new Promise(
         function (resolve) {
 
-            const animation =
-                gachaBox.animate(
-                    [
-                        {
-                            transform:
-                                "translate(0, 0) rotate(0deg)"
-                        },
-
-                        {
-                            transform:
-                                "translate(-10px, 0) rotate(-4deg)"
-                        },
-
-                        {
-                            transform:
-                                "translate(10px, 0) rotate(4deg)"
-                        },
-
-                        {
-                            transform:
-                                "translate(-7px, 0) rotate(-3deg)"
-                        },
-
-                        {
-                            transform:
-                                "translate(7px, 0) rotate(3deg)"
-                        },
-
-                        {
-                            transform:
-                                "translate(0, 0) rotate(0deg)"
-                        }
-
-                    ],
+            gachaBox.animate(
+                [
                     {
-                        duration: 800,
-                        easing:
-                            "ease-in-out"
+                        transform:
+                            "translateX(0) rotate(0deg)"
+                    },
+
+                    {
+                        transform:
+                            "translateX(-10px) rotate(-4deg)"
+                    },
+
+                    {
+                        transform:
+                            "translateX(10px) rotate(4deg)"
+                    },
+
+                    {
+                        transform:
+                            "translateX(-7px) rotate(-3deg)"
+                    },
+
+                    {
+                        transform:
+                            "translateX(7px) rotate(3deg)"
+                    },
+
+                    {
+                        transform:
+                            "translateX(0) rotate(0deg)"
                     }
-                );
-
-
-            animation.onfinish =
+                ],
+                {
+                    duration: 900,
+                    easing: "ease-in-out"
+                }
+            ).onfinish =
                 function () {
 
                     resolve();
@@ -816,173 +574,85 @@ function animateBox() {
 
         }
     );
-
 }
 
 
 /* =========================================
-   ONE ROLL
+   WAIT
 ========================================= */
 
-async function rollOnce() {
+function wait(ms) {
 
-    const rarity =
-        getRandomRarity();
+    return new Promise(
+        function (resolve) {
 
-
-    await animateBox();
-
-
-    return rarity;
-
-}
-
-
-/* =========================================
-   GACHA START
-========================================= */
-
-async function startGacha() {
-
-    if (rolling) {
-        return;
-    }
-
-
-    rolling = true;
-
-
-    rollButton.disabled = true;
-
-
-    resultArea.classList.add(
-        "hidden"
-    );
-
-
-    const results = [];
-
-
-    for (
-        let i = 0;
-        i < rollCount;
-        i++
-    ) {
-
-        const rarity =
-            await rollOnce();
-
-
-        results.push(
-            rarity
-        );
-
-
-        addHistory(
-            rarity
-        );
-
-
-        /*
-           レア演出
-        */
-
-        if (
-            rarity === "XR"
-        ) {
-
-            await showXR();
+            setTimeout(
+                resolve,
+                ms
+            );
 
         }
-
-        else if (
-            rarity === "SSR"
-        ) {
-
-            await showSSR();
-
-        }
-
-    }
-
-
-    showFinalResult(
-        results
     );
-
-
-    rolling = false;
-
-
-    rollButton.disabled = false;
-
 }
 
 
 /* =========================================
-   OPEN BUTTON
+   SSR
 ========================================= */
 
-rollButton.addEventListener(
-    "click",
-    function () {
+function showSSR() {
 
-        startGacha();
+    return new Promise(
+        function (resolve) {
 
-    }
-);
+            ssrOverlay.classList.add(
+                "active"
+            );
+
+
+            ssrContinue.onclick =
+                function () {
+
+                    ssrOverlay.classList.remove(
+                        "active"
+                    );
+
+                    resolve();
+
+                };
+
+        }
+    );
+}
 
 
 /* =========================================
-   FINAL RESULT
+   XR
 ========================================= */
 
-function showFinalResult(results) {
+function showXR() {
 
-    let best =
-        "R";
+    return new Promise(
+        function (resolve) {
 
-
-    if (
-        results.includes("XR")
-    ) {
-
-        best =
-            "XR";
-
-    }
-
-    else if (
-        results.includes("SSR")
-    ) {
-
-        best =
-            "SSR";
-
-    }
-
-    else if (
-        results.includes("SR")
-    ) {
-
-        best =
-            "SR";
-
-    }
+            xrOverlay.classList.add(
+                "active"
+            );
 
 
-    resultRarity.textContent =
-        best;
+            xrContinue.onclick =
+                function () {
 
+                    xrOverlay.classList.remove(
+                        "active"
+                    );
 
-    resultText.textContent =
-        `${results.length} ROLL COMPLETE`;
+                    resolve();
 
+                };
 
-    resultArea.classList.remove(
-        "hidden"
+        }
     );
-
 }
 
 
@@ -993,14 +663,10 @@ function showFinalResult(results) {
 function addHistory(rarity) {
 
     const item =
-        document.createElement(
-            "div"
-        );
-
+        document.createElement("div");
 
     item.className =
         "history-item";
-
 
     item.textContent =
         rarity;
@@ -1021,128 +687,215 @@ function addHistory(rarity) {
         );
 
     }
-
 }
 
 
 /* =========================================
-   SSR
+   FINAL RESULT
 ========================================= */
 
-function showSSR() {
+function showFinalResult(results) {
 
-    return new Promise(
-        function (resolve) {
-
-            ssrOverlay.classList.add(
-                "active"
-            );
+    let highest = "R";
 
 
-            const button =
-                document.getElementById(
-                    "ssrCloseButton"
-                );
+    if (
+        results.includes("XR")
+    ) {
+
+        highest = "XR";
+
+    }
+
+    else if (
+        results.includes("SSR")
+    ) {
+
+        highest = "SSR";
+
+    }
+
+    else if (
+        results.includes("SR")
+    ) {
+
+        highest = "SR";
+
+    }
 
 
-            if (!button) {
-
-                ssrOverlay.classList.remove(
-                    "active"
-                );
-
-                resolve();
-
-                return;
-
-            }
+    resultRarity.textContent =
+        highest;
 
 
-            button.onclick =
-                function () {
+    resultText.textContent =
+        results.length +
+        " ROLL COMPLETE";
 
-                    ssrOverlay.classList.remove(
-                        "active"
-                    );
 
-                    resolve();
-
-                };
-
-        }
+    resultArea.classList.remove(
+        "hidden"
     );
-
 }
 
 
 /* =========================================
-   XR
+   GACHA
 ========================================= */
 
-function showXR() {
+async function openGacha() {
 
-    return new Promise(
-        function (resolve) {
-
-            xrOverlay.classList.add(
-                "active"
-            );
+    if (isRolling) {
+        return;
+    }
 
 
-            const button =
-                document.getElementById(
-                    "xrCloseButton"
-                );
+    /*
+       管理者画面を閉じる
+    */
+
+    closeAdmin();
 
 
-            if (!button) {
+    /*
+       状態変更
+    */
 
-                xrOverlay.classList.remove(
-                    "active"
-                );
+    isRolling = true;
 
-                resolve();
-
-                return;
-
-            }
+    gachaBox.style.pointerEvents =
+        "none";
 
 
-            button.onclick =
-                function () {
-
-                    xrOverlay.classList.remove(
-                        "active"
-                    );
-
-                    resolve();
-
-                };
-
-        }
+    resultArea.classList.add(
+        "hidden"
     );
 
+
+    const results = [];
+
+
+    /*
+       連数分実行
+    */
+
+    for (
+        let i = 0;
+        i < rollCount;
+        i++
+    ) {
+
+        await shakeBox();
+
+
+        const rarity =
+            getRarity();
+
+
+        results.push(
+            rarity
+        );
+
+
+        addHistory(
+            rarity
+        );
+
+
+        /*
+           XR
+        */
+
+        if (
+            rarity === "XR"
+        ) {
+
+            await showXR();
+
+        }
+
+
+        /*
+           SSR
+        */
+
+        else if (
+            rarity === "SSR"
+        ) {
+
+            await showSSR();
+
+        }
+
+
+        /*
+           少し間隔を開ける
+        */
+
+        if (
+            i < rollCount - 1
+        ) {
+
+            await wait(150);
+
+        }
+
+    }
+
+
+    showFinalResult(
+        results
+    );
+
+
+    isRolling = false;
+
+
+    gachaBox.style.pointerEvents =
+        "auto";
 }
+
+
+/* =========================================
+   BOX CLICK
+========================================= */
+
+gachaBox.addEventListener(
+    "click",
+    openGacha
+);
+
+
+/* =========================================
+   KEYBOARD ACCESSIBILITY
+   Enterだけは残す
+========================================= */
+
+gachaBox.addEventListener(
+    "keydown",
+    function (event) {
+
+        if (
+            event.key === "Enter"
+        ) {
+
+            event.preventDefault();
+
+            openGacha();
+
+        }
+
+    }
+);
 
 
 /* =========================================
    INITIALIZE
 ========================================= */
 
-updateRollDisplay();
-
 checkTotal();
-
 
 console.log(
     "CYBER GACHA SYSTEM ONLINE"
-);
-
-console.log(
-    "SPACE = GACHA"
-);
-
-console.log(
-    "Q = ADMIN CONSOLE"
 );
 ```
