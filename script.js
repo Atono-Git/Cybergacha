@@ -20,7 +20,7 @@ const XR_RATE = 0.0001;
 
 
 /* =========================
-   保証
+   保証回数
 ========================= */
 
 const SSR_GUARANTEE = 200;
@@ -33,129 +33,64 @@ const XR_GUARANTEE = 15000;
 ========================= */
 
 const gachaBox =
-    document.getElementById(
-        "gachaBox"
-    );
-
+    document.getElementById("gachaBox");
 
 const gachaArea =
-    document.getElementById(
-        "gachaArea"
-    );
-
+    document.getElementById("gachaArea");
 
 const resultRarity =
-    document.getElementById(
-        "resultRarity"
-    );
-
+    document.getElementById("resultRarity");
 
 const historyList =
-    document.getElementById(
-        "historyList"
-    );
-
+    document.getElementById("historyList");
 
 const ssrOverlay =
-    document.getElementById(
-        "ssrOverlay"
-    );
-
+    document.getElementById("ssrOverlay");
 
 const xrOverlay =
-    document.getElementById(
-        "xrOverlay"
-    );
-
+    document.getElementById("xrOverlay");
 
 const ssrContinue =
-    document.getElementById(
-        "ssrContinue"
-    );
-
+    document.getElementById("ssrContinue");
 
 const xrContinue =
-    document.getElementById(
-        "xrContinue"
-    );
-
+    document.getElementById("xrContinue");
 
 const ssrCounter =
-    document.getElementById(
-        "ssrCounter"
-    );
-
+    document.getElementById("ssrCounter");
 
 const xrCounter =
-    document.getElementById(
-        "xrCounter"
-    );
-
+    document.getElementById("xrCounter");
 
 const ssrBar =
-    document.getElementById(
-        "ssrBar"
-    );
-
+    document.getElementById("ssrBar");
 
 const xrBar =
-    document.getElementById(
-        "xrBar"
-    );
-
+    document.getElementById("xrBar");
 
 const chargeMessage =
-    document.getElementById(
-        "chargeMessage"
-    );
-
-
-const warningText =
-    document.getElementById(
-        "warningText"
-    );
-
+    document.getElementById("chargeMessage");
 
 const boxScreenSmall =
-    document.getElementById(
-        "boxScreenSmall"
-    );
-
+    document.getElementById("boxScreenSmall");
 
 const boxScreenMain =
-    document.getElementById(
-        "boxScreenMain"
-    );
-
+    document.getElementById("boxScreenMain");
 
 const crystalContainer =
-    document.getElementById(
-        "crystalContainer"
-    );
-
+    document.getElementById("crystalContainer");
 
 const particleContainer =
-    document.getElementById(
-        "particleContainer"
-    );
-
+    document.getElementById("particleContainer");
 
 const beamContainer =
-    document.getElementById(
-        "beamContainer"
-    );
-
+    document.getElementById("beamContainer");
 
 const shockwaveContainer =
-    document.getElementById(
-        "shockwaveContainer"
-    );
-
+    document.getElementById("shockwaveContainer");
 
 const ldmButton =
-    document.getElementById(
-        "ldmButton"
-    );
+    document.getElementById("ldmButton");
 
 
 /* =========================
@@ -182,7 +117,6 @@ function updateLDM() {
         ldmMode
     );
 
-
     ldmButton.textContent =
         ldmMode
             ? "LDM: ON"
@@ -195,24 +129,16 @@ ldmButton.addEventListener(
     "click",
     function () {
 
-        if (
-            isRolling
-        ) {
-
+        if (isRolling) {
             return;
-
         }
 
-
-        ldmMode =
-            !ldmMode;
-
+        ldmMode = !ldmMode;
 
         localStorage.setItem(
             "cyberGachaLDM",
             String(ldmMode)
         );
-
 
         updateLDM();
 
@@ -241,9 +167,7 @@ let xrCount =
 
 
 if (
-    !Number.isFinite(
-        ssrCount
-    ) ||
+    !Number.isFinite(ssrCount) ||
     ssrCount < 0 ||
     ssrCount >= SSR_GUARANTEE
 ) {
@@ -254,9 +178,7 @@ if (
 
 
 if (
-    !Number.isFinite(
-        xrCount
-    ) ||
+    !Number.isFinite(xrCount) ||
     xrCount < 0 ||
     xrCount >= XR_GUARANTEE
 ) {
@@ -267,31 +189,26 @@ if (
 
 
 /* =========================
-   保存
+   カウンター保存
 ========================= */
 
 function saveCounters() {
 
     localStorage.setItem(
         "cyberGachaSSRCount",
-        String(
-            ssrCount
-        )
+        String(ssrCount)
     );
-
 
     localStorage.setItem(
         "cyberGachaXRCount",
-        String(
-            xrCount
-        )
+        String(xrCount)
     );
 
 }
 
 
 /* =========================
-   表示
+   カウンター表示
 ========================= */
 
 function updateCounters() {
@@ -308,22 +225,30 @@ function updateCounters() {
         XR_GUARANTEE;
 
 
+    const ssrProgress =
+        (
+            ssrCount /
+            SSR_GUARANTEE
+        ) * 100;
+
+
+    const xrProgress =
+        (
+            xrCount /
+            XR_GUARANTEE
+        ) * 100;
+
+
     ssrBar.style.width =
         Math.min(
-            (
-                ssrCount /
-                SSR_GUARANTEE
-            ) * 100,
+            ssrProgress,
             100
         ) + "%";
 
 
     xrBar.style.width =
         Math.min(
-            (
-                xrCount /
-                XR_GUARANTEE
-            ) * 100,
+            xrProgress,
             100
         ) + "%";
 
@@ -340,13 +265,11 @@ function updateCounters() {
 function drawRarity() {
 
     const random =
-        Math.random() *
-        100;
+        Math.random() * 100;
 
 
     if (
-        random <
-        R_RATE
+        random < R_RATE
     ) {
 
         return "R";
@@ -383,7 +306,7 @@ function drawRarity() {
 
 
 /* =========================
-   結果
+   結果表示
 ========================= */
 
 function showResult(
@@ -447,7 +370,7 @@ function showResult(
 
 
 /* =========================
-   HISTORY
+   履歴
 ========================= */
 
 function addHistory(
@@ -551,6 +474,27 @@ function clearBeams() {
 
 
 /* =========================
+   全エフェクト削除
+========================= */
+
+function clearEffects() {
+
+    clearCrystals();
+
+    clearParticles();
+
+    clearBeams();
+
+    shockwaveContainer.className =
+        "";
+
+    shockwaveContainer.style.borderColor =
+        "";
+
+}
+
+
+/* =========================
    クリスタル生成
 ========================= */
 
@@ -560,6 +504,10 @@ function createCrystals(
 
     clearCrystals();
 
+
+    /*
+       LDMではクリスタルなし
+    */
 
     if (
         ldmMode
@@ -606,7 +554,6 @@ function createCrystals(
         i++
     ) {
 
-
         const crystal =
             document.createElement(
                 "div"
@@ -629,29 +576,25 @@ function createCrystals(
             230;
 
 
-        const x =
-            Math.cos(
-                angle
-            ) *
+        const startX =
+            Math.cos(angle) *
             distance;
 
 
-        const y =
-            Math.sin(
-                angle
-            ) *
+        const startY =
+            Math.sin(angle) *
             distance;
 
 
         crystal.style.setProperty(
             "--startX",
-            x + "px"
+            startX + "px"
         );
 
 
         crystal.style.setProperty(
             "--startY",
-            y + "px"
+            startY + "px"
         );
 
 
@@ -836,8 +779,7 @@ function createParticles(
         particle.style.setProperty(
             "--delay",
             (
-                Math.random() *
-                1
+                Math.random()
             ) + "s"
         );
 
@@ -1005,7 +947,7 @@ function createBeams(
 
 
 /* =========================
-   SHOCKWAVE
+   衝撃波
 ========================= */
 
 function triggerShockwave(
@@ -1026,11 +968,6 @@ function triggerShockwave(
 
 
     void shockwaveContainer.offsetWidth;
-
-
-    shockwaveContainer.classList.add(
-        "active"
-    );
 
 
     if (
@@ -1070,23 +1007,10 @@ function triggerShockwave(
 
     }
 
-}
 
-
-/* =========================
-   全演出削除
-========================= */
-
-function clearEffects() {
-
-    clearCrystals();
-
-    clearParticles();
-
-    clearBeams();
-
-    shockwaveContainer.className =
-        "";
+    shockwaveContainer.classList.add(
+        "active"
+    );
 
 }
 
@@ -1113,22 +1037,33 @@ function setChargeMessage(
 
 
 /* =========================
-   アニメーション解除
+   アニメーションクラス解除
 ========================= */
 
 function clearAnimationClasses() {
 
     gachaArea.classList.remove(
+
         "charging",
+
         "limitBreak",
+
         "rare-r",
+
         "rare-sr",
+
         "rare-ssr",
+
         "rare-xr",
+
         "flash",
+
         "flash-ssr",
+
         "flash-xr",
+
         "reveal"
+
     );
 
 
@@ -1140,7 +1075,7 @@ function clearAnimationClasses() {
 
 
 /* =========================
-   オーバーレイ
+   オーバーレイを閉じる
 ========================= */
 
 function closeOverlays() {
@@ -1157,7 +1092,7 @@ function closeOverlays() {
 
 
 /* =========================
-   SSR
+   SSR CONTINUE
 ========================= */
 
 ssrContinue.addEventListener(
@@ -1168,14 +1103,18 @@ ssrContinue.addEventListener(
             "show"
         );
 
+
         clearAnimationClasses();
 
+
         clearEffects();
+
 
         setChargeMessage(
             "SYSTEM",
             "SYSTEM READY"
         );
+
 
         isRolling = false;
 
@@ -1184,7 +1123,7 @@ ssrContinue.addEventListener(
 
 
 /* =========================
-   XR
+   XR CONTINUE
 ========================= */
 
 xrContinue.addEventListener(
@@ -1195,14 +1134,18 @@ xrContinue.addEventListener(
             "show"
         );
 
+
         clearAnimationClasses();
 
+
         clearEffects();
+
 
         setChargeMessage(
             "SYSTEM",
             "SYSTEM READY"
         );
+
 
         isRolling = false;
 
@@ -1239,9 +1182,9 @@ function openGacha() {
 
 
     /*
-       =============================
+       =========================
        抽選
-       =============================
+       =========================
     */
 
     let rarity =
@@ -1249,9 +1192,9 @@ function openGacha() {
 
 
     /*
-       =============================
-       今回の回数
-       =============================
+       =========================
+       次回カウント
+       =========================
     */
 
     const nextSSRCount =
@@ -1263,9 +1206,9 @@ function openGacha() {
 
 
     /*
-       =============================
+       =========================
        XR保証
-       =============================
+       =========================
     */
 
     if (
@@ -1279,9 +1222,9 @@ function openGacha() {
 
 
     /*
-       =============================
+       =========================
        SSR保証
-       =============================
+       =========================
     */
 
     else if (
@@ -1295,9 +1238,9 @@ function openGacha() {
 
 
     /*
-       =============================
-       カウンター
-       =============================
+       =========================
+       カウンター更新
+       =========================
     */
 
     if (
@@ -1338,9 +1281,9 @@ function openGacha() {
 
 
     /*
-       =============================
+       =========================
        レア度クラス
-       =============================
+       =========================
     */
 
     gachaArea.classList.add(
@@ -1350,9 +1293,9 @@ function openGacha() {
 
 
     /*
-       =============================
-       派手演出素材
-       =============================
+       =========================
+       エフェクト準備
+       =========================
     */
 
     createCrystals(
@@ -1371,9 +1314,9 @@ function openGacha() {
 
 
     /*
-       =============================
-       CHARGE
-       =============================
+       =========================
+       CHARGE START
+       =========================
     */
 
     gachaArea.classList.add(
@@ -1387,9 +1330,9 @@ function openGacha() {
 
 
     /*
-       =============================
-       STAGE 0
-       =============================
+       =========================
+       STAGE 1
+       =========================
     */
 
     setChargeMessage(
@@ -1398,14 +1341,10 @@ function openGacha() {
     );
 
 
-    warningText.textContent =
-        "ENERGY LEVEL: 08%";
-
-
     /*
-       =============================
-       STAGE 1
-       =============================
+       =========================
+       STAGE 2
+       =========================
     */
 
     setTimeout(
@@ -1416,18 +1355,15 @@ function openGacha() {
                 "TARGET LOCK"
             );
 
-            warningText.textContent =
-                "ENERGY LEVEL: 24%";
-
         },
         350
     );
 
 
     /*
-       =============================
-       STAGE 2
-       =============================
+       =========================
+       STAGE 3
+       =========================
     */
 
     setTimeout(
@@ -1438,18 +1374,15 @@ function openGacha() {
                 "ENERGY CHARGE"
             );
 
-            warningText.textContent =
-                "ENERGY LEVEL: 46%";
-
         },
         700
     );
 
 
     /*
-       =============================
-       STAGE 3
-       =============================
+       =========================
+       STAGE 4
+       =========================
     */
 
     setTimeout(
@@ -1460,18 +1393,15 @@ function openGacha() {
                 "CORE OVERLOAD"
             );
 
-            warningText.textContent =
-                "ENERGY LEVEL: 67%";
-
         },
         1050
     );
 
 
     /*
-       =============================
-       STAGE 4
-       =============================
+       =========================
+       STAGE 5
+       =========================
     */
 
     setTimeout(
@@ -1481,9 +1411,6 @@ function openGacha() {
                 "WARNING",
                 "ENERGY LIMIT"
             );
-
-            warningText.textContent =
-                "ENERGY LEVEL: 84%";
 
 
             gachaArea.classList.add(
@@ -1501,9 +1428,9 @@ function openGacha() {
 
 
     /*
-       =============================
-       STAGE 5
-       =============================
+       =========================
+       STAGE 6
+       =========================
     */
 
     setTimeout(
@@ -1514,9 +1441,6 @@ function openGacha() {
                 "LIMIT BREAK"
             );
 
-            warningText.textContent =
-                "ENERGY LEVEL: 100%";
-
 
             triggerShockwave(
                 rarity
@@ -1525,7 +1449,7 @@ function openGacha() {
 
             /*
                通常モードだけ
-               一気にエフェクト増強
+               エフェクトを再充填
             */
 
             if (
@@ -1536,9 +1460,11 @@ function openGacha() {
                     rarity
                 );
 
+
                 createParticles(
                     rarity
                 );
+
 
                 createBeams(
                     rarity
@@ -1552,9 +1478,9 @@ function openGacha() {
 
 
     /*
-       =============================
-       一瞬の静止
-       =============================
+       =========================
+       RELEASE
+       =========================
     */
 
     setTimeout(
@@ -1571,9 +1497,9 @@ function openGacha() {
 
 
     /*
-       =============================
+       =========================
        OPEN
-       =============================
+       =========================
     */
 
     setTimeout(
@@ -1597,8 +1523,7 @@ function openGacha() {
 
             /*
                =========================
-               通常モード
-               クリスタル爆発
+               通常モード爆発
                =========================
             */
 
@@ -1623,11 +1548,6 @@ function openGacha() {
                 );
 
 
-                /*
-                   クリスタルを再生成して
-                   一斉飛散感を出す
-                */
-
                 createCrystals(
                     rarity
                 );
@@ -1637,11 +1557,22 @@ function openGacha() {
 
             /*
                =========================
-               フラッシュ
+               FLASH
+               
+               LDMでは絶対に発生させない
                =========================
-
-               LDMでは完全に実行しない
             */
+
+            /*
+               念のため既存クラスも消す
+            */
+
+            gachaArea.classList.remove(
+                "flash",
+                "flash-ssr",
+                "flash-xr"
+            );
+
 
             if (
                 !ldmMode
@@ -1657,6 +1588,7 @@ function openGacha() {
 
                 }
 
+
                 else if (
                     rarity === "SSR"
                 ) {
@@ -1666,6 +1598,7 @@ function openGacha() {
                     );
 
                 }
+
 
                 else {
 
@@ -1799,7 +1732,7 @@ function openGacha() {
 
 
 /* =========================
-   BOX CLICK
+   BOXをクリック
 ========================= */
 
 gachaBox.addEventListener(
@@ -1832,8 +1765,10 @@ setChargeMessage(
 );
 
 
-warningText.textContent =
-    "ENERGY LEVEL: 0%";
+/*
+   ENERGY LEVELは完全撤去。
+   warningTextも使用しない。
+*/
 
 
 console.log(
