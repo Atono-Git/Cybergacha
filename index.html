@@ -4,253 +4,414 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CYBER GACHA SYSTEM</title>
+    <title>CYBER GACHA</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <!-- 背景 -->
-    <div class="grid"></div>
+    <div class="background-grid"></div>
     <div class="scanlines"></div>
 
-    <!-- システム情報 -->
-    <div class="system-info">
+    <!-- 左上システム表示 -->
+    <div class="system-status">
         <div>CYBER GACHA SYSTEM</div>
-        <div id="systemStatus">● SYSTEM ONLINE</div>
+        <span>● ONLINE</span>
     </div>
 
-    <!-- メイン画面 -->
-    <main id="mainScreen">
+    <!-- 管理者ボタン -->
+    <button id="adminButton" class="admin-button">
+        ADMIN
+    </button>
 
-        <div class="title-area">
-            <div class="small-title">RANDOMIZED REWARD SYSTEM</div>
-            <h1>CYBER<br><span>GACHA</span></h1>
-        </div>
+    <!-- メイン -->
+    <main>
 
-        <!-- ガチャボックス -->
-        <div id="gachaArea">
-
-            <div class="scanner">
-                <div class="scanner-line"></div>
+        <div class="title">
+            <div class="subtitle">
+                RANDOMIZED REWARD SYSTEM
             </div>
 
-            <div id="gachaBox" class="gacha-box">
+            <h1>
+                CYBER
+                <span>GACHA</span>
+            </h1>
+
+            <div class="instruction">
+                TAP THE BOX TO OPEN
+            </div>
+        </div>
+
+        <!-- ガチャエリア -->
+        <section id="gachaArea">
+
+            <div class="scanner scanner-1"></div>
+            <div class="scanner scanner-2"></div>
+
+            <div class="scan-line"></div>
+
+            <!-- ガチャボックス -->
+            <div
+                id="gachaBox"
+                class="gacha-box"
+                role="button"
+                tabindex="0"
+                aria-label="ガチャボックスを開く"
+            >
+
                 <div class="box-top"></div>
+
                 <div class="box-body">
-                    <div class="box-symbol">◇</div>
-                    <div class="box-text">SYSTEM<br>LOCKED</div>
+
+                    <div class="box-core">
+                        ◇
+                    </div>
+
+                    <div class="box-label">
+                        SYSTEM
+                    </div>
+
+                    <div class="box-lock">
+                        LOCKED
+                    </div>
+
                 </div>
+
                 <div class="box-bottom"></div>
+
             </div>
 
-            <div id="energyRing" class="energy-ring"></div>
-            <div id="particles"></div>
+            <div class="energy-ring ring-1"></div>
+            <div class="energy-ring ring-2"></div>
 
-        </div>
+        </section>
 
-        <!-- 結果 -->
-        <div id="resultArea" class="result-area hidden">
-            <div class="result-label">RESULT</div>
-            <div id="resultRarity" class="result-rarity">R</div>
-            <div id="resultText"></div>
-        </div>
+        <!-- 通常結果 -->
+        <section
+            id="resultArea"
+            class="result-area hidden"
+        >
 
-        <!-- ガチャ操作 -->
-        <div class="controls">
-
-            <div class="pull-count">
-                <span>ROLL COUNT</span>
-                <strong id="rollCountDisplay">1</strong>
+            <div class="result-title">
+                LAST RESULT
             </div>
 
-            <button id="minusButton">−</button>
-            <button id="plusButton">＋</button>
+            <div
+                id="resultRarity"
+                class="result-rarity"
+            >
+                R
+            </div>
 
-            <button id="rollButton" class="roll-button">
-                <span>OPEN</span>
-                <small id="rollButtonSub">1 ROLL</small>
+            <div id="resultText">
+                READY
+            </div>
+
+        </section>
+
+        <!-- 履歴 -->
+        <section class="history">
+
+            <div class="history-title">
+                RECENT RESULTS
+            </div>
+
+            <div id="historyList"></div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =========================
+         SSR演出
+    ========================== -->
+
+    <div
+        id="ssrOverlay"
+        class="overlay ssr-overlay"
+    >
+
+        <div class="warning">
+            HIGH ENERGY DETECTED
+        </div>
+
+        <div class="ssr-rarity">
+            SSR
+        </div>
+
+        <div class="ssr-description">
+            SUPER SPECIAL RARITY
+        </div>
+
+        <button
+            id="ssrContinue"
+            class="continue-button"
+        >
+            CONTINUE
+        </button>
+
+    </div>
+
+
+    <!-- =========================
+         XR演出
+    ========================== -->
+
+    <div
+        id="xrOverlay"
+        class="overlay xr-overlay"
+    >
+
+        <div class="xr-error">
+            SYSTEM ERROR
+        </div>
+
+        <div class="xr-unknown">
+            UNKNOWN RARITY DETECTED
+        </div>
+
+        <div class="xr-rarity">
+            X<span>R</span>
+        </div>
+
+        <div class="xr-description">
+            EXTREME RARITY
+        </div>
+
+        <div class="xr-message">
+            UNIDENTIFIED SIGNAL
+        </div>
+
+        <button
+            id="xrContinue"
+            class="continue-button"
+        >
+            CONTINUE
+        </button>
+
+    </div>
+
+
+    <!-- =========================
+         管理者画面
+    ========================== -->
+
+    <aside
+        id="adminPanel"
+        class="admin-panel"
+    >
+
+        <div class="admin-header">
+
+            <div>
+                <div class="admin-label">
+                    SECURE ACCESS
+                </div>
+
+                <h2>
+                    ADMIN CONSOLE
+                </h2>
+            </div>
+
+            <button
+                id="adminClose"
+                class="close-button"
+            >
+                ×
             </button>
 
         </div>
 
-        <!-- 確率 -->
-        <div class="probability-display">
-            <div>R <span id="rRate">90%</span></div>
-            <div>SR <span id="srRate">8.5%</span></div>
-            <div>SSR <span id="ssrRate">1.4999%</span></div>
-            <div>XR <span id="xrRate">0.0001%</span></div>
-        </div>
-
-        <!-- 履歴 -->
-        <div class="history">
-            <div class="history-title">ROLL HISTORY</div>
-            <div id="historyList"></div>
-        </div>
-
-    </main>
-
-    <!-- XR専用オーバーレイ -->
-    <div id="xrOverlay" class="rarity-overlay xr-overlay">
-
-        <div class="glitch-text" data-text="SYSTEM ERROR">
-            SYSTEM ERROR
-        </div>
-
-        <div class="unknown">
-            UNKNOWN RARITY DETECTED
-        </div>
-
-        <div class="xr-big">
-            X<span>R</span>
-        </div>
-
-        <div class="xr-sub">
-            EXTREME RARITY
-        </div>
-
-        <div class="xr-particles"></div>
-
-        <button id="xrCloseButton">
-            CONTINUE
-        </button>
-
-    </div>
-
-    <!-- SSR専用オーバーレイ -->
-    <div id="ssrOverlay" class="rarity-overlay ssr-overlay">
-
-        <div class="ssr-warning">
-            ⚠ HIGH ENERGY DETECTED ⚠
-        </div>
-
-        <div class="ssr-big">
-            SSR
-        </div>
-
-        <div class="ssr-sub">
-            SUPER SPECIAL RARITY
-        </div>
-
-        <button id="ssrCloseButton">
-            CONTINUE
-        </button>
-
-    </div>
-
-    <!-- 管理者画面 -->
-    <div id="adminPanel">
-
-        <div class="admin-header">
-            <div>
-                <span class="admin-small">SECURE SYSTEM</span>
-                <h2>ADMIN CONSOLE</h2>
-            </div>
-
-            <button id="adminClose">×</button>
-        </div>
 
         <div class="admin-content">
 
+            <!-- 連数 -->
             <section class="admin-section">
 
-                <h3>GACHA CONFIGURATION</h3>
+                <h3>
+                    GACHA COUNT
+                </h3>
 
                 <label>
                     ROLL COUNT
-                    <input id="adminRollCount"
-                           type="number"
-                           min="1"
-                           max="9999"
-                           value="1">
+
+                    <input
+                        id="rollCountInput"
+                        type="number"
+                        min="1"
+                        max="9999"
+                        value="1"
+                    >
                 </label>
 
-                <div class="quick-rolls">
-                    <button data-roll="1">1 ROLL</button>
-                    <button data-roll="10">10 ROLL</button>
-                    <button data-roll="100">100 ROLL</button>
-                    <button data-roll="1000">1000 ROLL</button>
+                <div class="quick-buttons">
+
+                    <button data-count="1">
+                        1
+                    </button>
+
+                    <button data-count="10">
+                        10
+                    </button>
+
+                    <button data-count="100">
+                        100
+                    </button>
+
+                    <button data-count="1000">
+                        1000
+                    </button>
+
                 </div>
 
             </section>
 
+
+            <!-- 確率 -->
             <section class="admin-section">
 
-                <h3>RARITY CONFIGURATION</h3>
+                <h3>
+                    RARITY PROBABILITY
+                </h3>
 
-                <div class="rarity-input">
-                    <label>R</label>
-                    <input id="rateR" type="number" min="0" step="0.0001" value="90">
+                <div class="rate-row">
+                    <span>R</span>
+
+                    <input
+                        id="rateR"
+                        type="number"
+                        min="0"
+                        step="0.0001"
+                        value="90"
+                    >
+
                     <span>%</span>
                 </div>
 
-                <div class="rarity-input">
-                    <label>SR</label>
-                    <input id="rateSR" type="number" min="0" step="0.0001" value="8.5">
+
+                <div class="rate-row">
+                    <span>SR</span>
+
+                    <input
+                        id="rateSR"
+                        type="number"
+                        min="0"
+                        step="0.0001"
+                        value="8.5"
+                    >
+
                     <span>%</span>
                 </div>
 
-                <div class="rarity-input">
-                    <label>SSR</label>
-                    <input id="rateSSR" type="number" min="0" step="0.0001" value="1.4999">
+
+                <div class="rate-row">
+                    <span>SSR</span>
+
+                    <input
+                        id="rateSSR"
+                        type="number"
+                        min="0"
+                        step="0.0001"
+                        value="1.4999"
+                    >
+
                     <span>%</span>
                 </div>
 
-                <div class="rarity-input">
-                    <label>XR</label>
-                    <input id="rateXR" type="number" min="0" step="0.0001" value="0.0001">
+
+                <div class="rate-row">
+                    <span>XR</span>
+
+                    <input
+                        id="rateXR"
+                        type="number"
+                        min="0"
+                        step="0.0001"
+                        value="0.0001"
+                    >
+
                     <span>%</span>
                 </div>
 
-                <div id="totalDisplay" class="total-display">
+
+                <div
+                    id="totalDisplay"
+                    class="total"
+                >
                     TOTAL : 100.0000%
                 </div>
 
             </section>
 
+
+            <!-- 強制レアリティ -->
             <section class="admin-section">
 
-                <h3>DEBUG / TEST MODE</h3>
+                <h3>
+                    TEST MODE
+                </h3>
 
-                <div class="force-buttons">
+                <div class="force-grid">
 
-                    <button data-force="R">FORCE R</button>
-                    <button data-force="SR">FORCE SR</button>
-                    <button data-force="SSR">FORCE SSR</button>
-                    <button data-force="XR">FORCE XR</button>
-                    <button data-force="RANDOM" class="active">
+                    <button
+                        data-force="RANDOM"
+                        class="selected"
+                    >
                         RANDOM
+                    </button>
+
+                    <button data-force="R">
+                        FORCE R
+                    </button>
+
+                    <button data-force="SR">
+                        FORCE SR
+                    </button>
+
+                    <button data-force="SSR">
+                        FORCE SSR
+                    </button>
+
+                    <button data-force="XR">
+                        FORCE XR
                     </button>
 
                 </div>
 
-                <div id="forceStatus">
+                <div
+                    id="forceStatus"
+                    class="force-status"
+                >
                     MODE : RANDOM
                 </div>
 
             </section>
 
-            <button id="applyButton" class="apply-button">
+
+            <button
+                id="applyButton"
+                class="apply-button"
+            >
                 APPLY CONFIGURATION
             </button>
 
-            <button id="resetButton" class="reset-button">
+
+            <button
+                id="resetButton"
+                class="reset-button"
+            >
                 RESET DEFAULT
             </button>
 
         </div>
 
         <div class="admin-footer">
-            PRESS Q TO CLOSE CONSOLE
+            ADMIN MODE
         </div>
 
-    </div>
+    </aside>
 
-    <!-- 管理者アクセス表示 -->
-    <div id="adminAccess">
-        <div>&gt; ADMIN ACCESS GRANTED</div>
-        <div>&gt; SYSTEM CONFIGURATION ENABLED</div>
-    </div>
 
     <script src="script.js"></script>
 
