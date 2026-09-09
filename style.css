@@ -1,7 +1,9 @@
 * {
+
     box-sizing: border-box;
 
     -webkit-tap-highlight-color: transparent;
+
 }
 
 
@@ -87,6 +89,71 @@ body {
             transparent 3px,
             rgba(255,255,255,0.025) 4px
         );
+
+}
+
+
+/* =========================
+   LDM BUTTON
+========================= */
+
+#ldmButton {
+
+    position: fixed;
+
+    top: 20px;
+
+    right: 20px;
+
+    z-index: 200;
+
+    padding:
+        10px 16px;
+
+    border:
+        1px solid #00eaff;
+
+    background:
+        rgba(
+            0,
+            15,
+            25,
+            0.9
+        );
+
+    color: #00eaff;
+
+    font-size: 11px;
+
+    letter-spacing: 2px;
+
+    cursor: pointer;
+
+    box-shadow:
+
+        0 0 10px
+        rgba(
+            0,
+            234,
+            255,
+            0.25
+        );
+
+    transition:
+        0.2s ease;
+
+}
+
+
+#ldmButton:hover {
+
+    background: #00eaff;
+
+    color: #001018;
+
+    box-shadow:
+
+        0 0 20px #00eaff;
 
 }
 
@@ -203,7 +270,7 @@ main {
 
     height: 300px;
 
-    z-index: 10;
+    z-index: 20;
 
     cursor: pointer;
 
@@ -485,9 +552,6 @@ main {
 
     opacity: 0.5;
 
-    transition:
-        0.2s ease;
-
 }
 
 
@@ -583,10 +647,10 @@ main {
 
 
 /* =========================
-   ENERGY RINGS
+   HUD
 ========================= */
 
-.energyRing {
+.hudRing {
 
     position: absolute;
 
@@ -594,18 +658,26 @@ main {
 
     top: 50%;
 
-    width: 180px;
+    width: 230px;
 
-    height: 180px;
-
-    border:
-        1px solid #00eaff;
-
-    border-radius: 50%;
+    height: 230px;
 
     transform:
-        translate(-50%, -50%)
-        scale(0);
+        translate(
+            -50%,
+            -50%
+        );
+
+    border:
+        1px dashed
+        rgba(
+            0,
+            234,
+            255,
+            0.3
+        );
+
+    border-radius: 50%;
 
     opacity: 0;
 
@@ -614,62 +686,134 @@ main {
 }
 
 
-#gachaArea.charging .ringA {
+.hudRing1 {
 
-    animation:
-        energyExpand
-        1.4s linear infinite;
+    border-style: dashed;
 
 }
 
 
-#gachaArea.charging .ringB {
+.hudRing2 {
 
-    animation:
-        energyExpand
-        1.4s linear
-        0.45s infinite;
+    width: 310px;
 
-}
+    height: 310px;
 
-
-#gachaArea.charging .ringC {
-
-    animation:
-        energyExpand
-        1.4s linear
-        0.9s infinite;
+    border-style: dotted;
 
 }
 
 
-@keyframes energyExpand {
+.hudRing3 {
 
-    0% {
+    width: 370px;
+
+    height: 370px;
+
+    border-style: solid;
+
+    border-color:
+        rgba(
+            0,
+            234,
+            255,
+            0.12
+        );
+
+}
+
+
+/* =========================
+   HUD ANIMATION
+========================= */
+
+#gachaArea.charging .hudRing1 {
+
+    opacity: 1;
+
+    animation:
+        hudRotate
+        2.4s
+        linear
+        infinite;
+
+}
+
+
+#gachaArea.charging .hudRing2 {
+
+    opacity: 0.75;
+
+    animation:
+        hudRotateReverse
+        3.4s
+        linear
+        infinite;
+
+}
+
+
+#gachaArea.charging .hudRing3 {
+
+    opacity: 0.45;
+
+    animation:
+        hudRotate
+        5s
+        linear
+        infinite;
+
+}
+
+
+@keyframes hudRotate {
+
+    from {
 
         transform:
-            translate(-50%, -50%)
-            scale(0.3)
+            translate(
+                -50%,
+                -50%
+            )
             rotate(0deg);
 
-        opacity: 0;
-
     }
 
-    15% {
-
-        opacity: 0.9;
-
-    }
-
-    100% {
+    to {
 
         transform:
-            translate(-50%, -50%)
-            scale(3.2)
-            rotate(180deg);
+            translate(
+                -50%,
+                -50%
+            )
+            rotate(360deg);
 
-        opacity: 0;
+    }
+
+}
+
+
+@keyframes hudRotateReverse {
+
+    from {
+
+        transform:
+            translate(
+                -50%,
+                -50%
+            )
+            rotate(360deg);
+
+    }
+
+    to {
+
+        transform:
+            translate(
+                -50%,
+                -50%
+            )
+            rotate(0deg);
 
     }
 
@@ -748,7 +892,7 @@ main {
 
     animation:
         messageGlitch
-        0.18s
+        0.14s
         infinite;
 
 }
@@ -757,28 +901,1155 @@ main {
 @keyframes messageGlitch {
 
     0% {
+
         transform:
             translateX(-50%);
+
+    }
+
+    25% {
+
+        transform:
+            translateX(-52%);
+
+    }
+
+    50% {
+
+        transform:
+            translateX(-48%);
+
+    }
+
+    75% {
+
+        transform:
+            translateX(-51%);
+
+    }
+
+    100% {
+
+        transform:
+            translateX(-50%);
+
+    }
+
+}
+
+
+/* =========================
+   CRYSTAL CONTAINER
+========================= */
+
+#crystalContainer {
+
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 12;
+
+    pointer-events: none;
+
+    overflow: visible;
+
+}
+
+
+/* =========================
+   CRYSTALS
+========================= */
+
+.crystal {
+
+    position: absolute;
+
+    left: 50%;
+
+    top: 50%;
+
+    width: var(--size);
+
+    height: var(--size);
+
+    background: #00eaff;
+
+    clip-path:
+        polygon(
+            50% 0%,
+            100% 50%,
+            50% 100%,
+            0% 50%
+        );
+
+    opacity: 0;
+
+    filter:
+        drop-shadow(
+            0 0 5px #00eaff
+        );
+
+    transform:
+        translate(
+            var(--startX),
+            var(--startY)
+        )
+        rotate(0deg)
+        scale(0.2);
+
+    animation:
+        crystalConverge
+        var(--duration)
+        cubic-bezier(
+            0.15,
+            0.8,
+            0.25,
+            1
+        )
+        var(--delay)
+        infinite;
+
+}
+
+
+@keyframes crystalConverge {
+
+    0% {
+
+        opacity: 0;
+
+        transform:
+            translate(
+                var(--startX),
+                var(--startY)
+            )
+            rotate(0deg)
+            scale(0.15);
+
+    }
+
+    15% {
+
+        opacity: 1;
+
+    }
+
+    70% {
+
+        opacity: 0.9;
+
+    }
+
+    100% {
+
+        opacity: 0;
+
+        transform:
+            translate(
+                0,
+                0
+            )
+            rotate(
+                360deg
+            )
+            scale(1.4);
+
+    }
+
+}
+
+
+/* =========================
+   CRYSTAL COLORS
+========================= */
+
+.crystal-sr {
+
+    background: #55ff99;
+
+    filter:
+        drop-shadow(
+            0 0 7px #55ff99
+        )
+
+        drop-shadow(
+            0 0 14px #55ff99
+        );
+
+}
+
+
+.crystal-ssr {
+
+    background: #ffcc33;
+
+    filter:
+        drop-shadow(
+            0 0 8px #ffcc33
+        )
+
+        drop-shadow(
+            0 0 18px #ffcc33
+        );
+
+}
+
+
+.crystal-xr {
+
+    background: white;
+
+    filter:
+        drop-shadow(
+            0 0 8px white
+        )
+
+        drop-shadow(
+            0 0 20px white
+        )
+
+        drop-shadow(
+            0 0 35px white
+        );
+
+}
+
+
+/* =========================
+   CRYSTAL BURST
+========================= */
+
+#crystalContainer.burst {
+
+    animation:
+        crystalBurst
+        0.9s
+        cubic-bezier(
+            0.2,
+            0.8,
+            0.2,
+            1
+        )
+        forwards;
+
+}
+
+
+@keyframes crystalBurst {
+
+    0% {
+
+        transform:
+            scale(0.2);
+
+        opacity: 0;
+
+    }
+
+    15% {
+
+        transform:
+            scale(0.7);
+
+        opacity: 1;
+
+    }
+
+    35% {
+
+        transform:
+            scale(1.2);
+
+        opacity: 1;
+
+    }
+
+    100% {
+
+        transform:
+            scale(4);
+
+        opacity: 0;
+
+    }
+
+}
+
+
+/* =========================
+   BOX CHARGING
+========================= */
+
+#gachaBox.charging {
+
+    animation:
+        chargeBox
+        0.14s
+        ease-in-out
+        infinite alternate;
+
+    filter:
+
+        drop-shadow(
+            0 0 15px #00eaff
+        )
+
+        drop-shadow(
+            0 0 35px #00eaff
+        )
+
+        drop-shadow(
+            0 0 70px #00eaff
+        );
+
+}
+
+
+@keyframes chargeBox {
+
+    0% {
+
+        transform:
+            translateY(0)
+            scale(1);
+
+    }
+
+    25% {
+
+        transform:
+            translateY(-4px)
+            scale(1.015);
+
+    }
+
+    50% {
+
+        transform:
+            translateY(-9px)
+            scale(1.03);
+
+    }
+
+    75% {
+
+        transform:
+            translateY(-6px)
+            scale(1.04);
+
+    }
+
+    100% {
+
+        transform:
+            translateY(-14px)
+            scale(1.06);
+
+    }
+
+}
+
+
+/* =========================
+   CORE
+========================= */
+
+#gachaBox.charging .boxCore {
+
+    animation:
+        corePulse
+        0.18s
+        ease-in-out
+        infinite alternate;
+
+}
+
+
+@keyframes corePulse {
+
+    from {
+
+        transform:
+            translateX(-50%)
+            scale(1);
+
+        box-shadow:
+
+            0 0 10px #00eaff,
+
+            0 0 25px #00eaff;
+
+    }
+
+    to {
+
+        transform:
+            translateX(-50%)
+            scale(1.8);
+
+        box-shadow:
+
+            0 0 20px #00eaff,
+
+            0 0 60px #00eaff,
+
+            0 0 120px #00eaff;
+
+    }
+
+}
+
+
+/* =========================
+   BOX LIGHT
+========================= */
+
+#gachaBox.charging .boxLight {
+
+    animation:
+        lightFlash
+        0.1s
+        linear
+        infinite;
+
+}
+
+
+@keyframes lightFlash {
+
+    0% {
+
+        opacity: 0.2;
+
+        transform:
+            translateX(-50%)
+            scaleX(0.5);
+
+    }
+
+    50% {
+
+        opacity: 1;
+
+        transform:
+            translateX(-50%)
+            scaleX(1.4);
+
+    }
+
+    100% {
+
+        opacity: 0.2;
+
+        transform:
+            translateX(-50%)
+            scaleX(0.5);
+
+    }
+
+}
+
+
+/* =========================
+   BOX LINES
+========================= */
+
+#gachaBox.charging .line1 {
+
+    animation:
+        lineCharge
+        0.4s
+        ease-in-out
+        infinite;
+
+}
+
+
+#gachaBox.charging .line2 {
+
+    animation:
+        lineCharge
+        0.4s
+        ease-in-out
+        0.13s
+        infinite;
+
+}
+
+
+#gachaBox.charging .line3 {
+
+    animation:
+        lineCharge
+        0.4s
+        ease-in-out
+        0.26s
+        infinite;
+
+}
+
+
+@keyframes lineCharge {
+
+    0% {
+
+        opacity: 0.15;
+
+        transform:
+            scaleX(0.5);
+
+    }
+
+    50% {
+
+        opacity: 1;
+
+        transform:
+            scaleX(1);
+
+    }
+
+    100% {
+
+        opacity: 0.15;
+
+        transform:
+            scaleX(0.5);
+
+    }
+
+}
+
+
+/* =========================
+   SCREEN GLITCH
+========================= */
+
+#gachaBox.charging .boxScreen {
+
+    animation:
+        screenGlitch
+        0.13s
+        steps(2)
+        infinite;
+
+}
+
+
+@keyframes screenGlitch {
+
+    0% {
+
+        transform:
+            translateX(-50%)
+            skewX(0deg);
+
+    }
+
+    25% {
+
+        transform:
+            translateX(-52%)
+            skewX(-2deg);
+
+    }
+
+    50% {
+
+        transform:
+            translateX(-48%)
+            skewX(2deg);
+
+    }
+
+    75% {
+
+        transform:
+            translateX(-51%)
+            skewX(-1deg);
+
+    }
+
+    100% {
+
+        transform:
+            translateX(-50%)
+            skewX(0deg);
+
+    }
+
+}
+
+
+/* =========================
+   LIMIT BREAK
+========================= */
+
+#gachaArea.limitBreak {
+
+    animation:
+        areaShake
+        0.055s
+        linear
+        infinite;
+
+}
+
+
+#gachaArea.limitBreak .boxBody,
+#gachaArea.limitBreak .boxTop {
+
+    box-shadow:
+
+        0 0 30px #00eaff inset,
+
+        0 0 80px #00eaff,
+
+        0 0 150px
+        rgba(
+            0,
+            234,
+            255,
+            0.9
+        );
+
+}
+
+
+@keyframes areaShake {
+
+    0% {
+        transform:
+            translate(
+                0,
+                0
+            );
     }
 
     25% {
         transform:
-            translateX(-51%);
+            translate(
+                4px,
+                -2px
+            );
     }
 
     50% {
         transform:
-            translateX(-49%);
+            translate(
+                -4px,
+                3px
+            );
     }
 
     75% {
         transform:
-            translateX(-50%);
+            translate(
+                3px,
+                2px
+            );
     }
 
     100% {
         transform:
-            translateX(-50%);
+            translate(
+                0,
+                0
+            );
+    }
+
+}
+
+
+/* =========================
+   SR
+========================= */
+
+#gachaArea.rare-sr .scanner {
+
+    border-color:
+        rgba(
+            85,
+            255,
+            153,
+            0.65
+        );
+
+}
+
+
+#gachaArea.rare-sr .boxBody,
+#gachaArea.rare-sr .boxTop {
+
+    border-color:
+        #55ff99;
+
+}
+
+
+#gachaArea.rare-sr .boxCore {
+
+    border-color:
+        #55ff99;
+
+    box-shadow:
+
+        0 0 20px #55ff99,
+
+        0 0 50px #55ff99;
+
+}
+
+
+/* =========================
+   SSR
+========================= */
+
+#gachaArea.rare-ssr .scanner {
+
+    border-color:
+        rgba(
+            255,
+            204,
+            51,
+            0.85
+        );
+
+}
+
+
+#gachaArea.rare-ssr .hudRing {
+
+    border-color:
+        rgba(
+            255,
+            204,
+            51,
+            0.45
+        );
+
+}
+
+
+#gachaArea.rare-ssr .boxBody,
+#gachaArea.rare-ssr .boxTop {
+
+    border-color:
+        #ffcc33;
+
+    box-shadow:
+
+        0 0 25px #ffcc33 inset,
+
+        0 0 60px
+        rgba(
+            255,
+            204,
+            51,
+            0.8
+        );
+
+}
+
+
+#gachaArea.rare-ssr .boxCore {
+
+    border-color:
+        #ffcc33;
+
+    animation:
+        corePulseGold
+        0.09s
+        ease-in-out
+        infinite alternate;
+
+}
+
+
+@keyframes corePulseGold {
+
+    from {
+
+        transform:
+            translateX(-50%)
+            scale(1);
+
+        box-shadow:
+
+            0 0 20px #ffcc33;
+
+    }
+
+    to {
+
+        transform:
+            translateX(-50%)
+            scale(2.3);
+
+        box-shadow:
+
+            0 0 30px #ffcc33,
+
+            0 0 90px #ffcc33,
+
+            0 0 160px #ffcc33;
+
+    }
+
+}
+
+
+/* =========================
+   XR
+========================= */
+
+#gachaArea.rare-xr .scanner {
+
+    border-color:
+        rgba(
+            255,
+            255,
+            255,
+            0.95
+        );
+
+}
+
+
+#gachaArea.rare-xr .hudRing {
+
+    border-color:
+        rgba(
+            255,
+            255,
+            255,
+            0.65
+        );
+
+}
+
+
+#gachaArea.rare-xr .boxBody,
+#gachaArea.rare-xr .boxTop {
+
+    border-color:
+        white;
+
+    box-shadow:
+
+        0 0 30px white inset,
+
+        0 0 80px white,
+
+        0 0 150px
+        rgba(
+            255,
+            255,
+            255,
+            0.9
+        );
+
+}
+
+
+#gachaArea.rare-xr .boxCore {
+
+    border-color:
+        white;
+
+    animation:
+        corePulseXR
+        0.055s
+        ease-in-out
+        infinite alternate;
+
+}
+
+
+@keyframes corePulseXR {
+
+    from {
+
+        transform:
+            translateX(-50%)
+            scale(1);
+
+        box-shadow:
+
+            0 0 30px white;
+
+    }
+
+    to {
+
+        transform:
+            translateX(-50%)
+            scale(2.6);
+
+        box-shadow:
+
+            0 0 40px white,
+
+            0 0 120px white,
+
+            0 0 220px white;
+
+    }
+
+}
+
+
+/* =========================
+   FLASH
+========================= */
+
+#gachaArea.flash::before {
+
+    content: "";
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 90;
+
+    background: white;
+
+    pointer-events: none;
+
+    animation:
+        screenFlash
+        0.6s
+        ease-out
+        forwards;
+
+}
+
+
+@keyframes screenFlash {
+
+    0% {
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    18% {
+        opacity: 0.05;
+    }
+
+    35% {
+        opacity: 0.85;
+    }
+
+    100% {
+        opacity: 0;
+    }
+
+}
+
+
+/* =========================
+   SSR FLASH
+========================= */
+
+#gachaArea.flash-ssr::before {
+
+    content: "";
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 90;
+
+    background:
+        #ffcc33;
+
+    pointer-events: none;
+
+    animation:
+        rareFlash
+        1s
+        ease-out
+        forwards;
+
+}
+
+
+@keyframes rareFlash {
+
+    0% {
+        opacity: 0;
+    }
+
+    8% {
+        opacity: 1;
+    }
+
+    17% {
+        opacity: 0.08;
+    }
+
+    28% {
+        opacity: 0.9;
+    }
+
+    45% {
+        opacity: 0.15;
+    }
+
+    65% {
+        opacity: 0.65;
+    }
+
+    100% {
+        opacity: 0;
+    }
+
+}
+
+
+/* =========================
+   XR FLASH
+========================= */
+
+#gachaArea.flash-xr::before {
+
+    content: "";
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 90;
+
+    background:
+        white;
+
+    pointer-events: none;
+
+    animation:
+        xrFlash
+        1.3s
+        ease-out
+        forwards;
+
+}
+
+
+@keyframes xrFlash {
+
+    0% {
+        opacity: 0;
+    }
+
+    7% {
+        opacity: 1;
+    }
+
+    13% {
+        opacity: 0.03;
+    }
+
+    20% {
+        opacity: 1;
+    }
+
+    27% {
+        opacity: 0.05;
+    }
+
+    37% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.12;
+    }
+
+    65% {
+        opacity: 0.7;
+    }
+
+    100% {
+        opacity: 0;
+    }
+
+}
+
+
+/* =========================
+   RESULT
+========================= */
+
+#resultRarity {
+
+    transition:
+        transform 0.2s ease,
+        opacity 0.2s ease;
+
+}
+
+
+#gachaArea.reveal ~ #resultArea #resultRarity {
+
+    animation:
+        resultReveal
+        0.7s
+        cubic-bezier(
+            0.2,
+            1.4,
+            0.4,
+            1
+        );
+
+}
+
+
+@keyframes resultReveal {
+
+    0% {
+
+        opacity: 0;
+
+        transform:
+            scale(0.15)
+            rotateX(90deg);
+
+        filter:
+            blur(20px);
+
+    }
+
+    55% {
+
+        opacity: 1;
+
+        transform:
+            scale(1.2)
+            rotateX(0deg);
+
+        filter:
+            blur(0);
+
+    }
+
+    75% {
+
+        transform:
+            scale(0.92);
+
+    }
+
+    100% {
+
+        transform:
+            scale(1);
+
     }
 
 }
@@ -949,54 +2220,6 @@ main {
 
         0 0 40px #00eaff;
 
-    opacity: 1;
-
-}
-
-
-#gachaArea.reveal ~ * #resultRarity {
-
-    animation:
-        resultPop
-        0.55s
-        ease-out;
-
-}
-
-
-@keyframes resultPop {
-
-    0% {
-
-        transform:
-            scale(0.3);
-
-        opacity: 0;
-
-        filter:
-            blur(12px);
-
-    }
-
-    60% {
-
-        transform:
-            scale(1.18);
-
-        opacity: 1;
-
-        filter:
-            blur(0);
-
-    }
-
-    100% {
-
-        transform:
-            scale(1);
-
-    }
-
 }
 
 
@@ -1050,965 +2273,6 @@ main {
         );
 
     font-weight: bold;
-
-}
-
-
-/* =========================
-   CHARGING
-========================= */
-
-#gachaArea.charging::after {
-
-    content: "";
-
-    position: absolute;
-
-    left: 50%;
-
-    top: 50%;
-
-    width: 320px;
-
-    height: 320px;
-
-    transform:
-        translate(
-            -50%,
-            -50%
-        );
-
-    border:
-        2px solid #00eaff;
-
-    border-radius: 50%;
-
-    box-shadow:
-
-        0 0 20px #00eaff,
-
-        0 0 60px
-        rgba(
-            0,
-            234,
-            255,
-            0.6
-        );
-
-    animation:
-        chargeRing
-        0.65s linear infinite;
-
-    pointer-events: none;
-
-}
-
-
-@keyframes chargeRing {
-
-    0% {
-
-        transform:
-            translate(
-                -50%,
-                -50%
-            )
-            rotate(0deg)
-            scale(0.4);
-
-        opacity: 0;
-
-    }
-
-    20% {
-
-        opacity: 1;
-
-    }
-
-    100% {
-
-        transform:
-            translate(
-                -50%,
-                -50%
-            )
-            rotate(360deg)
-            scale(1.8);
-
-        opacity: 0;
-
-    }
-
-}
-
-
-/* =========================
-   SCANNER ANIMATION
-========================= */
-
-#gachaArea.charging .scanner1 {
-
-    animation:
-        scannerRotate
-        0.7s linear infinite;
-
-}
-
-
-#gachaArea.charging .scanner2 {
-
-    animation:
-        scannerRotateReverse
-        1s linear infinite;
-
-}
-
-
-@keyframes scannerRotate {
-
-    from {
-
-        transform:
-            translate(
-                -50%,
-                -50%
-            )
-            rotate(0deg);
-
-    }
-
-    to {
-
-        transform:
-            translate(
-                -50%,
-                -50%
-            )
-            rotate(360deg);
-
-    }
-
-}
-
-
-@keyframes scannerRotateReverse {
-
-    from {
-
-        transform:
-            translate(
-                -50%,
-                -50%
-            )
-            rotate(360deg);
-
-    }
-
-    to {
-
-        transform:
-            translate(
-                -50%,
-                -50%
-            )
-            rotate(0deg);
-
-    }
-
-}
-
-
-/* =========================
-   BOX CHARGE
-========================= */
-
-#gachaBox.charging {
-
-    animation:
-        chargeBox
-        0.16s ease-in-out
-        infinite alternate;
-
-    filter:
-
-        drop-shadow(
-            0 0 15px #00eaff
-        )
-
-        drop-shadow(
-            0 0 35px #00eaff
-        )
-
-        drop-shadow(
-            0 0 70px #00eaff
-        );
-
-}
-
-
-@keyframes chargeBox {
-
-    0% {
-
-        transform:
-            translateY(0)
-            scale(1);
-
-    }
-
-    25% {
-
-        transform:
-            translateY(-4px)
-            scale(1.015);
-
-    }
-
-    50% {
-
-        transform:
-            translateY(-10px)
-            scale(1.035);
-
-    }
-
-    75% {
-
-        transform:
-            translateY(-6px)
-            scale(1.025);
-
-    }
-
-    100% {
-
-        transform:
-            translateY(-14px)
-            scale(1.055);
-
-    }
-
-}
-
-
-/* =========================
-   CORE PULSE
-========================= */
-
-#gachaBox.charging .boxCore {
-
-    animation:
-        corePulse
-        0.2s ease-in-out
-        infinite alternate;
-
-}
-
-
-@keyframes corePulse {
-
-    from {
-
-        transform:
-            translateX(-50%)
-            scale(1);
-
-        box-shadow:
-
-            0 0 10px #00eaff,
-
-            0 0 25px #00eaff;
-
-    }
-
-    to {
-
-        transform:
-            translateX(-50%)
-            scale(1.8);
-
-        box-shadow:
-
-            0 0 20px #00eaff,
-
-            0 0 60px #00eaff,
-
-            0 0 120px #00eaff;
-
-    }
-
-}
-
-
-/* =========================
-   LIGHT
-========================= */
-
-#gachaBox.charging .boxLight {
-
-    animation:
-        lightFlash
-        0.12s linear infinite;
-
-}
-
-
-@keyframes lightFlash {
-
-    0% {
-        opacity: 0.2;
-        transform:
-            translateX(-50%)
-            scaleX(0.5);
-    }
-
-    50% {
-        opacity: 1;
-        transform:
-            translateX(-50%)
-            scaleX(1.4);
-    }
-
-    100% {
-        opacity: 0.2;
-        transform:
-            translateX(-50%)
-            scaleX(0.5);
-    }
-
-}
-
-
-/* =========================
-   ライン点滅
-========================= */
-
-#gachaBox.charging .line1 {
-
-    animation:
-        lineCharge
-        0.45s
-        ease-in-out
-        infinite;
-
-}
-
-
-#gachaBox.charging .line2 {
-
-    animation:
-        lineCharge
-        0.45s
-        ease-in-out
-        0.15s
-        infinite;
-
-}
-
-
-#gachaBox.charging .line3 {
-
-    animation:
-        lineCharge
-        0.45s
-        ease-in-out
-        0.3s
-        infinite;
-
-}
-
-
-@keyframes lineCharge {
-
-    0% {
-        opacity: 0.2;
-        transform: scaleX(0.5);
-    }
-
-    50% {
-        opacity: 1;
-        transform: scaleX(1);
-    }
-
-    100% {
-        opacity: 0.2;
-        transform: scaleX(0.5);
-    }
-
-}
-
-
-/* =========================
-   SCREEN GLITCH
-========================= */
-
-#gachaBox.charging .boxScreen {
-
-    animation:
-        screenGlitch
-        0.16s
-        steps(2)
-        infinite;
-
-}
-
-
-@keyframes screenGlitch {
-
-    0% {
-
-        transform:
-            translateX(-50%)
-            skewX(0deg);
-
-    }
-
-    30% {
-
-        transform:
-            translateX(-51%)
-            skewX(-2deg);
-
-    }
-
-    60% {
-
-        transform:
-            translateX(-49%)
-            skewX(2deg);
-
-    }
-
-    100% {
-
-        transform:
-            translateX(-50%)
-            skewX(0deg);
-
-    }
-
-}
-
-
-/* =========================
-   LIMIT BREAK
-========================= */
-
-#gachaArea.limitBreak {
-
-    animation:
-        areaShake
-        0.08s
-        linear
-        infinite;
-
-}
-
-
-#gachaArea.limitBreak .boxBody,
-#gachaArea.limitBreak .boxTop {
-
-    box-shadow:
-
-        0 0 30px #00eaff inset,
-
-        0 0 80px #00eaff,
-
-        0 0 140px
-        rgba(
-            0,
-            234,
-            255,
-            0.8
-        );
-
-}
-
-
-@keyframes areaShake {
-
-    0% {
-        transform:
-            translate(0, 0);
-    }
-
-    25% {
-        transform:
-            translate(3px, -2px);
-    }
-
-    50% {
-        transform:
-            translate(-3px, 2px);
-    }
-
-    75% {
-        transform:
-            translate(2px, 2px);
-    }
-
-    100% {
-        transform:
-            translate(0, 0);
-    }
-
-}
-
-
-/* =========================
-   R
-========================= */
-
-#gachaArea.rare-r .boxCore {
-
-    border-color:
-        #00eaff;
-
-}
-
-
-/* =========================
-   SR
-========================= */
-
-#gachaArea.rare-sr .scanner {
-
-    border-color:
-        rgba(
-            85,
-            255,
-            153,
-            0.65
-        );
-
-}
-
-
-#gachaArea.rare-sr .boxCore {
-
-    border-color: #55ff99;
-
-    box-shadow:
-
-        0 0 20px #55ff99,
-
-        0 0 50px #55ff99;
-
-}
-
-
-#gachaArea.rare-sr .boxBody,
-#gachaArea.rare-sr .boxTop {
-
-    border-color:
-        #55ff99;
-
-}
-
-
-/* =========================
-   SSR
-========================= */
-
-#gachaArea.rare-ssr .scanner {
-
-    border-color:
-        rgba(
-            255,
-            204,
-            51,
-            0.8
-        );
-
-}
-
-
-#gachaArea.rare-ssr .boxBody,
-#gachaArea.rare-ssr .boxTop {
-
-    border-color: #ffcc33;
-
-    box-shadow:
-
-        0 0 20px #ffcc33 inset,
-
-        0 0 50px
-        rgba(
-            255,
-            204,
-            51,
-            0.7
-        );
-
-}
-
-
-#gachaArea.rare-ssr .boxCore {
-
-    border-color: #ffcc33;
-
-    animation:
-        corePulseGold
-        0.1s ease-in-out
-        infinite alternate;
-
-}
-
-
-@keyframes corePulseGold {
-
-    from {
-
-        transform:
-            translateX(-50%)
-            scale(1);
-
-        box-shadow:
-            0 0 20px #ffcc33;
-
-    }
-
-    to {
-
-        transform:
-            translateX(-50%)
-            scale(2.2);
-
-        box-shadow:
-
-            0 0 30px #ffcc33,
-
-            0 0 80px #ffcc33,
-
-            0 0 150px #ffcc33;
-
-    }
-
-}
-
-
-/* =========================
-   XR
-========================= */
-
-#gachaArea.rare-xr .scanner {
-
-    border-color:
-        rgba(
-            255,
-            255,
-            255,
-            0.95
-        );
-
-}
-
-
-#gachaArea.rare-xr .boxBody,
-#gachaArea.rare-xr .boxTop {
-
-    border-color: white;
-
-    box-shadow:
-
-        0 0 25px white inset,
-
-        0 0 70px white,
-
-        0 0 130px
-        rgba(
-            255,
-            255,
-            255,
-            0.8
-        );
-
-}
-
-
-#gachaArea.rare-xr .boxCore {
-
-    border-color: white;
-
-    animation:
-        corePulseXR
-        0.065s ease-in-out
-        infinite alternate;
-
-}
-
-
-@keyframes corePulseXR {
-
-    from {
-
-        transform:
-            translateX(-50%)
-            scale(1);
-
-        box-shadow:
-            0 0 30px white;
-
-    }
-
-    to {
-
-        transform:
-            translateX(-50%)
-            scale(2.5);
-
-        box-shadow:
-
-            0 0 40px white,
-
-            0 0 100px white,
-
-            0 0 200px white;
-
-    }
-
-}
-
-
-/* =========================
-   FLASH
-========================= */
-
-#gachaArea.flash::before {
-
-    content: "";
-
-    position: fixed;
-
-    inset: 0;
-
-    z-index: 90;
-
-    background: white;
-
-    pointer-events: none;
-
-    animation:
-        screenFlash
-        0.55s ease-out
-        forwards;
-
-}
-
-
-@keyframes screenFlash {
-
-    0% {
-        opacity: 0;
-    }
-
-    12% {
-        opacity: 1;
-    }
-
-    25% {
-        opacity: 0.15;
-    }
-
-    45% {
-        opacity: 0.8;
-    }
-
-    100% {
-        opacity: 0;
-    }
-
-}
-
-
-/* =========================
-   SSR FLASH
-========================= */
-
-#gachaArea.flash-ssr::before {
-
-    content: "";
-
-    position: fixed;
-
-    inset: 0;
-
-    z-index: 90;
-
-    background: #ffcc33;
-
-    pointer-events: none;
-
-    animation:
-        rareFlash
-        0.9s ease-out
-        forwards;
-
-}
-
-
-@keyframes rareFlash {
-
-    0% {
-        opacity: 0;
-    }
-
-    10% {
-        opacity: 1;
-    }
-
-    20% {
-        opacity: 0.15;
-    }
-
-    35% {
-        opacity: 0.95;
-    }
-
-    55% {
-        opacity: 0.3;
-    }
-
-    100% {
-        opacity: 0;
-    }
-
-}
-
-
-/* =========================
-   XR FLASH
-========================= */
-
-#gachaArea.flash-xr::before {
-
-    content: "";
-
-    position: fixed;
-
-    inset: 0;
-
-    z-index: 90;
-
-    background: white;
-
-    pointer-events: none;
-
-    animation:
-        xrFlash
-        1.15s ease-out
-        forwards;
-
-}
-
-
-@keyframes xrFlash {
-
-    0% {
-        opacity: 0;
-    }
-
-    8% {
-        opacity: 1;
-    }
-
-    15% {
-        opacity: 0.05;
-    }
-
-    23% {
-        opacity: 1;
-    }
-
-    31% {
-        opacity: 0.1;
-    }
-
-    42% {
-        opacity: 0.95;
-    }
-
-    60% {
-        opacity: 0.25;
-    }
-
-    100% {
-        opacity: 0;
-    }
-
-}
-
-
-/* =========================
-   RESULT REVEAL
-========================= */
-
-#resultRarity {
-
-    transition:
-        transform 0.2s ease,
-        opacity 0.2s ease;
-
-}
-
-
-#gachaArea.reveal ~ #resultArea #resultRarity {
-
-    animation:
-        resultReveal
-        0.7s
-        cubic-bezier(
-            0.2,
-            1.4,
-            0.4,
-            1
-        );
-
-}
-
-
-@keyframes resultReveal {
-
-    0% {
-
-        opacity: 0;
-
-        transform:
-            scale(0.15)
-            rotateX(90deg);
-
-        filter:
-            blur(20px);
-
-    }
-
-    55% {
-
-        opacity: 1;
-
-        transform:
-            scale(1.2)
-            rotateX(0deg);
-
-        filter:
-            blur(0);
-
-    }
-
-    75% {
-
-        transform:
-            scale(0.92);
-
-    }
-
-    100% {
-
-        transform:
-            scale(1);
-
-    }
 
 }
 
@@ -2089,7 +2353,8 @@ main {
 
 .rareRarity {
 
-    margin: 20px 0;
+    margin:
+        20px 0;
 
     font-size: 120px;
 
@@ -2097,7 +2362,8 @@ main {
 
     letter-spacing: 8px;
 
-    color: #ffcc33;
+    color:
+        #ffcc33;
 
     text-shadow:
 
@@ -2117,7 +2383,8 @@ main {
 
 .xr .rareRarity {
 
-    color: white;
+    color:
+        white;
 
     text-shadow:
 
@@ -2171,9 +2438,11 @@ main {
     border:
         1px solid #00eaff;
 
-    background: #03131a;
+    background:
+        #03131a;
 
-    color: #00eaff;
+    color:
+        #00eaff;
 
     padding:
         14px 30px;
@@ -2191,9 +2460,329 @@ main {
 
 .overlay button:hover {
 
-    background: #00eaff;
+    background:
+        #00eaff;
 
-    color: #001018;
+    color:
+        #001018;
+
+}
+
+
+/* =========================
+   LDM
+========================= */
+
+body.ldm-mode .grid {
+
+    opacity:
+        0.45;
+
+}
+
+
+body.ldm-mode .scanlines {
+
+    opacity:
+        0.5;
+
+}
+
+
+body.ldm-mode #gachaBox {
+
+    filter:
+        none;
+
+}
+
+
+body.ldm-mode #gachaBox:hover {
+
+    filter:
+        drop-shadow(
+            0 0 8px
+            rgba(
+                0,
+                234,
+                255,
+                0.5
+            )
+        );
+
+}
+
+
+body.ldm-mode .boxBody,
+body.ldm-mode .boxTop {
+
+    box-shadow:
+
+        0 0 7px
+        rgba(
+            0,
+            234,
+            255,
+            0.25
+        )
+        inset,
+
+        0 0 12px
+        rgba(
+            0,
+            234,
+            255,
+            0.18
+        );
+
+}
+
+
+body.ldm-mode .boxCore {
+
+    box-shadow:
+
+        0 0 7px
+        rgba(
+            0,
+            234,
+            255,
+            0.45
+        );
+
+}
+
+
+body.ldm-mode .boxLight {
+
+    opacity:
+        0.55;
+
+}
+
+
+body.ldm-mode .scanner {
+
+    opacity:
+        0.4;
+
+}
+
+
+body.ldm-mode .hudRing {
+
+    opacity:
+        0.2 !important;
+
+}
+
+
+body.ldm-mode #crystalContainer {
+
+    display:
+        none;
+
+}
+
+
+/* =========================
+   LDM CHARGE
+========================= */
+
+body.ldm-mode #gachaBox.charging {
+
+    filter:
+        drop-shadow(
+            0 0 8px
+            rgba(
+                0,
+                234,
+                255,
+                0.45
+            )
+        );
+
+}
+
+
+body.ldm-mode #gachaBox.charging .boxCore {
+
+    animation:
+        ldmCorePulse
+        0.25s
+        ease-in-out
+        infinite alternate;
+
+}
+
+
+@keyframes ldmCorePulse {
+
+    from {
+
+        transform:
+            translateX(-50%)
+            scale(1);
+
+    }
+
+    to {
+
+        transform:
+            translateX(-50%)
+            scale(1.35);
+
+    }
+
+}
+
+
+/* =========================
+   LDM FLASH
+========================= */
+
+body.ldm-mode #gachaArea.flash::before {
+
+    opacity:
+        0.3;
+
+}
+
+
+body.ldm-mode #gachaArea.flash-ssr::before {
+
+    opacity:
+        0.3;
+
+}
+
+
+body.ldm-mode #gachaArea.flash-xr::before {
+
+    opacity:
+        0.25;
+
+}
+
+
+/* =========================
+   LDM SSR
+========================= */
+
+body.ldm-mode #gachaArea.rare-ssr .boxBody,
+body.ldm-mode #gachaArea.rare-ssr .boxTop {
+
+    box-shadow:
+
+        0 0 10px
+        rgba(
+            255,
+            204,
+            51,
+            0.3
+        )
+        inset,
+
+        0 0 18px
+        rgba(
+            255,
+            204,
+            51,
+            0.3
+        );
+
+}
+
+
+body.ldm-mode #gachaArea.rare-ssr .boxCore {
+
+    animation:
+        ldmGoldPulse
+        0.18s
+        ease-in-out
+        infinite alternate;
+
+}
+
+
+@keyframes ldmGoldPulse {
+
+    from {
+
+        transform:
+            translateX(-50%)
+            scale(1);
+
+    }
+
+    to {
+
+        transform:
+            translateX(-50%)
+            scale(1.45);
+
+    }
+
+}
+
+
+/* =========================
+   LDM XR
+========================= */
+
+body.ldm-mode #gachaArea.rare-xr .boxBody,
+body.ldm-mode #gachaArea.rare-xr .boxTop {
+
+    box-shadow:
+
+        0 0 12px
+        rgba(
+            255,
+            255,
+            255,
+            0.35
+        )
+        inset,
+
+        0 0 22px
+        rgba(
+            255,
+            255,
+            255,
+            0.35
+        );
+
+}
+
+
+body.ldm-mode #gachaArea.rare-xr .boxCore {
+
+    animation:
+        ldmXRpulse
+        0.14s
+        ease-in-out
+        infinite alternate;
+
+}
+
+
+@keyframes ldmXRpulse {
+
+    from {
+
+        transform:
+            translateX(-50%)
+            scale(1);
+
+    }
+
+    to {
+
+        transform:
+            translateX(-50%)
+            scale(1.6);
+
+    }
 
 }
 
@@ -2229,14 +2818,16 @@ main {
 
     #gachaBox {
 
-        transform: scale(0.85);
+        transform:
+            scale(0.85);
 
     }
 
 
     #gachaBox:hover {
 
-        transform: scale(0.88);
+        transform:
+            scale(0.88);
 
     }
 
@@ -2259,11 +2850,29 @@ main {
     }
 
 
-    .energyRing {
+    .hudRing1 {
 
-        width: 140px;
+        width: 190px;
 
-        height: 140px;
+        height: 190px;
+
+    }
+
+
+    .hudRing2 {
+
+        width: 250px;
+
+        height: 250px;
+
+    }
+
+
+    .hudRing3 {
+
+        width: 310px;
+
+        height: 310px;
 
     }
 
@@ -2288,6 +2897,20 @@ main {
             1fr;
 
         gap: 10px;
+
+    }
+
+
+    #ldmButton {
+
+        top: 12px;
+
+        right: 12px;
+
+        padding:
+            8px 11px;
+
+        font-size: 9px;
 
     }
 
