@@ -227,7 +227,137 @@
             <div id="historyList"></div>
 
         </section>
+<!-- =================================
+     ADMIN BUTTON
+================================== -->
 
+<button id="adminButton">
+    ADMIN
+</button>
+
+
+<!-- =================================
+     ADMIN PANEL
+================================== -->
+
+<div id="adminOverlay" class="adminOverlay">
+
+    <div class="adminPanel">
+
+        <div class="adminHeader">
+            <span>ADMIN PANEL</span>
+            <button id="adminClose">×</button>
+        </div>
+
+
+        <div class="adminSection">
+
+            <div class="adminSectionTitle">
+                PROBABILITY CONFIG
+            </div>
+
+
+            <div class="probabilityRow">
+                <span>R</span>
+                <input
+                    id="adminRRate"
+                    type="text"
+                    inputmode="decimal"
+                    autocomplete="off"
+                >
+                <span>%</span>
+            </div>
+
+
+            <div class="probabilityRow">
+                <span>SR</span>
+                <input
+                    id="adminSRRate"
+                    type="text"
+                    inputmode="decimal"
+                    autocomplete="off"
+                >
+                <span>%</span>
+            </div>
+
+
+            <div class="probabilityRow">
+                <span>SSR</span>
+                <input
+                    id="adminSSRRate"
+                    type="text"
+                    inputmode="decimal"
+                    autocomplete="off"
+                >
+                <span>%</span>
+            </div>
+
+
+            <div class="probabilityRow">
+                <span>XR</span>
+                <input
+                    id="adminXRRate"
+                    type="text"
+                    inputmode="decimal"
+                    autocomplete="off"
+                >
+                <span>%</span>
+            </div>
+
+
+            <div class="probabilityTotal">
+                <span>TOTAL</span>
+                <strong id="adminTotal">
+                    100.0000 %
+                </strong>
+            </div>
+
+
+            <div id="adminStatus" class="adminStatus">
+                READY
+            </div>
+
+
+            <button id="adminSaveProbability" class="adminSaveButton">
+                SAVE PROBABILITY
+            </button>
+
+        </div>
+
+
+        <div class="adminSection">
+
+            <div class="adminSectionTitle">
+                GUARANTEE
+            </div>
+
+
+            <div class="adminFixedRow">
+                <span>SSR GUARANTEE</span>
+                <strong>200</strong>
+            </div>
+
+
+            <div class="adminFixedRow">
+                <span>XR GUARANTEE</span>
+                <strong>15000</strong>
+            </div>
+
+
+            <div class="adminFixedNote">
+                GUARANTEE VALUES ARE FIXED
+            </div>
+
+        </div>
+
+
+        <button id="adminCloseBottom" class="adminCloseButton">
+            CLOSE
+        </button>
+
+    </div>
+
+</div>
     </main>
 
 
