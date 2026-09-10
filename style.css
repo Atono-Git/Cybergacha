@@ -3350,3 +3350,524 @@ body.ldm-mode #gachaArea.limitBreak {
     }
 
 }
+/* =================================
+   ADMIN BUTTON
+================================= */
+
+#adminButton {
+    position: fixed;
+
+    top: 20px;
+    left: 20px;
+
+    z-index: 500;
+
+    padding: 10px 18px;
+
+    border: 1px solid #00eaff;
+
+    background: rgba(0, 20, 30, 0.9);
+
+    color: #00eaff;
+
+    font-family: monospace;
+    font-size: 13px;
+    font-weight: bold;
+
+    letter-spacing: 2px;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 0 8px rgba(0, 234, 255, 0.35),
+        inset 0 0 8px rgba(0, 234, 255, 0.08);
+
+    transition:
+        background 0.2s,
+        box-shadow 0.2s,
+        color 0.2s;
+}
+
+
+#adminButton:hover {
+    background: rgba(0, 234, 255, 0.12);
+
+    box-shadow:
+        0 0 14px rgba(0, 234, 255, 0.6),
+        inset 0 0 12px rgba(0, 234, 255, 0.15);
+}
+
+
+#adminButton:active {
+    transform: scale(0.96);
+}
+
+
+/* =================================
+   ADMIN OVERLAY
+================================= */
+
+.adminOverlay {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 1000;
+
+    display: none;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    background:
+        rgba(0, 0, 0, 0.82);
+
+    backdrop-filter: blur(8px);
+}
+
+
+.adminOverlay.show {
+    display: flex;
+
+    animation: adminFadeIn 0.25s ease;
+}
+
+
+@keyframes adminFadeIn {
+
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+
+}
+
+
+/* =================================
+   ADMIN PANEL
+================================= */
+
+.adminPanel {
+
+    width: min(460px, 92vw);
+
+    max-height: 90vh;
+
+    overflow-y: auto;
+
+    padding: 22px;
+
+    border: 1px solid #00eaff;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(5, 18, 28, 0.98),
+            rgba(0, 5, 10, 0.98)
+        );
+
+    color: #ffffff;
+
+    font-family: monospace;
+
+    box-shadow:
+        0 0 20px rgba(0, 234, 255, 0.25),
+        0 0 60px rgba(0, 234, 255, 0.08),
+        inset 0 0 20px rgba(0, 234, 255, 0.04);
+
+    animation: adminPanelIn 0.25s ease;
+}
+
+
+@keyframes adminPanelIn {
+
+    from {
+        opacity: 0;
+        transform: scale(0.94) translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+
+}
+
+
+/* =================================
+   ADMIN HEADER
+================================= */
+
+.adminHeader {
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 22px;
+
+    padding-bottom: 12px;
+
+    border-bottom: 1px solid rgba(0, 234, 255, 0.35);
+
+    color: #00eaff;
+
+    font-size: 20px;
+    font-weight: bold;
+
+    letter-spacing: 3px;
+}
+
+
+#adminClose {
+
+    width: 34px;
+    height: 34px;
+
+    padding: 0;
+
+    border: 1px solid #00eaff;
+
+    background: transparent;
+
+    color: #00eaff;
+
+    font-size: 24px;
+
+    cursor: pointer;
+}
+
+
+#adminClose:hover {
+
+    background: rgba(0, 234, 255, 0.12);
+
+}
+
+
+/* =================================
+   ADMIN SECTION
+================================= */
+
+.adminSection {
+
+    margin-bottom: 22px;
+
+    padding: 16px;
+
+    border: 1px solid rgba(0, 234, 255, 0.2);
+
+    background: rgba(0, 15, 25, 0.65);
+}
+
+
+.adminSectionTitle {
+
+    margin-bottom: 15px;
+
+    color: #00eaff;
+
+    font-size: 13px;
+    font-weight: bold;
+
+    letter-spacing: 2px;
+}
+
+
+/* =================================
+   PROBABILITY ROW
+================================= */
+
+.probabilityRow {
+
+    display: grid;
+
+    grid-template-columns: 50px 1fr 25px;
+
+    align-items: center;
+
+    gap: 8px;
+
+    margin-bottom: 10px;
+
+    color: #ffffff;
+
+    font-size: 16px;
+}
+
+
+.probabilityRow > span:first-child {
+
+    color: #00eaff;
+
+    font-weight: bold;
+}
+
+
+.probabilityRow input {
+
+    width: 100%;
+
+    box-sizing: border-box;
+
+    padding: 9px 10px;
+
+    border: 1px solid rgba(0, 234, 255, 0.45);
+
+    outline: none;
+
+    background: #050b10;
+
+    color: #ffffff;
+
+    font-family: monospace;
+
+    font-size: 16px;
+
+    text-align: right;
+}
+
+
+.probabilityRow input:focus {
+
+    border-color: #00eaff;
+
+    box-shadow:
+        0 0 8px rgba(0, 234, 255, 0.3);
+}
+
+
+.probabilityRow > span:last-child {
+
+    color: #888;
+
+}
+
+
+/* =================================
+   TOTAL
+================================= */
+
+.probabilityTotal {
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    margin-top: 16px;
+    padding-top: 14px;
+
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+
+    font-size: 16px;
+}
+
+
+.probabilityTotal strong {
+
+    color: #00ff99;
+
+    font-size: 18px;
+
+}
+
+
+.probabilityTotal.invalid strong {
+
+    color: #ff3b5c;
+}
+
+
+/* =================================
+   ADMIN STATUS
+================================= */
+
+.adminStatus {
+
+    margin-top: 12px;
+
+    min-height: 20px;
+
+    color: #00ff99;
+
+    font-size: 12px;
+
+    text-align: center;
+
+    letter-spacing: 1px;
+}
+
+
+.adminStatus.error {
+
+    color: #ff3b5c;
+}
+
+
+.adminStatus.success {
+
+    color: #00ff99;
+}
+
+
+/* =================================
+   SAVE BUTTON
+================================= */
+
+.adminSaveButton {
+
+    width: 100%;
+
+    margin-top: 14px;
+
+    padding: 13px;
+
+    border: 1px solid #00eaff;
+
+    background: rgba(0, 234, 255, 0.08);
+
+    color: #00eaff;
+
+    font-family: monospace;
+
+    font-size: 14px;
+    font-weight: bold;
+
+    letter-spacing: 2px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+
+.adminSaveButton:hover {
+
+    background: rgba(0, 234, 255, 0.18);
+
+    box-shadow:
+        0 0 12px rgba(0, 234, 255, 0.35);
+}
+
+
+.adminSaveButton:active {
+
+    transform: scale(0.98);
+}
+
+
+/* =================================
+   FIXED GUARANTEE
+================================= */
+
+.adminFixedRow {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding: 10px 0;
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+
+    font-size: 14px;
+}
+
+
+.adminFixedRow strong {
+
+    color: #ffd84d;
+
+    font-size: 18px;
+}
+
+
+.adminFixedNote {
+
+    margin-top: 12px;
+
+    color: #777;
+
+    font-size: 10px;
+
+    text-align: center;
+
+    letter-spacing: 1px;
+}
+
+
+/* =================================
+   CLOSE BUTTON
+================================= */
+
+.adminCloseButton {
+
+    width: 100%;
+
+    padding: 11px;
+
+    border: 1px solid #555;
+
+    background: transparent;
+
+    color: #aaa;
+
+    font-family: monospace;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+
+.adminCloseButton:hover {
+
+    border-color: #00eaff;
+
+    color: #00eaff;
+}
+
+
+/* =================================
+   MOBILE
+================================= */
+
+@media (max-width: 600px) {
+
+    #adminButton {
+
+        top: 15px;
+        left: 15px;
+
+        padding: 8px 13px;
+
+        font-size: 11px;
+
+    }
+
+
+    .adminPanel {
+
+        width: calc(100vw - 30px);
+
+        padding: 16px;
+
+    }
+
+
+    .adminHeader {
+
+        font-size: 17px;
+
+    }
+
+}
