@@ -65,35 +65,53 @@
 
             <div id="gachaBox">
 
-                <div class="boxOuter">
+                <div class="boxTop">
 
-                    <div class="boxGlow"></div>
-
-                    <div class="boxTop"></div>
-
-                    <div class="boxMain">
-
-                        <div class="boxScreen">
-
-                            <div id="boxScreenSmall">
-                                CYBER
-                            </div>
-
-                            <div id="boxScreenMain">
-                                GACHA
-                            </div>
-
-                        </div>
-
-                        <div class="boxCore"></div>
-
-                    </div>
-
-                    <div class="boxBottom"></div>
+                    <div class="boxLight"></div>
 
                 </div>
 
+
+                <div class="boxBody">
+
+                    <div class="boxLine line1"></div>
+                    <div class="boxLine line2"></div>
+                    <div class="boxLine line3"></div>
+
+
+                    <div class="boxScreen">
+
+                        <span id="boxScreenSmall">
+                            CYBER
+                        </span>
+
+                        <strong id="boxScreenMain">
+                            GACHA
+                        </strong>
+
+                    </div>
+
+
+                    <div class="boxCore"></div>
+
+                </div>
+
+
+                <div class="boxBottom"></div>
+
             </div>
+
+
+            <!-- =================================
+                 HUD RINGS
+            ================================== -->
+
+            <div class="scanner scanner1"></div>
+            <div class="scanner scanner2"></div>
+
+            <div class="hudRing hudRing1"></div>
+            <div class="hudRing hudRing2"></div>
+            <div class="hudRing hudRing3"></div>
 
 
             <!-- =================================
@@ -104,6 +122,15 @@
                 GACHA
             </div>
 
+
+            <!-- =================================
+                 TAP TEXT
+            ================================== -->
+
+            <div id="tapText">
+                TAP BOX
+            </div>
+
         </section>
 
 
@@ -111,9 +138,9 @@
              RESULT
         ================================== -->
 
-        <section id="resultSection">
+        <section id="resultArea">
 
-            <div class="sectionTitle">
+            <div id="resultLabel">
                 RESULT
             </div>
 
@@ -128,7 +155,7 @@
              GUARANTEE
         ================================== -->
 
-        <section id="guaranteeSection">
+        <section id="guaranteeArea">
 
             <div class="guaranteeCard">
 
@@ -136,12 +163,12 @@
                     SSR GUARANTEE
                 </div>
 
-                <div id="ssrCounter">
+                <div id="ssrCounter" class="guaranteeCounter">
                     0 / 200
                 </div>
 
-                <div class="progressBackground">
-                    <div id="ssrBar"></div>
+                <div class="guaranteeBar">
+                    <div id="ssrBar" class="guaranteeBarFill"></div>
                 </div>
 
             </div>
@@ -153,12 +180,12 @@
                     XR GUARANTEE
                 </div>
 
-                <div id="xrCounter">
+                <div id="xrCounter" class="guaranteeCounter">
                     0 / 15000
                 </div>
 
-                <div class="progressBackground">
-                    <div id="xrBar"></div>
+                <div class="guaranteeBar">
+                    <div id="xrBar" class="guaranteeBarFill"></div>
                 </div>
 
             </div>
@@ -180,7 +207,6 @@
                 SKIP: OFF
             </button>
 
-            <!-- データリセット -->
             <button id="resetButton">
                 RESET DATA
             </button>
@@ -192,11 +218,11 @@
              HISTORY
         ================================== -->
 
-        <section id="historySection">
+        <section id="historyArea">
 
-            <div class="sectionTitle">
+            <h2>
                 HISTORY
-            </div>
+            </h2>
 
             <div id="historyList"></div>
 
@@ -209,15 +235,15 @@
          SSR OVERLAY
     ================================== -->
 
-    <div id="ssrOverlay">
+    <div id="ssrOverlay" class="overlay">
 
         <div class="overlayContent">
 
-            <div class="overlayLabel">
+            <div class="rareText">
                 SUPER RARE
             </div>
 
-            <div class="overlayRarity">
+            <div class="rareRarity">
                 SSR
             </div>
 
@@ -234,15 +260,15 @@
          XR OVERLAY
     ================================== -->
 
-    <div id="xrOverlay">
+    <div id="xrOverlay" class="overlay xr">
 
         <div class="overlayContent">
 
-            <div class="overlayLabel">
+            <div class="rareText">
                 EXTREME RARE
             </div>
 
-            <div class="overlayRarity">
+            <div class="rareRarity">
                 XR
             </div>
 
@@ -254,6 +280,10 @@
 
     </div>
 
+
+    <!-- =================================
+         SCRIPT
+    ================================== -->
 
     <script src="script.js"></script>
 
